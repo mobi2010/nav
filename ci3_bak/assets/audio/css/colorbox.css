@@ -1,0 +1,72 @@
+/*
+    Colorbox Core Style:
+    The following CSS is consistent between example themes and should not be altered.
+*/
+#colorbox, #cboxOverlay, #cboxWrapper{position:absolute; top:0; left:0; z-index:10000; overflow:hidden;}
+#cboxWrapper {max-width:none;}
+#cboxOverlay{position:fixed; width:100%; height:100%;}
+#cboxMiddleLeft, #cboxBottomLeft{clear:left;}
+#cboxContent{position:relative;}
+#cboxLoadedContent{overflow:auto; -webkit-overflow-scrolling: touch;}
+#cboxTitle{margin:0;}
+#cboxLoadingOverlay, #cboxLoadingGraphic{position:absolute; top:0; left:0; width:100%; height:100%;}
+#cboxPrevious, #cboxNext, #cboxClose, #cboxSlideshow{cursor:pointer;}
+.cboxPhoto{float:left; margin:auto; border:0; display:block; max-width:none; -ms-interpolation-mode:bicubic;}
+.cboxIframe{width:100%; height:100%; display:block; border:0; padding:0; margin:0;}
+#colorbox, #cboxContent, #cboxLoadedContent{box-sizing:content-box; -moz-box-sizing:content-box; -webkit-box-sizing:content-box;}
+
+/* 
+    User Style:
+    Change the following styles to modify the appearance of Colorbox.  They are
+    ordered & tabbed in a way that represents the nesting of the generated HTML.
+*/
+#cboxOverlay{background:#000;}
+#colorbox{outline:0;}
+    #cboxTopLeft{width:14px; height:14px; background:url(http://resource.3uol.com/images/commons/controls.png) no-repeat 0 0;}
+    #cboxTopCenter{height:14px; background:url(http://resource.3uol.com/images/commons/border.png) repeat-x top left;}
+    #cboxTopRight{width:14px; height:14px; background:url(http://resource.3uol.com/images/commons/controls.png) no-repeat -36px 0;}
+    #cboxBottomLeft{width:14px; height:15px; background:url(http://resource.3uol.com/images/commons/controls.png) no-repeat 0 -60px;}
+    #cboxBottomCenter{height:15px; background:url(http://resource.3uol.com/images/commons/border.png) repeat-x bottom left;}
+    #cboxBottomRight{width:14px; height:15px; background:url(http://resource.3uol.com/images/commons/controls.png) no-repeat -36px -60px;}
+    #cboxMiddleLeft{width:14px; background:url(http://resource.3uol.com/images/commons/controls.png) repeat-y -175px 0;}
+    #cboxMiddleRight{width:14px; background:url(http://resource.3uol.com/images/commons/controls.png) repeat-y -211px 0;}
+    #cboxContent{background:#fff; overflow:visible;}
+        .cboxIframe{background:#fff;}
+        #cboxError{padding:50px; border:1px solid #ccc;}
+        #cboxLoadedContent{margin-bottom:20px;margin-top: 56px;padding: 0 10px;}
+        #cboxLoadingOverlay{background:url(http://resource.3uol.com/images/commons/loading_background.png) no-repeat center center;}
+        #cboxLoadingGraphic{background:url(http://resource.3uol.com/images/commons/loading.gif) no-repeat center center;}
+        #cboxTitle{position:absolute; top:18px; left:0;  width:100%; }
+        #cboxTitleSpan{display: block;margin: 0 10px;border-bottom: 1px solid #ccc;color:#999; font-size: 18px;text-align:left; padding-bottom:14px; }
+        #cboxTitleSpan em{color: #fd7575;}
+        #cboxCurrent{position:absolute; bottom:-25px; left:58px; font-weight:bold; color:#7C7C7C;}
+
+        /* these elements are buttons, and may need to have additional styles reset to avoid unwanted base styles */
+        #cboxPrevious, #cboxNext, #cboxSlideshow {border:0; padding:0; margin:0; overflow:visible;  position:absolute; bottom:-29px; background:url(http://resource.3uol.com/images/commons/controls.png) no-repeat 0px 0px; width:23px; height:23px; text-indent:-9999px;}
+        
+        /* avoid outlines on :active (mouseclick), but preserve outlines on :focus (tabbed navigating) */
+        #cboxPrevious:active, #cboxNext:active, #cboxSlideshow:active, #cboxClose:active {outline:0;}
+
+        #cboxPrevious{left:0px; background-position: -51px -25px;}
+        #cboxPrevious:hover{background-position:-51px 0px;}
+        #cboxNext{left:27px; background-position:-75px -25px;}
+        #cboxNext:hover{background-position:-75px 0px;}
+        #cboxClose{
+            width: 28px;
+            height: 28px;
+            border:0;
+            padding:0;
+            margin:0;
+            overflow:visible;
+            background:url(http://resource.3uol.com/images/commons/controls.png) no-repeat -50px 0;
+            text-indent:-9999px;
+            position:absolute;
+            top:10px;
+            right:10px;
+        }
+        #cboxClose:hover{background:url(http://resource.3uol.com/images/commons/controls.png) no-repeat -78px 0px;}
+
+        .cboxSlideshow_on #cboxSlideshow{background-position:-125px 0px; right:27px;}
+        .cboxSlideshow_on #cboxSlideshow:hover{background-position:-150px 0px;}
+        .cboxSlideshow_off #cboxSlideshow{background-position:-150px -25px; right:27px;}
+        .cboxSlideshow_off #cboxSlideshow:hover{background-position:-125px 0px;}

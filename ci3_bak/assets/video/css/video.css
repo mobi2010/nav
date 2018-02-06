@@ -1,0 +1,1643 @@
+body{
+	background:#f1f1f1;
+}
+.area{
+	margin-bottom: 13px;
+}
+.area .areaTitle,
+.area .areaContent{
+	width: 1210px;
+	margin: 0 auto;
+}
+.area .areaTitle,
+.area .module .titleBar{
+	height: 48px;
+	line-height: 48px;
+	position: relative;
+	border-bottom: none;
+}
+.area .areaTitle h2,
+.area .module .titleBar h2{
+	font-size: 22px;
+	color: #65c4aa;
+	padding: 0 15px;
+}
+.area .areaTitle h2 a,
+.area .module .titleBar h2 a{
+	color: #15b05e;
+}
+.area .areaTitle .line,
+.area .module .titleBar .line{
+	display: block;
+	width: 5px;
+	height: 24px;
+	background: #65c4aa;
+	position: absolute;
+	top: 12px;
+	left: 0;
+}
+.area .areaTitle .filter,
+.area .module .titleBar .filter{
+	font-size: 14px;
+	padding-left: 20px;
+	padding-top: 3px;
+	height: 45px;
+}
+.area .areaTitle .filter span,
+.area .areaTitle .filter a,
+.area .module .titleBar .filter span,
+.area .module .titleBar .filter a{
+	color: #828282;
+}
+.area .areaTitle .filter span,
+.area .module .titleBar .filter span{
+	padding: 0 15px;
+}
+.area .areaTitle .filter a:hover,
+.area .module .titleBar .filter a:hover{
+	color: #ffbf00;
+}
+.header-warp{height:60px; margin-bottom:20px;background:#fff}
+
+/*焦点图*/
+.focusPic{
+	width: 100%;
+	height: 325px;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 15px;
+}
+.focusPic .focusPicCon{
+	width: 100%;
+	height: 325px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 1;
+}
+.focusPic .focusPicCon li{
+	display: inline;
+	float: left;
+	width: 1230px;
+	height: 325px;
+}
+.focusPic .focusPicCon li a{
+	display: block;
+	width: 585px;
+	height: 325px;
+	overflow: hidden;
+	margin: 0 15px;
+	position: relative;
+}
+.focusPic .focusPicCon li .countBox{
+	display: block;
+	width: 582px;
+	height: 28px;
+	line-height: 28px;
+	color: #fff;
+	position: absolute;
+	left: 0;
+	bottom: 60px;
+	padding-left: 15px;
+	font-size: 14px;
+}
+.focusPic .focusPicCon li .countBox i{
+	font-size: 16px;
+	margin-right: 3px;
+}
+.focusPic .focusPicCon li .countBox .testCount{
+	margin-right: 25px;
+}
+.focusPic .focusPicCon li .t{
+	display: block;
+	height: 32px;
+	font-size: 24px;
+	color: #fff;
+	line-height: 32px;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	bottom: 25px;
+	padding-left: 15px;
+}
+.focusPic .focusBtn{
+	display: block;
+	height: 325px;
+	position: absolute;
+	top: 0;
+	z-index: 3;
+	background: #fff;
+	opacity: .5;
+	filter:alpha(opacity=50);
+}
+.focusPic .focusBtn em{
+	display: block;
+	width: 31px;
+	height: 130px;
+	background: url(http://resource.3uol.com/images/www/video/arrow.png) no-repeat 0 0;
+	position: absolute;
+	top: 110px;
+	opacity: .5;
+	filter:alpha(opacity=50);
+}
+.focusPic .prevBtn{
+	left: 0;
+}
+.focusPic .prevBtn em{
+	right: 25px;
+}
+.focusPic .nextBtn{
+	right: 0;
+}
+.focusPic .nextBtn em{
+	left: 25px;
+	background-position: 0 -130px;
+}
+.focusPic .focusBtn:hover{
+	opacity: .8;
+	filter:alpha(opacity=80);
+}
+.focusPic .focusBtn:hover em{
+	opacity: .8;
+	filter:alpha(opacity=80);
+}
+/*aRecommend*/
+.aRecommend{
+	margin-bottom: 0;
+}
+.aRecommend .areaContent{
+	/*height: 286px;*/
+	overflow: hidden;
+}
+.aRecommend .item,
+.mCourse .item{
+	width: 272px;
+	height: 270px;
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 7px;
+	margin-right: 16px;
+}
+.aRecommend .item .pic,
+.mCourse .item .pic{
+	display: block;
+	position: relative;
+	margin-bottom: 10px;
+}
+.aRecommend .item .pic img,
+.mCourse .item .pic img{
+	display: block;
+	width: 272px;
+	height: 159px;
+	margin-bottom: 15px;
+}
+.aRecommend .item .pic em,
+.mCourse .item .pic em{
+	position: absolute;
+	display: block;
+	width: 60px;
+	height: 65px;
+	left: 50%;
+	top: 50%;
+	margin-top: -50px;
+	margin-left: -30px;
+	cursor: pointer;
+}
+.aRecommend .item .pic em i,
+.mCourse .item .pic em i{
+	font-size:60px;
+	color: #fff;
+	cursor: pointer;
+}
+.aRecommend .item .pic .t,
+.mCourse .item .pic .t{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	display: block;
+	font-size: 14px;
+	color: #666;
+	font-weight: bold;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+	cursor: pointer;
+}
+.aRecommend .item .pic:hover .t,
+.mCourse .item .pic:hover .t{
+	color: #ffbf00;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+}
+.aRecommend .item .data,
+.mCourse .item .data{
+	margin-bottom: 15px;
+}
+.aRecommend .item .data i,
+.mCourse .item .data i{
+	font-size: 20px;
+	margin-right: 5px;
+}
+.aRecommend .item .data em,
+.mCourse .item .data em{
+	font-size: 14px;
+}
+.aRecommend .item .data .playCountBox,
+.mCourse .item .data .playCountBox{
+	margin-right: 20px;
+}
+.aRecommend .item .info,
+.mCourse .item .info{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+}
+.aRecommend .item .info .name,
+.mCourse .item .info .name{
+	font-size: 14px;
+	color: #2eb273;
+	font-weight: bold;
+}
+.aRecommend .item .info .name i,
+.mCourse .item .info .name i{
+	font-size: 20px;
+	color: #666;
+	margin-right: 10px;
+	font-weight: normal;
+}
+.aRecommend .item .info .name a,
+.mCourse .item .info .name a{
+	color: #666;
+}
+.aRecommend .item .info .name a:hover,
+.mCourse .item .info .name a:hover{
+	color: #ffbf00;
+}
+.aRecommend .item .info .title,
+.mCourse .item .info .title{
+	font-size: 14px;
+	color: #999;
+	line-height: 22px;
+	height: 22px;
+	overflow: hidden;
+	padding-left: 10px;
+}
+.aRecommend .item{
+	margin-bottom: 15px;
+}
+.aCourse{
+
+}
+.aCourse .colL{
+	width: 912px;
+}
+.aCourse .colR{
+	width: 288px;
+}
+.mCourse .moduleContent{
+	padding: 12px 0 0;
+	height: auto;
+	overflow: hidden;
+}
+.mCourse .item{
+	margin-bottom: 10px;
+}
+.mRecommendTopics .moduleContent{
+	padding: 12px 0 0;
+}
+.mRecommendTopics ol{
+	background: #fff;
+	padding: 18px 12px 0;
+	height: 564px;
+	overflow: hidden;
+	position:relative;
+}
+.mRecommendTopics ol li{
+	margin-bottom: 22px;
+	padding-bottom: 21px;
+	border-bottom: 1px solid #d9d9d9;
+	padding-left: 32px;
+	position: relative;
+}
+.mRecommendTopics ol li .t{
+	font-size: 14px;
+	display: inline-block;
+	height: 24px;
+	line-height: 24px;
+	overflow: hidden;
+	margin-bottom: 8px;
+}
+.mRecommendTopics ol li .info{
+	font-size: 14px;
+}
+.mRecommendTopics ol li .info .from,
+.mRecommendTopics ol li .info .date{
+	color: #15b05e;
+}
+.mRecommendTopics ol li .info .from:hover{
+	color: #ffbf00;
+}
+.mRecommendTopics ol li .no{
+	display: block;
+	width: 25px;
+	height: 25px;
+	background: url(http://resource.3uol.com/images/www/video/ol.png) no-repeat 0 -25px;
+	position: absolute;
+	left: 0;
+	top: 0;
+	text-align: center;
+	color: #fff;
+	line-height: 25px;
+}
+.mRecommendTopics ol li .no1,
+.mRecommendTopics ol li .no2{
+	background-position: 0 0;
+}
+.aExpert{
+	margin-bottom: 45px;
+}
+.aExpert .areaTitle .more{
+	font-size: 14px;
+	color: #828282;
+}
+.aExpert .areaTitle .more:hover{
+	color: #ffbf00;
+}
+.aExpert .areaContent{
+	padding-top: 12px;
+}
+.aExpert .focus{
+	width: 398px;
+	height: 280px;
+	overflow: hidden;
+	position: relative;
+}
+.aExpert .focus .new{
+	width: 121px;
+	height: 121px;
+	overflow: hidden;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: url(http://resource.3uol.com/images/www/video/new.png) no-repeat 0 0;
+	z-index: 1;
+}
+.aExpert .focus a{
+	display: block;
+	width: 420px;
+	height: 335px;
+}
+.aExpert .focus a img{
+	display: block;
+}
+.aExpert .focus a .info{
+	display: block;
+	width: 400px;
+	height: 40px;
+	line-height: 40px;
+	background: url(http://resource.3uol.com/images/www/alpha60.png) repeat 0 0;
+	position: absolute;
+	left: 0;
+	bottom: 0;
+	padding: 0 10px;
+	color: #fff;
+	font-size: 16px;
+	cursor: pointer;
+}
+.aExpert .focus a .info .name{
+	margin-right: 15px;
+}
+.aExpert .focus a .info .playCount{
+	font-size: 14px;
+}
+.aExpert .focus a .info .playCount i{
+	font-size: 22px;
+	margin-right: 5px;
+}
+.aExpert .list{
+	width: 810px;
+	height: 280px;
+	overflow: hidden;
+}
+.aExpert .list .item{
+	width: 240px;
+	height: 118px;
+	overflow: hidden;
+	position: relative;
+	margin-left: 15px;
+	margin-bottom: 15px;
+	background: #fff;
+	padding: 6px;
+	border: 1px solid #ddd;
+}
+.aExpert .list .item .pic{
+	width: 120px;
+	height: 120px;
+	display: block;
+	margin-right: 10px;
+}
+.aExpert .list .item .pic img{
+	display: block;
+	width: 118px;
+	height: 118px;
+}
+.aExpert .list .item .text{
+	width: 108px;
+	font-size: 12px;
+}
+.aExpert .list .item .tItem{
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+}
+.aExpert .list .item .name{
+	font-size: 16px;
+	margin-bottom: 5px;
+}
+.aExpert .list .item .name a{
+	color: #15b05e;
+}
+.aExpert .list .item .name a:hover{
+	color: #ffbf00;
+}
+.aExpert .list .item .title{
+	margin-bottom: 5px;
+}
+.aExpert .list .item .videoCount{
+	margin-bottom: 7px;
+}
+.aExpert .list .item .videoCount i{
+	margin-right: 5px;
+	color: #15b05e;
+}
+.aExpert .list .item .info{
+	height: 3em;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.aVideoList{
+	margin-bottom: 55px;
+}
+.aVideoList .colL{
+	width: 260px;
+	padding-top: 10px;
+}
+.aVideoList .colR{
+	width: 912px;
+}
+.aVideoList .menu{
+	background: #fff;
+}
+.aVideoList .menu a{
+	display: block;
+	height: 60px;
+	line-height: 60px;
+	font-size: 18px;
+	text-align: center;
+	color: #444;
+	border-bottom: 1px solid #dbdbdb;
+	margin: 0 20px;
+}
+.aVideoList .menu a.cur{
+	margin: 0;
+	border-left: 3px solid #65c4aa;
+	color: #65c4aa;
+}
+.aVideoList .menu a:hover{
+	color: #65c4aa;
+}
+.aVideoList .mAllCourse .titleBar .filter{
+	padding-top: 0;
+}
+.aVideoList .mAllCourse .titleBar .filter a{
+	margin-right: 25px;
+	font-size: 16px;
+}
+.aVideoList .mAllCourse .titleBar .filter a.cur{
+	color: #15b05e;
+}
+.aVideoList .mAllCourse .moduleContent{
+	padding: 12px 0 36px;
+}
+.aVideoList .mAllCourse .item{
+	width: 272px;
+	height: 270px;
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 7px;
+	margin-right: 16px;
+	margin-bottom: 16px;
+}
+.aVideoList .mAllCourse .item .pic{
+	display: block;
+	position: relative;
+	margin-bottom: 10px;
+}
+.aVideoList .mAllCourse .item .pic img{
+	display: block;
+	width: 272px;
+	height: 159px;
+	margin-bottom: 15px;
+}
+.aVideoList .mAllCourse .item .pic em{
+	position: absolute;
+	display: block;
+	width: 60px;
+	height: 65px;
+	left: 50%;
+	top: 50%;
+	margin-top: -50px;
+	margin-left: -30px;
+	cursor: pointer;
+}
+.aVideoList .mAllCourse .item .pic em i{
+	font-size:60px;
+	color: #fff;
+	cursor: pointer;
+}
+.aVideoList .mAllCourse .item .t{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	display: block;
+	font-size: 14px;
+	color: #666;
+	font-weight: bold;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+	cursor: pointer;
+}
+.aVideoList .mAllCourse .item .pic .t{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	display: block;
+	font-size: 14px;
+	color: #666;
+	font-weight: bold;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+	cursor: pointer;
+}
+.aVideoList .mAllCourse .item .pic:hover .t{
+	color: #ffbf00;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+}
+.aVideoList .mAllCourse .item .data{
+	margin-bottom: 15px;
+}
+.aVideoList .mAllCourse .item .data i{
+	font-size: 20px;
+	margin-right: 5px;
+}
+.aVideoList .mAllCourse .item .data em{
+	font-size: 14px;
+}
+.aVideoList .mAllCourse .item .data .playCountBox{
+	margin-right: 20px;
+}
+.aVideoList .mAllCourse .item .info{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+}
+.aVideoList .mAllCourse .item .info .name{
+	font-size: 14px;
+	color: #666867;
+	margin-right: 10px;
+	font-weight: bold;
+}
+.aVideoList .mAllCourse .item .info .name i{
+	font-size: 20px;
+	color: #666;
+	margin-right: 10px;
+	font-weight: normal;
+}
+.aVideoList .mAllCourse .item .info .title{
+	font-size: 14px;
+	color: #999;
+	line-height: 22px;
+	height: 22px;
+	overflow: hidden;
+}
+.aVideoContent{
+
+}
+.aVideoContent h1{
+	font-size: 30px;
+	color: #65c4aa;
+	margin-bottom: 5px;
+}
+.aVideoContent .info{
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+.aVideoContent .info .name,
+.aVideoContent .info .name a,
+.aVideoContent .info .playCount{
+	color: #65c4aa;
+}
+.aVideoContent .info .title{
+	padding: 0 15px;
+}
+.aVideoContent .summary{
+	font-size: 16px;
+	color: #666;
+	line-height: 26px;
+	height: 52px;
+	overflow: hidden;
+	margin-bottom: 10px;
+}
+.aVideoContent .summary em{
+	color: #121313;
+}
+.aVideoContent .video{
+	margin-bottom: 15px;
+}
+.aVideoContent .toolsModule{
+	height: 90px;
+	overflow: hidden;
+	background: #fff;
+}
+/*shareBox*/
+.aVideoContent .shareBox{
+	width: 250px;
+	height: 75px;
+	overflow: hidden;
+	padding: 15px 25px 0;
+}
+.aVideoContent .shareBox .item{
+	width: 41px;
+	height: 41px;
+	background: url(http://resource.3uol.com/images/www/shareBg.png) no-repeat 0 0;
+	line-height: 41px;
+	text-align: center;
+	color: #fff;
+	overflow: hidden;
+	margin: 0 10px;
+	position: relative;
+	text-align: center;
+}
+.aVideoContent .shareBox .item a{
+	background: #fff;
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: block;
+	width: 41px;
+	height: 41px;
+	margin: 0;
+	padding: 0;
+	opacity: 0;
+	filter:alpha(opacity=0);
+}
+.aVideoContent .shareBox .item i{
+	font-size: 28px;
+	cursor: pointer;
+}
+.aVideoContent .shareBox .bdsharebuttonbox{
+	margin-bottom: 6px;
+}
+.aVideoContent .shareBox .c{
+	text-align: center;
+	font-size: 14px;
+}
+.aVideoContent .toolsModule .likeBtn{
+	width: 268px;
+	height: 90px;
+	overflow: hidden;
+	text-align: center;
+	border-right: 1px solid #cbd2d8;
+	border-left:1px solid #cbd2d8;
+	line-height: 90px;
+	color: #65c4aa;
+	font-size: 18px;
+}
+.aVideoContent .toolsModule .likeBtn i{
+	font-size: 44px;
+	font-weight: bold;
+	margin-right: 25px;
+}
+.aVideoContent .toolsModule .disabled{
+	color: #999;
+}
+.aVideoContent .toolsModule .disabled,
+.aVideoContent .toolsModule .disabled *{
+	cursor: default;
+}
+.aVideoContent .toolsModule .newComment{
+	width: 610px;
+	height: 90px;
+	line-height: 90px;
+	overflow: hidden;
+	font-size: 16px;
+	color: #676767;
+	padding: 0 10px;
+}
+.aVideoContent .toolsModule .newComment i{
+	color: #65c4aa;
+	font-size: 30px;
+	margin-right: 5px;
+	width: 30px;
+}
+.aVideoContent .toolsModule .newComment .t{
+	width: 80px;
+}
+.aVideoContent .toolsModule .newComment .c{
+	width: 495px;
+	height: 30px;
+	line-height: 30px;
+	margin-top: 30px;
+	overflow: hidden;
+}
+.aVideoContent .toolsModule .newComment .c .item{
+	height: 30px;
+	overflow: hidden;
+}
+.aVideoRelated .colL,
+.aVideoComment .colL{
+	width: 855px;
+}
+.aVideoRelated .colR,
+.aVideoComment .colR{
+	width: 345px;
+}
+.aVideoRelated .mRelated .moduleContent{
+	padding: 12px 0;
+}
+.aVideoRelated .mRelated .item{
+	width: 254px;
+	height: 270px;
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 7px;
+	margin-right: 15px;
+}
+.aVideoRelated .mRelated .item .pic{
+	display: block;
+	position: relative;
+	margin-bottom: 10px;
+}
+.aVideoRelated .mRelated .item .pic img{
+	display: block;
+	width: 254px;
+	height: 159px;
+	margin-bottom: 15px;
+}
+.aVideoRelated .mRelated .item .t .pic{
+	height: 20px;
+	overflow: hidden;
+}
+.aVideoRelated .mRelated .item .pic em{
+	position: absolute;
+	display: block;
+	width: 60px;
+	height: 65px;
+	left: 50%;
+	top: 50%;
+	margin-top: -47px;
+	margin-left: -30px;
+	cursor: pointer;
+}
+.aVideoRelated .mRelated .item .pic em i{
+	font-size:60px;
+	color: #fff;
+	cursor: pointer;
+}
+.aVideoRelated .mRelated .item .pic .t{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	display: block;
+	font-size: 14px;
+	color: #666;
+	font-weight: bold;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+	cursor: pointer;
+}
+.aVideoRelated .mRelated .item .pic:hover .t{
+	color: #ffbf00;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+}
+.aVideoRelated .mRelated .item .data{
+	margin-bottom: 15px;
+}
+.aVideoRelated .mRelated .item .data i{
+	font-size: 20px;
+	margin-right: 5px;
+}
+.aVideoRelated .mRelated .item .data em{
+	font-size: 14px;
+}
+.aVideoRelated .mRelated .item .data .playCountBox{
+	margin-right: 20px;
+}
+.aVideoRelated .mRelated .item .info{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+}
+.aVideoRelated .mRelated .item .info .name{
+	font-size: 14px;
+	color: #2eb273;
+	margin-right: 10px;
+	font-weight: bold;
+}
+.aVideoRelated .mRelated .item .info .name a{
+	color: #65c4aa;
+}
+.aVideoRelated .mRelated .item .info .name i{
+	font-size: 20px;
+	color: #666;
+	margin-right: 10px;
+	font-weight: normal;
+}
+.aVideoRelated .mRelated .item .info .title{
+	font-size: 14px;
+	color: #999;
+	line-height: 22px;
+	height: 22px;
+	overflow: hidden;
+}
+.aVideoRelated .mTeach .moduleContent{
+	padding: 12px 0;
+}
+.aVideoRelated .mTeach .item{
+	background: #fff;
+	padding: 10px;
+	border: 1px solid #ddd;
+}
+.aVideoRelated .mTeach .item .info{
+	margin-bottom: 16px;
+}
+.aVideoRelated .mTeach .item a.pic{
+	display: block;
+}
+.aVideoRelated .mTeach .item a.pic img{
+	display: block;
+	width: 146px;
+	height: 146px;
+	border: 2px solid #65c4aa;
+}
+.aVideoRelated .mTeach .item .infoCon{
+	width: 160px;
+	height: 150px;
+	overflow: hidden;
+}
+.aVideoRelated .mTeach .item .infoCon .name{
+	line-height: 30px;
+	height: 30px;
+	overflow: hidden;
+	font-size: 18px;
+	color: #65c4aa;
+	margin: 10px 0;
+}
+.aVideoRelated .mTeach .item .infoCon .name a{
+	color: #65c4aa;
+}
+.aVideoRelated .mTeach .item .infoCon .name a:hover{
+	color: #ffbf00;
+}
+.aVideoRelated .mTeach .item .infoCon .title{
+	font-size: 14px;
+	color: #666666;
+	line-height: 22px;
+	max-height: 44px;
+	overflow: hidden;
+    margin-bottom: 10px;
+}
+.aVideoRelated .mTeach .item .infoCon .popular,
+.aVideoRelated .mTeach .item .infoCon .works{
+	color: #666666;
+	font-size: 14px;
+	margin-bottom: 10px;
+}
+.aVideoRelated .mTeach .item .text{
+	line-height: 22px;
+	font-size: 14px;
+	height: 98px;
+	overflow: hidden;
+}
+.aVideoRelated .mTeach .item .text a{
+	color: #65c4aa;
+}
+.aVideoRelated .mTeach .item .text a:hover{
+	text-decoration: underline;
+}
+.aVideoComment .mComment .moduleContent{
+	padding: 12px 15px 12px 0;
+}
+.aVideoComment .mComment .commentMain{
+	background: #fff;
+	padding: 12px;
+}
+.aVideoComment .mIntroduction .moduleContent{
+	padding: 12px 0;
+}
+.aVideoComment .mIntroduction .item{
+	background: #fff;
+	padding: 12px;
+	color: #666666;
+	font-size: 14px;
+	line-height: 22px;
+}
+.aVideoComment .mIntroduction .item p{
+	
+}
+.aVideoComment .mIntroduction .item .c{
+	height: 240px;
+	line-height: 24px;
+	text-align: justify;
+  	text-justify: inter-ideograph;
+  	overflow: hidden;
+}
+.aVideoComment .mIntroduction .item strong{
+	font-weight: bold;
+}
+.aVideoComment .mIntroduction .item .readAllBtn{
+	text-align: center;
+	font-size: 14px;
+	padding: 5px 0;
+	color: #65c4aa;
+	display: block;
+}
+.aVideoExpertList{
+	margin-bottom: 45px;
+}
+.aVideoExpertList .colL{
+	width: 880px;
+}
+.aVideoExpertList .colR{
+	width: 300px;
+}
+.aVideoExpertList .mYrExpert .moduleContent{
+	padding: 12px 0;
+}
+.aVideoExpertList .mYrExpert .item{
+	padding: 12px 0;
+	background: #fff;
+	border: 1px solid #ddd;
+	margin-bottom: 15px;
+}
+.aVideoExpertList .mYrExpert .item .pic{
+	width: 180px;
+	height: 180px;
+	overflow: hidden;
+	margin-right: 15px;
+	margin-left: 12px;
+}
+.aVideoExpertList .mYrExpert .item .pic img{
+	display: block;
+	width: 150px;
+	height: 150px;  
+	border: 2px solid #65c4aa;
+}
+.aVideoExpertList .mYrExpert .item .eInfo{
+	width: 670px;
+	height: 180px;
+	overflow: hidden;
+}
+.aVideoExpertList .mYrExpert .noresult{
+	font-size: 24px;
+	text-align: center;
+	padding: 30px 0;
+}
+.aVideoExpertList .mYrExpert .eInfo .nameLine{
+	font-size: 14px;
+	color: #65c4aa;
+	height: 36px;
+	line-height: 36px;
+	overflow: hidden;
+}
+.aVideoExpertList .mYrExpert .eInfo .nameLine .name{
+	font-size: 24px;
+	margin-right: 10px;
+}
+.aVideoExpertList .mYrExpert .eInfo .nameLine .name a{
+	color: #65c4aa;
+}
+.aVideoExpertList .mYrExpert .eInfo .nameLine .rql{
+	height: 25px;
+	line-height: 25px;
+	padding-left: 25px;
+	background: url(http://resource.3uol.com/images/www/rql.png) no-repeat left 0;
+	color: #fff;
+	margin-top: 5px;
+	margin-right: 15px;
+}
+.aVideoExpertList .mYrExpert .eInfo .nameLine .rqr{
+	display: block;
+	height: 25px;
+	padding-right: 20px;
+	background: url(http://resource.3uol.com/images/www/rqr.png) no-repeat right 0;
+}
+.aVideoExpertList .mYrExpert .eInfo .nameLine .rqm{
+	display: block;
+	height: 25px;
+	background: url(http://resource.3uol.com/images/www/rqm.png) repeat-x 0 0;
+}
+.aVideoExpertList .mYrExpert .eInfo .nameLine .playCount{
+	margin-right: 10px;
+}
+.aVideoExpertList .mYrExpert .eInfo .nameLine .playCount i{
+	font-size: 22px;
+	margin-right: 5px;
+}
+.aVideoExpertList .mYrExpert .eInfo .nameLine .askBtn{
+	color: #0ab068;
+}
+.aVideoExpertList .mYrExpert .eInfo .nameLine .askBtn i{
+	font-size: 26px;
+	margin-right: 5px;
+	vertical-align: sub;
+	*vertical-align: middle;
+}
+.aVideoExpertList .mYrExpert .eInfo .titleLine,
+.aVideoExpertList .mYrExpert .eInfo .infoLine{
+	font-size: 14px;
+	color: #666;
+	line-height: 25px;
+	height: 55px;
+	overflow: hidden;
+}
+.aVideoExpertList .mYrExpert .eInfo .titleLine{
+	height: 30px;
+	margin-bottom: 0;
+}
+.aVideoExpertList .mYrExpert .opreat a{
+	display: block;
+	width: 220px;
+	height: 35px;
+	line-height: 35px;
+	font-size: 16px;
+	color: #fff;
+	background: #65c4aa;
+	text-align: center;
+}
+.aVideoExpertList .mYrExpert .opreat a:hover{
+	background: #6ed5b8;
+}
+.aVideoExpertList .mYrExpert .vlist{
+	padding: 15px 9px 0 8px;
+}
+.aVideoExpertList .mYrExpert .vlist .vItem{
+	background: #fff;
+	border: 1px solid #ddd;
+	width: 181px;
+	padding: 10px;
+	margin: 0 6px;
+}
+.aVideoExpertList .mYrExpert .vlist .vItem .vpic{
+	display: block;
+	width: 180px;
+	height: 135px;
+	overflow: hidden;
+	margin-bottom: 10px;
+	position: relative;
+	cursor: pointer;
+}
+.aVideoExpertList .mYrExpert .vlist .vItem .vpic img{
+	display: block;
+}
+.aVideoExpertList .mYrExpert .vlist .vItem .vpic .icon,
+.aVideoExpertList .mYrExpert .vlist .vItem .vpic .more{
+	position: absolute;
+	display: block;
+	width: 60px;
+	height: 65px;
+	left: 50%;
+	top: 50%;
+	margin-top: -32.5px;
+	margin-left: -30px;
+	text-align: center;
+	line-height: 65px;
+	cursor: pointer;
+}
+.aVideoExpertList .mYrExpert .vlist .vItem .vpic .more{
+	width: 90px;
+	margin-left: -45px;
+	color: #fff;
+	font-size: 20px;
+}
+.aVideoExpertList .mYrExpert .vlist .vItem .vpic .icon i{
+	font-size: 40px;
+	color: #fff;
+}
+.aVideoExpertList .mYrExpert .vlist .vItem .t{
+	font-size: 14px;
+	font-weight: bold;
+	height: 20px;
+	line-height: 20px;
+	overflow: hidden;
+	cursor: pointer;
+	display: block;
+}
+.aVideoExpertList .mRecommend .moduleContent{
+	padding: 12px 0;
+}
+.aVideoExpertList .mRecommend .adBox{
+	margin-bottom: 15px;
+}
+.aVideoExpertList .mRecommend .item{
+	width: 284px;
+	height: 285px;
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 7px;
+	margin-bottom: 15px;
+	position: relative;
+}
+.aVideoExpertList .mRecommend .item .new{
+	display: block;
+	width: 84px;
+	height: 84px;
+	background: url(http://resource.3uol.com/images/www/video/new2.png) no-repeat 0 0;
+	position: absolute;
+	left: 0;
+	top: 0;
+	z-index: 2;
+	cursor: pointer;
+}
+.aVideoExpertList .mRecommend .item .pic{
+	display: block;
+	position: relative;
+	margin-bottom: 5px;
+	cursor: pointer;
+}
+.aVideoExpertList .mRecommend .item .pic img{
+	display: block;
+	width: 284px;
+	/*height: 192px;*/
+	margin-bottom: 10px;
+}
+.aVideoExpertList .mRecommend .item .pic em{
+	position: absolute;
+	display: block;
+	width: 60px;
+	height: 65px;
+	left: 50%;
+	top: 50%;
+	margin-top: -50px;
+	margin-left: -30px;
+	cursor: pointer;
+}
+.aVideoExpertList .mRecommend .item .pic em i{
+	font-size:60px;
+	color: #fff;
+	cursor: pointer;
+}
+.aVideoExpertList .mRecommend .item .pic .t{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	display: block;
+	font-size: 14px;
+	color: #666;
+	font-weight: bold;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+	cursor: pointer;
+}
+.aVideoExpertList .mRecommend .item .pic:hover .t{
+	color: #ffbf00;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+}
+.aVideoExpertList .mRecommend .item .data{
+	margin-bottom: 10px;
+}
+.aVideoExpertList .mRecommend .item .data i{
+	font-size: 20px;
+	margin-right: 5px;
+}
+.aVideoExpertList .mRecommend .item .data em{
+	font-size: 14px;
+}
+.aVideoExpertList .mRecommend .item .data .playCountBox{
+	margin-right: 20px;
+}
+.aVideoExpertList .mRecommend .item .info{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+}
+.aVideoExpertList .mRecommend .item .info .name{
+	font-size: 14px;
+	color: #676566;
+	margin-right: 10px;
+	font-weight: bold;
+}
+.aVideoExpertList .mRecommend .item .info .name i{
+	font-size: 20px;
+	color: #666;
+	margin-right: 10px;
+	font-weight: normal;
+}
+.aVideoExpertList .mRecommend .item .info .title{
+	font-size: 14px;
+	color: #999;
+	line-height: 22px;
+	height: 22px;
+	overflow: hidden;
+}
+.aVideoExpertInfo{
+	padding-top: 10px;
+	margin-bottom: 65px;
+}
+.aVideoExpertInfo .pic {
+  width: 166px;
+  height: 166px;
+  overflow: hidden;
+  margin-right: 15px;
+}
+.aVideoExpertInfo .pic img {
+  display: block;
+  width: 162px;
+  height: 162px;
+  border: 2px solid #0ab068;
+}
+.aVideoExpertInfo .eInfo {
+  width: 1018px;
+  /*height: 180px;*/
+  overflow: hidden;
+}
+.aVideoExpertInfo .eInfo .nameLine,
+.aVideoExpertInfo .eInfo .toolsLine{
+	font-size: 14px;
+	color: #0ab068;
+	height: 36px;
+	line-height: 36px;
+	overflow: hidden;
+	//margin-bottom: 10px;
+}
+.aVideoExpertInfo .eInfo .nameLine .name{
+	font-size: 24px;
+	margin-right: 10px;
+}
+.aVideoExpertInfo .eInfo .nameLine .rql{
+	height: 25px;
+	line-height: 25px;
+	padding-left: 25px;
+	background: url(http://resource.3uol.com/images/www/rql.png) no-repeat left 0;
+	color: #fff;
+	margin-top: 5px;
+	margin-right: 15px;
+}
+.aVideoExpertInfo .eInfo .nameLine .rqr{
+	display: block;
+	height: 25px;
+	padding-right: 20px;
+	background: url(http://resource.3uol.com/images/www/rqr.png) no-repeat right 0;
+}
+.aVideoExpertInfo .eInfo .nameLine .rqm{
+	display: block;
+	height: 25px;
+	background: url(http://resource.3uol.com/images/www/rqm.png) repeat-x 0 0;
+}
+.aVideoExpertInfo .eInfo .toolsLine{
+	
+}
+.aVideoExpertInfo .eInfo .toolsLine .playCount,
+.aVideoExpertInfo .eInfo .toolsLine .askBtn{
+	margin-right: 30px;
+}
+.aVideoExpertInfo .eInfo .toolsLine .playCount i{
+	font-size: 22px;
+	margin-right: 5px;
+}
+.aVideoExpertInfo .eInfo .toolsLine .askBtn{
+	color: #0ab068;
+}
+.aVideoExpertInfo .eInfo .toolsLine .askBtn i{
+	font-size: 26px;
+	margin-right: 5px;
+	vertical-align: sub;
+	*vertical-align: middle;
+}
+.aVideoExpertInfo .eInfo .toolsLine .works{
+	margin-right: 10px;
+}
+.aVideoExpertInfo .eInfo .toolsLine .works i{
+	font-size: 24px;
+	margin-right: 5px;
+}
+.aVideoExpertInfo .eInfo .titleLine,
+.aVideoExpertInfo .eInfo .infoLine{
+	font-size: 14px;
+	color: #666;
+	height: 48px;
+	line-height: 24px;
+	overflow: hidden;
+}
+.aVideoExpertInfo .eInfo .titleLine{
+	height: 24px;
+}
+.aVideoExpertInfo .eInfo .opreat{
+	height: 24px;
+	line-height: 24px;
+	font-size: 14px;
+}
+.aVideoExpertInfo .eInfo .opreat a{
+	color: #0ab068;
+}
+.aVideoExpertInfo .expertmore{
+	height: 100px;
+	margin-top: 35px;
+}
+.aVideoExpertInfo .expertmore .moreList{
+	width: 1080px;
+	height: 80px;
+	background: #fff;
+	padding: 10px;
+}
+.aVideoExpertInfo .expertmore .item{
+	width: 196px;
+	height: 80px;
+	overflow: hidden;
+	margin: 0 10px;
+}
+.aVideoExpertInfo .expertmore .item .pic{
+	width: 80px;
+	height: 80px;
+	//margin-right: 15px;
+	cursor: pointer;
+}
+.aVideoExpertInfo .expertmore .item .text{
+	width: 100px;
+	height: 80px;
+	overflow: hidden;
+	cursor: pointer;
+}
+.aVideoExpertInfo .expertmore .item .text .name,
+.aVideoExpertInfo .expertmore .item .text .title{
+	display: block;
+	font-size: 14px;
+	color: #0ab068;
+	margin-bottom: 4px;
+}
+.aVideoExpertInfo .expertmore .item .text .title{
+	color: #666;
+	margin-bottom: 0;
+	line-height: 19px;
+	height: 57px;
+	overflow: hidden;
+}
+.aVideoExpertInfo .expertmore .more{
+	width: 50px;
+	height: 50px;
+	font-size: 18px;
+	color: #fff;
+	padding: 25px;
+	text-align: center;
+	background: #0ab068;
+}
+.aVideoExpertInfo .expertmore .more:hover{
+	background: #039656;
+}
+.aWorks{
+	background: #fff;
+	position: relative;
+	margin-bottom: 0;
+	padding-bottom: 45px;
+}
+.aWorks .areaTitle{
+	width: 540px;
+	height: 60px;
+	line-height: 60px;
+	border: 1px solid #ddd;
+	border-radius: 5px;
+	text-align: center;
+	padding: 0 130px;
+	position: absolute;
+	top: -33px;
+	left: 50%;
+	margin-left: -400px;
+	background: #fff;
+}
+.aWorks .areaTitle .t{
+	font-size: 18px;
+	color: #0ab068;
+	border-bottom: 5px solid #fff;
+	width: 270px;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	margin: 0 auto;
+	display: block;
+}
+.aWorks .areaTitle .cur{
+	border-bottom: 5px solid #15b05e;
+}
+.aWorks .areaContent{
+	padding-top: 50px;
+	padding: 50px 8px 0 7px;
+}
+.aWorks .item{
+	width: 269px;
+	height: 255px;
+	background: #fff;
+	border: 1px solid #ddd;
+	padding: 7px;
+	margin: 0 7px 15px 8px;
+	position: relative;
+}
+.aWorks .item .pic{
+	display: block;
+	position: relative;
+	margin-bottom: 5px;
+}
+.aWorks .item .pic img{
+	display: block;
+	width: 269px;
+	height: 152px;
+	margin-bottom: 10px;
+}
+.aWorks .item .pic em{
+	position: absolute;
+	display: block;
+	width: 60px;
+	height: 65px;
+	left: 50%;
+	top: 50%;
+	margin-top: -50px;
+	margin-left: -30px;
+	cursor: pointer;
+}
+.aWorks .pic em i{
+	font-size:60px;
+	color: #fff;
+	cursor: pointer;
+}
+.aWorks .pic .t{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	display: block;
+	font-size: 14px;
+	color: #666;
+	font-weight: bold;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+	cursor: pointer;
+}
+.aWorks .pic:hover .t{
+	color: #ffbf00;
+	-moz-transition:all 0.2s linear 0s;
+	-webkit-transition:all 0.2s linear 0s;
+}
+.aWorks .data{
+	margin-bottom: 10px;
+}
+.aWorks .data i{
+	font-size: 20px;
+	margin-right: 5px;
+}
+.aWorks .data em{
+	font-size: 14px;
+}
+.aWorks .data .playCountBox{
+	margin-right: 20px;
+}
+.aWorks .info{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+}
+.aWorks .info .name{
+	font-size: 14px;
+	color: #2eb273;
+	margin-right: 10px;
+	font-weight: bold;
+}
+.aWorks .info .name i{
+	font-size: 20px;
+	color: #666;
+	margin-right: 10px;
+	font-weight: normal;
+}
+.aWorks .info .title{
+	font-size: 14px;
+	color: #999;
+	line-height: 22px;
+	height: 22px;
+	overflow: hidden;
+}
+.aAsk{
+	background: #fff;
+}
+.aAsk .replyRow{
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 15px;
+	margin-bottom: 15px;
+}
+.aAsk .replyRow .user,
+.aAsk .commentlist .item .user{
+	display: block;
+	width: 65px;
+	margin-right: 15px;
+}
+.aAsk .replyRow .user img,
+.aAsk .commentlist .item .user img{
+	display: block;
+	width: 63px;
+	height: 63px;
+	border: 1px solid #ddd;
+	margin-bottom: 5px;
+}
+.aAsk .replyRow .user .name{
+	height: 22px;
+	line-height: 22px;
+	overflow: hidden;
+	font-size: 12px;
+	display: block;
+}
+.aAsk .replyRow .c textarea {
+  resize: none;
+  width: 1108px;
+  height: 75px;
+  border: 1px solid #ccc;
+  padding: 5px;
+  font-size: 14px;
+  font-family: Microsoft Yahei;
+  margin-bottom: 10px;
+}
+.aAsk .commentlist .item .itemCon{
+	width: 1120px;
+}
+.aAsk .commentlist .item .c .cText{
+	margin-bottom: 17px;
+	color: #ababab;
+} 
+.aAsk .commentlist .item .c .cText i{
+	font-size: 16px;
+	padding: 0 10px;
+	color: #555;
+}
+.aAsk .commentlist .item .c .cText .point{
+	font-weight: bold;
+	color: #555;
+}
+.aAsk .commentlist .item .username {
+  color: #333;
+  font-weight: bold;
+}
+.aAsk .commentlist .item .c .quote {
+  background: #f4f4f4;
+  border: 1px solid #ddd;
+  padding: 12px;
+  margin-bottom: 10px;
+  position: relative;
+}
+.aAsk .commentlist .item .c .quote .arrow{
+	display: block;
+	width: 21px;
+	height: 11px;
+	background: url(http://resource.3uol.com/images/www/arrow_top.png) no-repeat 0 0;
+	position: absolute;
+	left: 20px;
+	top: -11px;
+}
+.aAsk .commentlist .item .c .quote .qt{
+	font-family: Microsoft Yahei;
+}
+.aAsk .commentlist .item .quote .zj{
+	font-size: 14px;
+	color: #07a14f;
+}
+.aAsk .commentlist .item .c .quote .qc{
+	color: #555;
+}
+.aAsk .commentlist .item .b a.userreply{
+	color: #666;
+	font-size: 14px;
+}
+.aAsk .commentlist .item .b a.userreply i{
+	margin-right: 5px;
+}
+.aAsk .commentlist .item .b a.userreply:hover{
+	text-decoration: none;
+	color: #ffbf00;
+}
+.aAsk .commentlist .item .opreat{
+	background: none;
+	padding: 0; 
+	margin-top: 10px; 
+}
+.aAsk .commentlist .item .opreat em{
+	display: none;
+}
+.aAsk .commentlist .item .opreat textarea{
+	width: 1108px;
+}
+
+.lastpage{ margin-top:0px;}
+.bread .iconfont{ color:#65c4aa;}
+.titleBar{ border-bottom: 1px solid #65c4aa;}
+.titleBar h3{ background:#65c4aa;}
+
+

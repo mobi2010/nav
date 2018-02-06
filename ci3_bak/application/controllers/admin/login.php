@@ -1,0 +1,40 @@
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+require('Admin_Controller.php');
+/**
+ * 登录.
+ */
+class Login extends Admin_Controller {
+	/**
+	 * [index description]
+	 * @return [type] [description]
+	 */
+	public function index()
+	{	
+		$this->load->view('admin/login');
+	}
+	/**
+	 * 验证
+	 * @return [type] [description]
+	 */
+	public function checked(){
+		$uname = ci3_string_filter($_POST['uname']);
+		$upwd = ci3_string_filter($_POST['upwd']);		
+		if($uname == 'admin' && $upwd == 'admin@ci3'){			
+			//$_SESSION['logined'] = true;
+			ci3_setcookie('logined',time(),7*24*3600);
+			$this->cResponse($res);
+		}
+		$res['code'] = 400;
+		$res['message'] = 'Account or Password is error';
+		$this->cResponse($res);
+	}
+	/**
+	 * 登出
+	 * @return [type] [description]
+	 */
+	public function logout(){
+		//unset($_SESSION['logined']);
+		ci3_delcookie('logined');
+		redirect('admin/login');
+	}
+}
