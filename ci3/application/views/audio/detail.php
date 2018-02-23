@@ -103,10 +103,10 @@ $this->load->view('/audio/header',$data);
     </div>
     <div class="playMain clearfix">
         <div class="playBox fl">
-            <h1><?=$dataModel['title'];?></h1>
+            <h1>不要借口工作忙而忽略孩子</h1>
             <div class="playInfo clearfix">
                 <div class="radiohost fl">主播: <a href="http://fm.3uol.com/anchor/88.html" target="_blank">文月</a></div>
-                <div class="popularity fr">人气：<?=$dataModel['views'];?></div>
+                <div class="popularity fr">人气：21.0万</div>
             </div>
             <div class="tools">
                 <a href="javascript:void(0)" class="btn likeBtn fl" data-disabled="false" onclick="onLike(this, 3196, 1)">
@@ -149,7 +149,7 @@ $this->load->view('/audio/header',$data);
             </div>
             <div class="player" data-player="http://mamafm.resource.3uol.com/20161205/636165486160326357.mp3?e=1481530044&amp;token=rDBDYPw36ixTYG84GMf3g1nTE-S7n3DNIljpe65f:p_nnTxClZYSGYD777ZrFaNxxR7g=" data-autoplay="true">
             <audio controls="controls" autoplay="autoplay" loop="loop">
-              <source src="<?=$dataModel['audio_url'];?>" type="audio/mpeg">
+              <source src="http://mamafm.resource.3uol.com/20161205/636165486160326357.mp3?e=1481530044&amp;token=rDBDYPw36ixTYG84GMf3g1nTE-S7n3DNIljpe65f:p_nnTxClZYSGYD777ZrFaNxxR7g=" type="audio/mpeg">
             Your browser does not support the audio tag.
             </audio>
 

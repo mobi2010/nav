@@ -11,7 +11,7 @@
 <body>
 
 <div class="admin-login"  style="width:340px; height:auto;margin: 120px auto 0;">
-    <h1>Edu CMS</h1>
+    <h1>Viu OTT CMS</h1>
         <div class="form-group field-adminloginform-username required">
             <label class="control-label" for="adminloginform-username">Username:</label>
             <input type="text" id="uname" value="" class="form-control" name="Login[username]">

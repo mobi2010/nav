@@ -1,0 +1,10 @@
+RewriteEngine on
+
+RewriteCond %{REQUEST_FILENAME} !-f    
+RewriteRule ^(.*?)-([0-9]+)\.html$ index.php?d=$1&c=detail&m=index&id=$2 [L]
+
+RewriteCond %{REQUEST_FILENAME} !-f    
+RewriteRule ^(.*)$ index.php/$1 [L]
+
+php_value upload_max_filesize 10M  
+php_value post_max_size 20M  

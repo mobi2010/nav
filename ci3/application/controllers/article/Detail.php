@@ -10,13 +10,21 @@ class Detail extends Article_Controller {
 	}
 	public function index()
 	{	
-		$id = (int)$_GET['id'];
-		if($id){
-			$dataModel = $this->articleModel->getRow($id);
-			$dataModel['views'] = $dataModel['views'] + 1;
-			$this->articleModel->save(['id'=>$id,'views'=>$dataModel['views']]);
-			$data['dataModel'] = $dataModel;
+		$data['categoryData'] = ["所有类别"]+$this->categoryModel->getData(1);
+		$data['cid'] = $cid = (int)$_GET['cid']; 
+		$data['sort'] = $sort = (int)$_GET['sort']; 
+
+		$where = [];
+		if($cid){
+			$where[] = "category_id={$cid}";
 		}
+		$where = empty($where) ? null : implode(' and ',$where);
+		$params['where'] = $where;
+		$params['order'] = $sort == 1 ? "views desc" : "update_time desc";
+
+		$getList = $this->articleModel->getList($params);
+		$data += $getList;
+
 		$this->load->view('article/detail',$data);
 	}	
 	

@@ -10,12 +10,10 @@
     <meta name="description" content="育儿微课是第一个为新生代妈妈提供母婴专家育儿知识的微视频服务，面向全网会员征集各种孕育难题，由专家亲身参与视频拍摄，为广大妈妈网友解决各种孕育难题。" />
     <meta name="applicable-device" content="pc">
     <link rel="alternate" media="only screen and（max-width: 640px）" href="http://yuerdashi.3uol.com/home/index/?cid=0">
-    <link rel="stylesheet" type="text/css" href="/assets/article/css/iconfont.css">
-    <link rel="stylesheet" type="text/css" href="/assets/article/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/assets/article/css/index.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/article/css/video1.1.css">
-    <link rel="stylesheet" type="text/css" href="/assets/article/css/video.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/article/css/share_style1_24.css">
+    <link rel="stylesheet" type="text/css" href="http://resource.3uol.com/style/commons/iconfont/iconfont.css">
+    <link rel="stylesheet" type="text/css" href="/assets/video/css/common.css">
+    <link rel="stylesheet" type="text/css" href="/assets/video/css/video.css" />
+    <link rel="stylesheet" href="/assets/video/css/video1.1.css">
 <style>
     .pagination{font-size: 18px;text-align: center;line-height: 44px;margin: 50px 0 0;}
     .pagination>a{display: inline-block;width: 42px;height: 42px;background: #ddd;color: #444;}

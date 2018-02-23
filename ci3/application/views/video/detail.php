@@ -4,38 +4,17 @@ $this->load->view('/video/header',$data);
 <div class="container" id="container" style="min-height: 638px;">
     <div class="area aVideoContent">
         <div class="areaContent clearfix">
-            <h1><?=$dataModel['title'];?></h1>
+            <h1>咳嗽变异性哮喘会变成典型哮喘吗？</h1>
             <div class="info clearfix">
                 <span class="name fl"><a href="http://video.3uol.com/expert/469.html" target="_blank">谢衍铭</a></span>
                 <span class="title fl">主任医师</span>
-                <span class="playCount">播放：<?=$dataModel['views'];?></span>
+                <span class="playCount">播放：339828</span>
             </div>
             <div class="summary clearfix">
                 <em class="fl">摘要：</em>
-                <div class="c"><?=$dataModel['abstract'];?></div>
+                <div class="c"><a href="http://video.3uol.com/view/1361.html" data-cut="160">咳嗽变异性哮喘和典型哮喘有什么区别？两者有什么关系吗？一起看看广东省人民医院新生儿科谢衍铭主任医师怎么说吧。</a></div>
             </div>
-            <div class="video" id="video_container" data-video="" style="text-align: center;">
-                <!-- <object data="http://imgcache.qq.com/open/qcloud/video/flash/video_player.swf?max_age=1800"
-                id="video_1480953348606_object" width="1210px" height="680px" style="background-color:#000000;"
-                align="middle" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab#version=9,0,0,0">
-                    <param name="flashVars" value="auto_play=undefined&amp;version=1&amp;refer=video.3uol.com&amp;jscbid=video_1480953348606&amp;disable_full_screen=0&amp;file_id=14651978969470586382&amp;app_id=1252325412&amp;definition=30&amp;stretch_full=1">
-                    <param name="src" value="http://imgcache.qq.com/open/qcloud/video/flash/video_player.swf?max_age=1800">
-                    <param name="wmode" value="Window">
-                    <param name="quality" value="High">
-                    <param name="allowScriptAccess" value="always">
-                    <param name="allowNetworking" value="all">
-                    <param name="allowFullScreen" value="true">
-                    <embed style="background-color:#000000;" id="video_1480953348606_embed"
-                    width="1210px" height="680px" flashvars="auto_play=undefined&amp;version=1&amp;refer=video.3uol.com&amp;jscbid=video_1480953348606&amp;disable_full_screen=0&amp;file_id=14651978969470586382&amp;app_id=1252325412&amp;definition=30&amp;stretch_full=1"
-                    align="middle" pluginspage="http://www.macromedia.com/go/getflashplayer"
-                    type="application/x-shockwave-flash" allowfullscreen="true" bgcolor="#000000"
-                    quality="high" src="http://imgcache.qq.com/open/qcloud/video/flash/video_player.swf?max_age=1800"
-                    wmode="Window" invokeurls="false" allownetworking="all" allowscriptaccess="always">
-                </object> -->
-                <video src="<?=$dataModel['video_url'];?>" width="1210px" height="680px" controls="controls">
-                    Your browser does not support the video tag.
-                </video>
-            </div>
+            <div class="video" id="video_container" data-video="" style="text-align: center;"><object data="http://imgcache.qq.com/open/qcloud/video/flash/video_player.swf?max_age=1800" id="video_1480953348606_object" width="1210px" height="680px" style="background-color:#000000;" align="middle" classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://fpdownload.macromedia.com/get/flashplayer/current/swflash.cab#version=9,0,0,0"><param name="flashVars" value="auto_play=undefined&amp;version=1&amp;refer=video.3uol.com&amp;jscbid=video_1480953348606&amp;disable_full_screen=0&amp;file_id=14651978969470586382&amp;app_id=1252325412&amp;definition=30&amp;stretch_full=1"><param name="src" value="http://imgcache.qq.com/open/qcloud/video/flash/video_player.swf?max_age=1800"><param name="wmode" value="Window"><param name="quality" value="High"><param name="allowScriptAccess" value="always"><param name="allowNetworking" value="all"><param name="allowFullScreen" value="true"><embed style="background-color:#000000;" id="video_1480953348606_embed" width="1210px" height="680px" flashvars="auto_play=undefined&amp;version=1&amp;refer=video.3uol.com&amp;jscbid=video_1480953348606&amp;disable_full_screen=0&amp;file_id=14651978969470586382&amp;app_id=1252325412&amp;definition=30&amp;stretch_full=1" align="middle" pluginspage="http://www.macromedia.com/go/getflashplayer" type="application/x-shockwave-flash" allowfullscreen="true" bgcolor="#000000" quality="high" src="http://imgcache.qq.com/open/qcloud/video/flash/video_player.swf?max_age=1800" wmode="Window" invokeurls="false" allownetworking="all" allowscriptaccess="always"></object></div>
             <div class="toolsModule clearfix">
                 <div class="shareBox fl">
                     <div class="bdsharebuttonbox clearfix bdshare-button-style1-24" data-tag="publicshare" data-bd-bind="1480953348707">

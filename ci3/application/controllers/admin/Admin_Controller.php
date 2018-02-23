@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 header( 'Content-type: text/html;charset=utf-8' );
-//session_start();
+session_start();
 /**
  * 后台控制器
  *
@@ -25,8 +25,7 @@ class Admin_Controller extends CI_Controller
 	 * @return [type] [description]
 	 */
 	protected function auth(){
-		$logined = ci3_getcookie('logined');
-		if ($this->uriEntity['class'] != 'login' && !$logined) {
+		if ($this->uriEntity['class'] != 'login' && !$_SESSION['logined']) {
 			redirect('admin/login');
 		}
 	}

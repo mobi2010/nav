@@ -21,8 +21,8 @@ class Article_model extends MY_Model {
 
 	function save($params=[]){
 		$params['update_time'] = time(); 
-		$id = $params['id'];unset($params['id']);
 		$this->params['data'] = $params;
+		$id = $params['id'];unset($params['id']);
 		if($id){
 			$this->params['where'] = $id;
 			$this->dataUpdate($this->params);

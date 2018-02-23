@@ -10,13 +10,7 @@ class Detail extends Audio_Controller {
 	}
 	public function index()
 	{	
-		$id = (int)$_GET['id'];
-		if($id){
-			$dataModel = $this->audioModel->getRow($id);
-			$dataModel['views'] = $dataModel['views'] + 1;
-			$this->audioModel->save(['id'=>$id,'views'=>$dataModel['views']]);
-			$data['dataModel'] = $dataModel;
-		}
+
 		$this->load->view('audio/detail',$data);
 	}	
 	
