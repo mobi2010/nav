@@ -683,3 +683,14 @@ if ( ! function_exists('ci3_format_url')){
 		}
 	}
 }
+
+
+if ( ! function_exists('ci3_article_url')){
+	function ci3_article_url($params=[]){
+		$tag_id = (int)$params['tag_id'];
+		$article_id = (int)$params['article_id'];
+		$host = "http://".$_SERVER['HTTP_HOST'];
+		$url = $host."/article-{$tag_id}-{$article_id}.html";
+		return $url;
+	}
+}

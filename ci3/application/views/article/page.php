@@ -46,16 +46,20 @@ if($totalPage > 1){
 	} 
 	$startPage = $startPage >0 ? $startPage : 1; //起始页      
 
-	$html = '<div class="pagination">';
+	$html = '<ul class="pagination">';
 
 
 	//第一页
-	if($page > 1){
-		$html .= '<a href="'.$url.'&page=1">首页</a>&nbsp;';
+	if($page <= 1){
+		$html .= '<li class="first disabled"><span>first</span></li>';
+	}else{
+		$html .= '<li class="first"><a href="javascript:;" data-page="1">first</a></li>';
 	}
 	//上页
 	if($page > 1){
-		$html .= '<a href="'.$url.'&page='.($page-1).'">上页</a>&nbsp;';
+		$html .= '<li class="prev"><a href="javascript:;" data-page="'.($page-1).'">&laquo;</a></li>';
+	}else{
+		$html .= '<li class="prev disabled"><span>&laquo;</span></li>';
 	}
 
 	//中间页
@@ -63,21 +67,25 @@ if($totalPage > 1){
 	for($i=0;$i<$showPageSize;$i++){
 		$pi = $i+$startPage;
 		if($page == $pi){
-			$html .= '<a class="current" href="'.$url.'&page='.$pi.'">'.$pi.'</a>&nbsp;';
+			$html .= '<li class="active"><a href="javascript:;" data-page="'.$pi.'">'.$pi.'</a></li>';
 		}else{
-			$html .= '<a href="'.$url.'&page='.$pi.'">'.$pi.'</a>&nbsp;';
+			$html .= '<li><a href="javascript:;" data-page="'.$pi.'">'.$pi.'</a></li>';
 		}
 	}   
 
 	//后页
 	if($page < $totalPage){
-		$html .= '<a href="'.$url.'&page='.($page+1).'">下页</a>&nbsp;';
-	}
+		$html .= '<li class="next"><a href="javascript:;" data-page="'.($page+1).'">&raquo;</a></li>';
+	}else{
+		$html .= '<li class="next disabled"><span>&raquo;</span></li>';
+	} 
 	//尾页
-	if($page < $totalPage){
-		$html .= '<a href="'.$url.'&page='.$totalPage.'">尾页</a>&nbsp;';
+	if($page >= $totalPage){
+		$html .= '<li class="last disabled"><span>last</span></li>';
+	}else{
+		$html .= '<li class="last"><a href="javascript:;" data-page="'.$totalPage.'">last</a></li>';
 	}
-	$html .= '</div>';
+	$html .= '</ul>';
 }
 echo $html;
 ?>

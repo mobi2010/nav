@@ -20,8 +20,10 @@ class MY_Controller extends CI_Controller
 		parent::__construct();
 
 		$this->load->model('Ci3_model', 'ci3Model');//服务
+		$this->load->model('member_model', 'memberModel');//服务
 
 		$this->load->library('image');
+		$this->load->library('aes');
 
 		$this->uriEntity();//uri实体数据		
 

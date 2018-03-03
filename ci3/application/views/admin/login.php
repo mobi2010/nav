@@ -3,15 +3,15 @@
 <head>
     <meta charset="utf-8">
     <title>CMS</title>
-    <link href="/assets/admin/css/bootstrap.css" rel="stylesheet">
-    <link href="/assets/admin/css/site.css" rel="stylesheet">
-    <script src="/assets/admin/js/jquery.js"></script>
-    <script src="/assets/js/common.js"></script>
+    <link href="/assets/common/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/common/css/site.css" rel="stylesheet">
+    <script src="/assets/common/js/jquery.js"></script>
+    <script src="/assets/common/js/common.js"></script>
 </head>
 <body>
 
 <div class="admin-login"  style="width:340px; height:auto;margin: 120px auto 0;">
-    <h1>Viu OTT CMS</h1>
+    <h1>NAV-CMS</h1>
         <div class="form-group field-adminloginform-username required">
             <label class="control-label" for="adminloginform-username">Username:</label>
             <input type="text" id="uname" value="" class="form-control" name="Login[username]">

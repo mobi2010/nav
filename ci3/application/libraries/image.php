@@ -7,9 +7,9 @@
 if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Image {
-	public $uploadImagePath = './assets/images/original';//上传图片地址
-	public $cropImagePath = './assets/images/crop';//切图图片地址
-	public $thumbImagePath = './assets/images/thumb';//缩略图地址
+	public $uploadImagePath = './assets/iv/images/original';//上传图片地址
+	public $cropImagePath = './assets/iv/images/crop';//切图图片地址
+	public $thumbImagePath = './assets/iv/images/thumb';//缩略图地址
 	public $fileExt;//允许的文件格式
 	public $fileSize;//字节，默认10M
 	public function __construct()
@@ -75,6 +75,67 @@ class Image {
     	$str = stripos($str,'!') ? strstr($str, '!', true) : $str;
         return $str;
     }
+
+    /**
+     * [普通上传-本地服务器]
+     * @param  array  $params [description]
+     * fileName //[选填] 要生成图片名，默认时间戳
+     * fileKey  //[选填] file控件名，默认Filedata
+     * fileExt  //[选填]允许的图片格式，默认array('.jpg','.png','.jpeg')
+     * @return [type]         [description]
+     * error 0 成功 1 错误
+     * msg 描述
+     * filePath 文件路径
+     * width  宽
+     * height 高
+     */
+    function mutilUpload($params=array()){    
+    	$res['error'] = 1;
+    	$fileKey = $params["fileKey"] ? $params["fileKey"] : 'Filedata';    			
+		$fileSizeArr = $_FILES[$fileKey]['size'];//文件大小
+		foreach ($fileSizeArr as $index => $fileSize) {
+
+
+			if($fileSize > $this->fileSize){
+		    	$res['msg'] = '文件过大!';
+				return $res;
+		    }
+			$tempFile = $_FILES[$fileKey]['tmp_name'][$index];//临时文件		
+			$uploadFileName = $_FILES[$fileKey]['name'][$index];//上传的文件名		
+			$fileExt = empty($params['fileExt']) ? $this->fileExt : $params['fileExt'];//允许的文件格式		
+		    $fileExtStr = $this->fileExt($uploadFileName); //文件.jpg 后缀
+		    if(!in_array($fileExtStr, $fileExt)){
+		    	$res['msg'] = '文件不合法!'.$fileExtStr;
+				return $res;
+		    }
+		    //文件路径
+		    $filePath = $this->filePath($this->uploadImagePath);
+		    //尝试创建目标文件夹，如果它不存在，
+			if(!is_dir($filePath)) {
+				if(!mkdir($filePath,0777,true)){
+					$res['msg'] = "The destination directory could not be created.";
+					return $res;
+				}
+			}
+			//文件名称		
+			$fileName = $this->fileName($params['fileName']).$fileExtStr;
+			$filePath .= $fileName;
+			//$res = $this->expand($tempFile);
+		    if(move_uploaded_file($tempFile,$filePath)){
+		    	$res['error'] = 0;	
+		    	$res['filePath'] = $this->imagePath($filePath);	    	
+		    	$res['msg'] = '上传成功';    	
+		    }else{
+		    	$res['msg'] = '上传失败';	
+		    }
+		    $res['fileName'] = $uploadFileName;
+		    $data[] = $res;
+		}
+		
+		return $data;
+
+    }
+
     /**
      * [普通上传-本地服务器]
      * @param  array  $params [description]

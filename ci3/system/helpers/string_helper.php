@@ -443,13 +443,13 @@ if ( ! function_exists('ci3_time')){
 		$ctime = $dtime-$ptime;
 		$res = "";
 		if($ctime<60){
-			$res = "刚刚";
+			$res = "just";
 		}elseif($ctime<3600){
-			$res = floor($ctime/60)."分钟前";
+			$res = floor($ctime/60)." mins ago ";
 		}elseif($ctime<86400){
-			$res = floor($ctime/3600)."小时前";
+			$res = floor($ctime/3600)."hours ago";
 		}else{
-			$res = date('y/m/d H:i',$ptime);
+			$res = date("F j, Y, g:i a",$ptime);
 		}
 		return $res;
 	}
@@ -461,11 +461,19 @@ if ( ! function_exists('ci3_time')){
  */
 if ( ! function_exists('ci3_content_images')){
 	function ci3_content_images($content){
+		$images = [];
 		if($content){
-			preg_match_all('/http:\/\/pinery.b0.upaiyun.com(.*?)"/isu', $content, $matches);
-			$images = str_replace('"', "", implode('|', $matches[0]));
-		}else{
-			$images = "";
+			preg_match_all('/\<img src="(.*?)"/isu', $content, $matches);
+			if(!empty($matches[1])){
+				$host = "http://".$_SERVER['HTTP_HOST'];
+				foreach ($matches[1] as $url) {
+					if(preg_match("/^(http|https)\:\/\/(.*?)/is", $url)){
+						$images[]=$url;
+					}else{
+						$images[]=$host.$url;
+					}
+				}
+			}
 		}
 		return $images;
 	}
@@ -491,3 +499,61 @@ if ( ! function_exists('ci3_u2gb')){
 		return iconv("UTF-8", "GBK", $str); 
 	}
 }	
+
+
+/**
+ * [内容图片]
+ * @param  [type] $key [description]
+ * @return [type]      [description]
+ */
+if ( ! function_exists('ci3_content')){
+	function ci3_content($content){
+		if($content){
+			$host = "http://".$_SERVER['HTTP_HOST'];
+			$imagesPath = $host.'/assets/iv/images/';
+			$videoPath = $host.'/assets/iv/video/';
+			$content = str_replace(['"/assets/iv/images/','"/assets/iv/video/'], ['"'.$imagesPath,'"'.$videoPath], $content);
+		}else{
+			$content = "";
+		}
+		return $content;
+	}
+}
+
+/**
+ * [加密]
+ * @param  [type] $key [description]
+ * @return [type]      [description]
+ */
+if ( ! function_exists('ci3_encrypt')){
+	function ci3_encrypt($content){
+		$content = urlencode(base64_encode($content));
+		return $content;
+	}
+}
+/**
+ * [解密]
+ * @param  [type] $key [description]
+ * @return [type]      [description]
+ */
+if ( ! function_exists('ci3_decrypt')){
+	function ci3_decrypt($content){
+		$content = base64_decode(urldecode($content));
+		return $content;
+	}
+}
+
+/**
+ * [解密]
+ * @param  [type] $key [description]
+ * @return [type]      [description]
+ */
+if ( ! function_exists('ci3_emoji')){
+	function ci3_emoji($content){
+		$pattern = '/\[GIF\:(\d+)\]/i';
+		$replacement = '<img src="/assets/plugins/emoji/dist/img/qq/$1.gif" />';
+		$content = preg_replace($pattern, $replacement, $content);
+		return $content;
+	}
+}
+

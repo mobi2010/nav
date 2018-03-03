@@ -117,9 +117,9 @@ if ( ! function_exists('elements'))
 
 /* End of file array_helper.php */
 /* Location: ./system/helpers/array_helper.php */
-if ( ! function_exists('mobi_array_rand'))
+if ( ! function_exists('ci3_array_rand'))
 {
-	function mobi_array_rand($data=array(),$num=5){
+	function ci3_array_rand($data=array(),$num=5){
 		$cn = count($data);
 		if($cn > $num){
 			$rkey = array_rand($data,$num);
@@ -132,5 +132,27 @@ if ( ! function_exists('mobi_array_rand'))
 		}else{
 			return $data;
 		}
+	}
+}
+
+if ( ! function_exists('ci3_array_kv'))
+{
+	function ci3_array_kv($data=array(),$kField,$vField){
+		$res = [];
+		if(!empty($data)){
+			foreach ($data as $key => $value) {
+				$kData = $value[$kField];
+				$vData = null;
+				if(is_array($vField)){
+					foreach ($vField as $vf) {
+						$vData[] = $value[$vf];
+					}
+				}else{
+					$vData = $value[$vField];
+				}
+				$res[$kData] = $vData;
+			}
+		}
+		return $res;
 	}
 }

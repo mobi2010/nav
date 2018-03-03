@@ -3,8 +3,8 @@
 <head>
     <meta charset="utf-8">
     <title>CMS</title>
-    <link href="/assets/admin/css/bootstrap.css" rel="stylesheet">
-    <link href="/assets/admin/css/site.css" rel="stylesheet">
+    <link href="/assets/common/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/common/css/site.css" rel="stylesheet">
 </head>
 <body style="margin: 0px; padding-top: 51px;" scroll="no">
     <nav id="w0" class="navbar-inverse navbar-fixed-top navbar" role="navigation">
@@ -14,7 +14,7 @@
                     <span class="sr-only">Toggle navigation</span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="">Edu-CMS</a>
+                <a class="navbar-brand" href="">Ci3-CMS</a>
             </div>
             <div id="w0-collapse" class="collapse navbar-collapse">
                 <ul id="w1" class="navbar-nav navbar-right nav">
@@ -66,9 +66,9 @@
         </tr>
     </table>
     
-    <script src="/assets/admin/js/jquery.js"></script>
-<script src="/assets/admin/js/yii.js"></script>
-<script src="/assets/admin/js/bootstrap.js"></script></body>
+    <script src="/assets/common/js/jquery.js"></script>
+<script src="/assets/common/js/yii.js"></script>
+<script src="/assets/common/js/bootstrap.js"></script></body>
 </html>
 <script type="text/javascript" language="javascript">
 function iFrameHeight() 

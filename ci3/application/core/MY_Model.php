@@ -42,9 +42,14 @@ class MY_Model extends CI_Model {
     * $param["where"] = "id=1";
     */
     function dataFetchCount($param=array()){     
-        $table = $param['table'];   
-        $where = $this->dataWhere($param['where']);        
-        $this->sqls[] = $sql = "select count(*) as total from {$table} $where limit 1";
+        if(!isset($param['sql'])){
+            $table = $param['table'];   
+            $where = $this->dataWhere($param['where']);        
+            $sql = "select count(*) as total from {$table} $where limit 1";
+        }else{
+            $sql = $param['sql'];
+        } 
+        $this->sqls[] = $sql;
         $res = $this->db->query($sql)->row_array();
         return intval($res['total']);
     }
@@ -57,11 +62,16 @@ class MY_Model extends CI_Model {
     * 
     */
     function dataFetchRow($param=array()){
-        $table = $param['table'];
-        $field = $param['field'] ? $param['field'] : "*" ;
-        $where = $this->dataWhere($param['where']);  
-        $order = $param['order'] ? " order by ".$param['order'] : null;
-        $this->sqls[] = $sql = "select $field from {$table} {$where} {$order} limit 1"; 
+        if(!isset($param['sql'])){
+            $table = $param['table'];
+            $field = $param['field'] ? $param['field'] : "*" ;
+            $where = $this->dataWhere($param['where']);  
+            $order = $param['order'] ? " order by ".$param['order'] : null;
+            $sql = "select $field from {$table} {$where} {$order} limit 1"; 
+        }else{
+            $sql = $param['sql'];
+        }
+        $this->sqls[] = $sql;
         return $this->db->query($sql)->row_array();
     }
 
@@ -77,13 +87,17 @@ class MY_Model extends CI_Model {
     * params['sval'] = 'names';以names作为值返回结果
     */
     function dataFetchArray($param=array()){
-        $table = $param['table'];    
-        $field = $param['field'] ? $param['field'] : "*" ;        
-        $where = $this->dataWhere($param['where']);  
-        $order = $param['order'] ? " order by ".$param['order'] : null;
-        $limit = $param['limit'] ? " limit ".$param['limit'] : null;          
-
-        $this->sqls[] = $sql = "select $field from {$table} {$where} {$order} {$limit}";
+        if(!isset($param['sql'])){
+            $table = $param['table'];    
+            $field = $param['field'] ? $param['field'] : "*" ;        
+            $where = $this->dataWhere($param['where']);  
+            $order = $param['order'] ? " order by ".$param['order'] : null;
+            $limit = $param['limit'] ? " limit ".$param['limit'] : null;   
+            $sql = "select $field from {$table} {$where} {$order} {$limit}";
+        }else{
+            $sql = $param['sql'];
+        }
+        $this->sqls[] = $sql;
         $res = $this->db->query($sql)->result_array();
 
         if(is_array($res) && $param['skey']){
@@ -159,7 +173,7 @@ class MY_Model extends CI_Model {
      * @return [type]        [description]
      */
     private function dataWhere($where){
-        if(isset($where)){
+        if($where){
             $where = is_numeric($where) ? " where id=".$where : " where ".$where;
         } else {
             $where = null;

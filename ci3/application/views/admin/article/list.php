@@ -1,38 +1,42 @@
 <?php 
 $this->load->view('admin/header');
 ?>
-    
-
-<div class="breadcrumbContainer">
-    <ul class="breadcrumb"><li class="active">分类管理</li></ul>       
-</div>
-
+<form id="ci3Form" method="post" action="<?=base_url('admin/article/batch');?>">
 
 <table class="table table-bordered table-hover">
     <tr>
         <td>
-            <label class="control-label">关键词：</label>
+            <label class="control-label">Title：</label>
         </td> 
         <td>
             <input type="text" id="title" class="form-control" name="title" value="<?=$title?>">
         </td>
+        <td>
+            <label class="control-label">Tag：</label>
+        </td> 
+        <td>
+            <?php 
+                $tagModel = ["--ALL--"]+$tagModel;
+                echo html_select(['name'=>"tag_id",'selected'=>$tag_id,'options'=>$tagModel]);
+
+
+            ?>
+        </td>
     </tr>
     <tr>
         <th colspan="4" class="text-center">
-            <a href='<?=ci3_url('admin/article/edit')?>' type="button" id='addBtn' class="btn btn-success">创建</a>
+            <a href='<?=ci3_url('admin/article/edit')?>' type="button" id='addBtn' class="btn btn-success">Create</a>
             &nbsp;&nbsp;&nbsp;&nbsp;
-            <button type="button" id='searchBtn'class="btn btn-default">查询</button>
+            <button type="button" id='searchBtn'class="btn btn-default">Select</button>
         </th>
     </tr>
 </table>
 <table class="table table-striped table-bordered">
     <tr>
         <th>ID</th>
-        <th>名称</th>
-        <th>图片</th>
-        <th>分类</th>
-        <th>更新时间</th>
-        <th>操作</th>
+        <th>Title</th>
+        <th>Cover Image</th>
+        <th>Operate</th>
     </tr>
     <?php 
         if(!empty($dataModel)){
@@ -41,27 +45,52 @@ $this->load->view('admin/header');
                 $tdBody .= str_repeat('&nbsp;',4);
                 $tdBody .= html_a(['text'=>'删除','data-value'=>$value['id'],'class'=>'deleteBtn btn btn-danger btn-xs']);
                 
-                $td = html_td(['body'=>$value['id']]);
-                $td .= html_td(['body'=>$value['title']]);
-                $td .= html_td(['body'=>html_img(['src'=>$value['image_url']])]);
-                $td .= html_td(['body'=>$categoryData[$value['category_id']]]);
-                $td .= html_td(['body'=>date("Y-m-d H:i:s",$value['update_time'])]);
+                $td = html_td(['body'=>html_checkbox(['class'=>'ckbOne','data-name'=>$value['name'],'name'=>'ckbOption[]','value'=>$value['id'],'text'=>$value['id']])]);;
+                $td .= html_td(['body'=>html_a(['target'=>"_blank",'href'=>ci3_url('article/detail',['id'=>$value['id']]),'text'=>$value['title']])]);
+
+                $td .= html_td(['body'=>html_img(['src'=>$value['cover_image'],'height'=>'80px'])]);
                 $td .= html_td(['body'=>$tdBody]);
                 echo html_tr(['body'=>$td]);
             }
+            $tdBody = html_checkbox(['name'=>'ckbAll','text'=>'All']);
+            $tdBody .= str_repeat('&nbsp;',4);
+            $tdBody .= html_a(['date-type'=>'delete','text'=>'Delete','class'=>'batchBtn btn btn-danger btn-xs']);
+            $td = html_td(['body'=>$tdBody,'colspan'=>6]);
+            echo html_tr(['body'=>$td]);   
         }
     ?>
 </table>
+</form>
 <?php
     $pageData['totalCount'] = $totalCount;
+    $pageData['pageSize'] = $pageSize;
     $this->load->view('admin/page',$pageData);
     $this->load->view('admin/footer');
 ?>
 <script type="text/javascript">
 $(document).ready(function() {
+
+    checkAll.init({'allBtn':'ckbAll','oneName':'ckbOption'});  
+    $('.batchBtn').click(function(){
+        
+        var type = $(this).attr('date-type');
+        if($("input[name='ckbOption[]']:checked").length == 0){
+            $.common.alert({"message":"请选择"});
+        }else{
+            if(!confirm('确定删除?')){return false;}
+            $.post("<?=base_url('admin/article/batch');?>?type="+type,$('#ci3Form').serialize(),function(dt){
+                $.common.alert(dt);
+                $.common.refresh();
+            }) 
+        }
+        return false;
+    })
+
+
     $('#searchBtn').click(function(){
         var title = $('#title').val();
-        var url = "<?=ci3_url('admin/article/index')?>?title="+title;
+        var tag_id = $('#tag_id').val();
+        var url = "<?=ci3_url('admin/article/index')?>?title="+title+"&tag_id="+tag_id;
         $.common.location(url);
         return false;
     })

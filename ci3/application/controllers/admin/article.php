@@ -6,7 +6,7 @@ class Article extends Admin_Controller {
 	function __construct($params = array())
 	{
 		parent::__construct();
-		$this->load->model('Category_model', 'categoryModel');//服务
+		$this->load->model('Tag_model', 'tagModel');//服务
 		$this->load->model('article_model', 'articleModel');//服务
 	}
 	/**
@@ -15,16 +15,20 @@ class Article extends Admin_Controller {
 	 */
 	public function index()
 	{	
-		$data['categoryData'] = $this->categoryModel->getData(3);
-		$data['title'] = $title = $_GET['title'] ? $_GET['title'] : null;
-		$where = [];
-		if($title){
-			$where[] = "title like '%".addslashes($title)."%'";
-		}
-		$where = empty($where) ? null : implode(' and ',$where);
-		$params['where'] = $where;
+
+		//分页
+		$page = (int)$_GET['page'];
+		$page = $page > 0 ? $page : 1;
+		$params['pageSize'] = $data['pageSize'] = $pageSize = 10;
+		$params['offset'] = $offset = ($page-1)*$pageSize; 
+
+		$data['title'] = $params['title'] = $_GET['title'] ? $_GET['title'] : null;
+		$data['tag_id'] = $params['tag_id'] = $_GET['tag_id'] ? $_GET['tag_id'] : null;
+		
 		$getList = $this->articleModel->getList($params);
 		$data += $getList;
+
+		$data['tagModel'] = $this->tagModel->getKv();
 		$this->load->view('admin/article/list',$data);
 	}
 	/**
@@ -32,8 +36,7 @@ class Article extends Admin_Controller {
 	 * @return [type] [description]
 	 */
 	public function edit(){
-		$data['categoryData'] = $this->categoryModel->getData(3);
-		$data['dataModel'] = $this->articleModel->getRow($_GET['id']);
+		$data['dataModel'] = $this->articleModel->getInfo($_GET['id']);
 		$this->load->view('admin/article/edit',$data);
 	}
 
@@ -44,18 +47,28 @@ class Article extends Admin_Controller {
 	public function save(){
 		if($_FILES['Filedata']['tmp_name']){
 			$uploadImg = $this->image->upload();
-			$thumbImg = $this->image->thumb(array('file'=>$uploadImg['filePath'],'width'=>272,'height'=>159,'bgcolor'=>'white'));
+			$thumbImg = $this->image->thumb(array('file'=>$uploadImg['filePath'],'width'=>160,'height'=>120,'bgcolor'=>'white'));
 			$image_url = $thumbImg['filePath'];
 		}else{
-			$image_url = $_POST['image_url'];
+			$image_url = $_POST['cover_image'];
 		}
 		$data['id'] = (int)$_POST['id'];
 		$data['title'] = ci3_string_filter($_POST['title']);
 		$data['abstract'] = ci3_string_filter($_POST['abstract']);
-		$data['image_url'] = addslashes($image_url);
+		$data['cover_image'] = $image_url;
 		$data['content'] = trim($_POST['editorValue']);
-		$data['category_id'] = intval($_POST['category_id']);
-		$res = $this->articleModel->save($data);
+		$data['hits'] = rand(10,100);
+		$data['member_id'] = rand(1,50);
+		$article_id = $this->articleModel->save($data);
+
+		//person_identity
+		foreach ($_POST['tag'] as $tag_id) {
+			$taData['tag_id'] = $tag_id;
+			$taData['article_id'] = $article_id;
+			$this->ci3Model->dataInsert(['table'=>'article_tag_relation','data'=>$taData]);
+		}
+
+
 		redirect('admin/article');
 	}
 	/**
@@ -66,9 +79,44 @@ class Article extends Admin_Controller {
 		$id = (int)$_POST['id'];
 		$res = $this->articleModel->delete(['where'=>$id]);
 		if($res){
+			$where = "article_id={$id}";
+			$this->ci3Model->dataDelete(['table'=>'article_tag_relation','where'=>$where]);
 			$this->cResponse();
 		}else{
 			$this->cResponse(['code'=>'10000','message'=>'data error']);
 		}
+	}
+
+	public function deltag(){
+		$tag_id = (int)$_POST['tag_id'];
+		$article_id = (int)$_POST['article_id'];
+		if($tag_id && $article_id){
+			$where = "tag_id={$tag_id} and article_id={$article_id}";
+			$this->ci3Model->dataDelete(['table'=>'article_tag_relation','where'=>$where]);
+		}
+		$this->cResponse();
+	}
+	/**
+	 * [batch description]
+	 * @return [type] [description]
+	 */
+	public function batch(){
+		$type = $_GET['type'];
+		if(!empty($_POST['ckbOption'])){
+			switch ($type) {
+				case 'delete':
+					foreach ($_POST['ckbOption'] as $article_id) {
+						$this->articleModel->delete(['where'=>$article_id]);
+						$where = "article_id={$article_id}";
+						$this->ci3Model->dataDelete(['table'=>'article_tag_relation','where'=>$where]);
+					}
+					break;
+				
+				default:
+					# code...
+					break;
+			}
+		}
+		$this->cResponse();
 	}
 }	

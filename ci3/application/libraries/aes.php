@@ -12,7 +12,7 @@ class Aes {
 
     //private标记的构造方法
     public function __construct(){
-        $adminParams = require_once(APPPATH.'/config/params_local.php');
+        $adminParams = require_once(APPPATH.'/config/common_params.php');
         self::$cryptoSecretKey = $adminParams['cryptoSecretKey'];
     }
     public static function genIvParameter() {   

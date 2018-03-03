@@ -1,38 +1,91 @@
 <?php 
     $commonParams = $initData['commonParams'];
+
+    $htmlTitle = $htmlTitle ? $htmlTitle : "NAV-BUS"; 
+    $htmlKeywords = $htmlKeywords ? $htmlKeywords :  "NAV-BUS"; 
+
 ?>
 <!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8">
-    <title>育儿微课_育儿视频-育儿大师</title>
-    <meta name="keywords" content="育儿微课,育儿视频" />
-    <meta name="description" content="育儿微课是第一个为新生代妈妈提供母婴专家育儿知识的微视频服务，面向全网会员征集各种孕育难题，由专家亲身参与视频拍摄，为广大妈妈网友解决各种孕育难题。" />
-    <meta name="applicable-device" content="pc">
-    <link rel="alternate" media="only screen and（max-width: 640px）" href="http://yuerdashi.3uol.com/home/index/?cid=0">
-    <link rel="stylesheet" type="text/css" href="http://resource.3uol.com/style/commons/iconfont/iconfont.css">
-    <link rel="stylesheet" type="text/css" href="/assets/video/css/common.css">
-    <link rel="stylesheet" type="text/css" href="/assets/video/css/video.css" />
-    <link rel="stylesheet" href="/assets/video/css/video1.1.css">
-<style>
-    .pagination{font-size: 18px;text-align: center;line-height: 44px;margin: 50px 0 0;}
-    .pagination>a{display: inline-block;width: 42px;height: 42px;background: #ddd;color: #444;}
-    .pagination>a.current,.pagination>a:hover{background: #65c4aa;color: #fff;}
-    .pagination>a.prev,.pagination>a.next{width: 3em;padding: 0 4px;}
-</style>
+    <meta name="keywords" content="<?=$htmlKeywords;?>" />
+    <title><?=$htmlTitle;?></title>
+
+    <link href="/assets/common/css/bootstrap.css" rel="stylesheet">
+    <link href="/assets/common/css/site.css" rel="stylesheet">
+
+    <script src="/assets/common/js/jquery.js"></script>
+    <script src="/assets/common/js/common.js"></script>
+
 </head>
-<body>
-<div class="header-warp">
-    <div class="header">
-        <h1><a href="">育儿大师 - 宝宝有问题，专家来帮您</a></h1>
-        <ul>
+
+<style>
+body{
+    background-color:#eee;
+}
+
+
+</style>
+
+<script type="text/javascript">
+$(document).ready(function(){
+}) 
+</script> 
+
+<body style="background:#eee">
+<script type="text/javascript">
+$(document).ready(function(){
+    //$.common.init();
+    $('.searchBtn').click(function(){
+        var keyWord = $('#keyWord').val()
+        var url = "<?=ci3_url('index')?>?w="+keyWord
+        window.location.href = url;
+    })
+}) 
+</script>    
+<div class="breadcrumbContainer" >
+    <ul class="breadcrumb" style="line-height:3em;background: #fff;padding: 1em 3.5em;color:#999999">
+        <a style="text-indent:-9999px;width:12em;background: url(/assets/common/images/logo.png) center no-repeat;display: inline-block;" href="<?=ci3_url('index')?>">NAV-BUS</a>
+
+        <span style="display: inline-block;float: right;">
             <?php 
-            foreach ($commonParams['menuData'] as $key => $value) {
-                $menuParams = ['href'=>ci3_url($value['uri']),'text'=>$value['title']];
-                $menuParams['class'] = strpos($commonParams['navIndex'],$value['uri']) === false ? '' : 'current';
-                echo '<li>'.html_a($menuParams).'</li>';
-            }
+            echo html_text(['id'=>'keyWord','value'=>$keyWord,'style'=>'display:inline-block;width:10em;height:2.5em;']);
+            echo "&nbsp;";
+            echo html_button(['style'=>'line-height:1em;','class'=>'btn btn-success searchBtn','value'=>'Search']);
             ?>
-        </ul>
-    </div>
+        </span> 
+        <span style="display: inline-block;float: right;">
+        <?php 
+
+        $identity = ci3_getcookie('identity');
+        if($identity){
+            $id = $this->aes->decrypt($identity);
+            $memberRow = $this->memberModel->getInfo($id);
+        }
+        if(empty($memberRow)){
+            echo html_a(['href'=>ci3_url('member/signin'),'text'=>'Sign in']);
+            echo "&nbsp;|&nbsp;";
+            echo html_a(['href'=>ci3_url('member/signup'),'text'=>'Sign up']);
+        }else{
+            echo html_a(['href'=>ci3_url('member/signup/index'),'text'=>html_img(['src'=>$memberRow['avatar_url'],'height'=>'30em'])]);
+        }
+        
+        echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        ?>
+        </span>
+        <span style="display: inline-block;float: right;">
+         <?php 
+        foreach ($commonParams['menuData'] as $key => $value) {
+            $menuParams = ['href'=>ci3_url($value['uri']),'text'=>$value['title']];
+            $menuParams['class'] = $uriEntity['uri_string'] == $value['uri'] ? 'current' : '';
+            $htmlNav[] = html_a($menuParams);
+        }
+        echo implode($htmlNav,'&nbsp;&nbsp;/&nbsp;&nbsp;').'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
+        ?>
+        </span>
+        
+    </ul>       
 </div>
+<div class="container" style="padding: 8px; padding-bottom: 40px;width: 95%;">
+    

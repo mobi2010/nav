@@ -10,49 +10,33 @@ $adminParams['cryptoSecretKey'] =  [
     ];
 
 //分类
-$adminParams['categoryType'] =  [1=>'视频',2=>'音频'];
+$adminParams['tagType'] =  [1=>'Identity'];
+
+//状态
+$adminParams['status'] =  [0=>'Active',1=>'Inactive'];
+
+//性别
+$adminParams['gender'] =  [0=>'Female',1=>'Male'];
+//region
+$adminParams['region'] =  [0=>'Unknown',1=>'Japan',2=>'America',3=>'China'];
+
 
 //菜单
 $adminParams['menuData'] = [
-		'index'=>['title'=>'分类管理','sub'=>
-			[
-				['title'=>'视频','sub'=>
+		'content'=>['title'=>'Content Management','sub'=>
+			[	
+				['title'=>'Tag','sub'=>
 					[
-						['title'=>'分类管理','uri'=>'admin/category','params'=>['type'=>1]],
+						['title'=>'Tag List','uri'=>'admin/tag'],
+						['title'=>'Tag Type','uri'=>'admin/tagtype'],
 					]
 				],
-				['title'=>'音频','sub'=>
+				['title'=>'Article','sub'=>
 					[
-						['title'=>'分类管理','uri'=>'admin/category','params'=>['type'=>2]],
+						['title'=>'Article Add','uri'=>'admin/article/edit'],
+						['title'=>'Article List','uri'=>'admin/article'],
 					]
-				],
-				['title'=>'文章','sub'=>
-					[
-						['title'=>'文章管理','uri'=>'admin/category','params'=>['type'=>3]],
-					]
-				],
-			]
-		],
-		'content'=>['title'=>'内容管理','sub'=>
-			[
-				['title'=>'视频管理','sub'=>
-					[
-						['title'=>'添加视频','uri'=>'admin/video/edit'],
-						['title'=>'视频列表','uri'=>'admin/video'],
-					]
-				],
-				['title'=>'音频管理','sub'=>
-					[
-						['title'=>'添加音频','uri'=>'admin/audio/edit'],
-						['title'=>'音频列表','uri'=>'admin/audio'],
-					]
-				],
-				['title'=>'文章管理','sub'=>
-					[
-						['title'=>'添加文章','uri'=>'admin/article/edit'],
-						['title'=>'文章列表','uri'=>'admin/article'],
-					]
-				],
+				]
 			]
 		]
 	];

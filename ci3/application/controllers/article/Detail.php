@@ -1,31 +1,98 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
-require('Article_Controller.php');
+//require('Article_Controller.php');
 
 
-class Detail extends Article_Controller {		
+class Detail extends MY_Controller {		
 	function __construct($params = array())
 	{
 		parent::__construct(array('auth'=>false));		
-		$this->load->model('Category_model', 'categoryModel');//服务
+		$this->load->model('article_model', 'articleModel');//服务
+		$this->load->model('comment_model', 'commentModel');//服务
+
 	}
 	public function index()
 	{	
-		$data['categoryData'] = ["所有类别"]+$this->categoryModel->getData(1);
-		$data['cid'] = $cid = (int)$_GET['cid']; 
-		$data['sort'] = $sort = (int)$_GET['sort']; 
-
-		$where = [];
-		if($cid){
-			$where[] = "category_id={$cid}";
+		$id = (int)$_GET['id'];
+		$tag_id = (int)$_GET['tag_id'];
+		$dataModel = [];
+		if($id){
+			$dataModel = $this->articleModel->getInfo($id);
 		}
-		$where = empty($where) ? null : implode(' and ',$where);
-		$params['where'] = $where;
-		$params['order'] = $sort == 1 ? "views desc" : "update_time desc";
+		
+		if(empty($dataModel['id'])){
+			redirect('index');
+		}else{
+			$dataModel['hits'] += +1;
+			$this->articleModel->save(['id'=>$dataModel['id'],'hits'=>$dataModel['hits']]);
 
-		$getList = $this->articleModel->getList($params);
+			$data['dataModel'] = $dataModel;
+			$data['tag_id'] = $tag_id;
+			$member_id = $dataModel['member_id'] ? $dataModel['member_id'] : 1;
+
+			$data['memberModel'] = $this->memberModel->getInfo($member_id);
+
+			$data['identity'] = ci3_getcookie('identity');
+
+			$data['previousModel'] = $this->articleModel->context(['article_id'=>$id,'tag_id'=>$tag_id]);
+			$data['nextModel'] = $this->articleModel->context(['article_id'=>$id,'tag_id'=>$tag_id,'type'=>1]);
+
+
+
+			$data['htmlTitle'] = $dataModel['title']; 
+    		$data['htmlKeywords'] = $dataModel['tags'] ? implode(',',$dataModel['tags']) :  "NAV-BUS"; 
+			$this->load->view('article/detail',$data);
+		}
+	}
+
+	public function comment(){
+		$member_id = $this->getMemberId();
+		if(!$member_id || !$_POST['article_id'] || !$_POST['comment']){
+			$this->cResponse(['code'=>'10000','message'=>'Data error']);
+		}
+
+        $reply_id = (int)$_POST['reply_id'];
+
+		$data['article_id'] = $_POST['article_id'];
+		$data['member_id'] = $member_id;
+		$data['content'] = ci3_string_filter($_POST['comment']);
+		$data['reply_id'] = $reply_id;
+
+		$res = $this->commentModel->save($data);
+		
+		$this->cResponse();
+	}
+
+	public function commentList(){
+
+
+		//分页
+		$page = (int)$_POST['page'];
+		$page = $page > 0 ? $page : 1;
+		$params['pageSize'] = $data['pageSize'] = $pageSize = 10;
+		$params['offset'] = $offset = ($page-1)*$pageSize; 
+		
+		$data['article_id'] = $params['article_id'] = (int)$_POST['article_id'];
+
+		$getList = $this->commentModel->getList($params);
 		$data += $getList;
+		$data['member_id'] = $this->getMemberId();
+		$this->load->view('article/comment-list',$data);
+	}	
 
-		$this->load->view('article/detail',$data);
+	public function commentDel(){
+
+		$id = (int)ci3_decrypt($_POST['c']);
+		$params['where'] = "id={$id}";
+		$params['article_id'] = (int)$_POST['article_id'];
+		$this->commentModel->delete($params);
+		$this->cResponse();
 	}	
 	
+	private function getMemberId(){
+		$identity = ci3_getcookie('identity');
+        if($identity){
+            $member_id = $this->aes->decrypt($identity);
+        }
+        return (int)$member_id;
+	}	
 }

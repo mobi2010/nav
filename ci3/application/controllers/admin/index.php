@@ -14,7 +14,7 @@ class Index extends Admin_Controller {
 	 */
 	public function index()
 	{	
-		$data['index'] = $_GET['i'] ? base64_decode($_GET['i']) : 'index';
+		$data['index'] = $_GET['i'] ? base64_decode($_GET['i']) : 'content';
 
 		$this->load->view('/admin/index',$data);
 	}
