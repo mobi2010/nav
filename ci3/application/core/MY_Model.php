@@ -100,10 +100,11 @@ class MY_Model extends CI_Model {
         $this->sqls[] = $sql;
         $res = $this->db->query($sql)->result_array();
 
-        if(is_array($res) && $param['skey']){
+        if(is_array($res) && ($param['skey'] || $param['sval'])){
             $result = array();
             foreach ($res as $k=>$v){
-                $result[$v[$param['skey']]] = $param['sval'] ? $v[$param['sval']] : $v;
+                $skey = $param['skey'] ? $v[$param['skey']] : $k;
+                $result[$skey] = $param['sval'] ? $v[$param['sval']] : $v;
             }
             return $result;
         }

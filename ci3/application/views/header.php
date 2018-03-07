@@ -68,7 +68,13 @@ $(document).ready(function(){
             echo "&nbsp;|&nbsp;";
             echo html_a(['href'=>ci3_url('member/signup'),'text'=>'Sign up']);
         }else{
-            echo html_a(['href'=>ci3_url('member/signup/index'),'text'=>html_img(['src'=>$memberRow['avatar_url'],'height'=>'30em'])]);
+
+            if($memberRow['status'] == 1){//被冻结
+                ci3_delcookie('identity');
+                redirect('index');
+            }
+
+            echo html_a(['href'=>ci3_url('member/account/index'),'text'=>html_img(['src'=>$memberRow['avatar_url'],'height'=>'30em'])]);
         }
         
         echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
@@ -76,11 +82,18 @@ $(document).ready(function(){
         </span>
         <span style="display: inline-block;float: right;">
          <?php 
-        foreach ($commonParams['menuData'] as $key => $value) {
-            $menuParams = ['href'=>ci3_url($value['uri']),'text'=>$value['title']];
-            $menuParams['class'] = $uriEntity['uri_string'] == $value['uri'] ? 'current' : '';
+        $menuData[] = ['title'=>'Home','uri'=>'index'];
+
+        $menuParams = ['href'=>ci3_url('index'),'text'=>'Home'];
+        $menuParams['class'] = $uriEntity['uri_string'] == $value['uri'] ? 'current' : '';
+        $htmlNav[] = html_a($menuParams);
+
+        $categoryData = $this->categoryModel->getKv();
+        foreach ($categoryData as $key => $value) {
+            $menuParams = ['href'=>ci3_url('index',['i'=>ci3_encrypt($key)]),'text'=>$value];
             $htmlNav[] = html_a($menuParams);
         }
+
         echo implode($htmlNav,'&nbsp;&nbsp;/&nbsp;&nbsp;').'&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
         ?>
         </span>

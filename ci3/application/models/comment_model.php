@@ -33,14 +33,19 @@ class Comment_model extends MY_Model {
 
 		$pageSize = $params['pageSize'];
 		$offset = $params['offset'];  
+		$source = $params['source'];
 
-
-		$table = $this->getTableName($params['article_id']);
+		if($source == 'backend'){
+			$table  = "comment";
+		}else{
+			$table = $this->getTableName($params['article_id']);
+		}
+		
 		$this->params['table'] = $table;
 
 		$this->params = $this->params + $params;
 		$res['totalCount'] = $this->dataFetchCount($this->params);
-		$this->params['order'] = "id desc";
+		$this->params['order'] = $params['order'] ? $params['order'] : "id desc";
 		$this->params['limit'] = "{$offset},{$pageSize}";
 
 		$res['totalCount'] = $this->dataFetchCount($this->params);
@@ -58,12 +63,20 @@ class Comment_model extends MY_Model {
 			$this->dataUpdate($this->params);
 		}else{
 			$this->params['data']['insert_time'] = time(); 
+			$this->params['data']['ip'] = $_SERVER['REMOTE_ADDR'];
 			$id = $this->dataInsert($this->params);
 		}
 		return $id;
 	}
 	function delete($params=[]){
-		$table = $this->getTableName($params['article_id']);
+		if($params['article_id']){
+			$article_id = $params['article_id'];
+		}else{
+			$id = (int)$params['where'];
+			$row = $this->getRow($id);
+			$article_id = $row['article_id'];
+		}
+		$table = $this->getTableName($article_id);
 		$this->params['table'] = $table;
 		$this->params['where'] = $params['where'];
 		$res = $this->dataDelete($this->params);
@@ -72,8 +85,8 @@ class Comment_model extends MY_Model {
 
 	function getTableName($article_id){
 		$article_id = (int)$article_id;
-		$article_id = str_pad($article_id,2,"0",STR_PAD_LEFT);
-		$article_id = substr($article_id,-2);
+		//$article_id = str_pad($article_id,2,"0",STR_PAD_LEFT);
+		$article_id = substr($article_id,-1);
 		return "comment_{$article_id}";
 	}
 }	

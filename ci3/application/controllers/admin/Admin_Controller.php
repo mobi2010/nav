@@ -17,8 +17,20 @@ class Admin_Controller extends CI_Controller
 		$this->uriEntity();//uri实体数据
 		$this->auth();//验证
 
-		$this->load->model('Ci3_model', 'ci3Model');//服务
+		$this->load->model('Ci3_model', 'ci3Model');
+		$this->load->model('tag_model', 'tagModel');
+		$this->load->model('member_model', 'memberModel');
+		$this->load->model('article_model', 'articleModel');
+		$this->load->model('comment_model', 'commentModel');
+		$this->load->model('tagType_model', 'tagtypeModel');
+		$this->load->model('feedback_model', 'feedbackModel');
+		$this->load->model('category_model', 'categoryModel');
+
+
+
+
 		$this->load->library('image');
+		$this->load->library('aes');
 	}
 	/**
 	 * [验证]

@@ -51,6 +51,8 @@ $adminParams = $initData['adminParams'];
         $tdBody = html_checkbox(['name'=>'ckbAll','text'=>'All']);
         $tdBody .= str_repeat('&nbsp;',4);
         $tdBody .= html_a(['date-type'=>'update','text'=>'Update','class'=>'batchBtn btn btn-primary btn-xs']);
+        $tdBody .= str_repeat('&nbsp;',4);
+        $tdBody .= html_a(['date-type'=>'delete','text'=>'Delete','class'=>'batchBtn btn btn-danger btn-xs']);
         $td .= html_td(['body'=>$tdBody,'colspan'=>6]);
         echo html_tr(['body'=>$td]);     
     ?>

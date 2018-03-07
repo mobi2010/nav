@@ -14,7 +14,19 @@ $this->load->view('admin/header');
 <script type="text/javascript" charset="utf-8" src="/assets/plugins/ueditor/ueditor.all.min.js"></script>
 
 <form id="ci3Form" enctype="multipart/form-data" action="<?=ci3_url('admin/article/save')?>" method="post">
-    <table class="table table-striped table-bordered" style="width: 100%;" id="tag_table">
+    <table class="table " style="width: 100%;" id="tag_table">
+        <tr >
+            <td><label>Member Id:</label></td>
+            <td>
+            <?=html_text(['name'=>'member_id','value'=>$dataModel['member_id']]);?>
+            </td>
+        </tr>
+        <tr >
+            <td><label>category:</label></td>
+            <td>
+            <?=html_select(['name'=>'category_id','selected'=>$dataModel['category_id'],'options'=>$categoryData]);?>
+            </td>
+        </tr>
         <tr >
             <td><label>Title:</label></td>
             <td>
@@ -45,19 +57,32 @@ $this->load->view('admin/header');
             <td><label>Tag:</label></td>
             <td>
             <?php 
-            echo html_a(['class'=>'btn btn-success tagBtn','text'=>'Select Tag']);
-            $tags = $dataModel['tags'];
-            $body = null;
-            if(!empty($tags)){
-                foreach ($tags as $key => $value) {
-                    $tagOne = html_a(['text'=>"[{$key}:{$value}]",'class'=>'delTag','onclick'=>"del_tag({$key})"]);
-                    $tagOne .= html_hidden(['name'=>'tag[]','value'=>$key]);
-                    $body .= html_span(['body'=>$tagOne,'class'=>'span-tag-'.$key]);
-                }
-            }
+            // echo html_a(['class'=>'btn btn-success tagBtn','text'=>'Select Tag']);
+            // $tags = $dataModel['tags'];
+            // $body = null;
+            // if(!empty($tags)){
+            //     foreach ($tags as $key => $value) {
+            //         $tagOne = html_a(['text'=>"[{$key}:{$value}]",'class'=>'delTag','onclick'=>"del_tag({$key})"]);
+            //         $tagOne .= html_hidden(['name'=>'tag[]','value'=>$key]);
+            //         $body .= html_span(['body'=>$tagOne,'class'=>'span-tag-'.$key]);
+            //     }
+            // }
             
-            echo html_div(['id'=>'select_tag','body'=>$body]);
+            // echo html_div(['id'=>'select_tag','body'=>$body]);
 
+
+            if(empty($dataModel['tags'])){
+                $tags = [];
+            }else{
+                $tags = ci3_array_values($dataModel['tags']);
+            }
+             
+
+            for($i=0;$i<5;$i++){
+                echo html_text(['name'=>'tags[]','value'=>$tags[$i],'style'=>'width:8em;display: inline-block;'])."&nbsp;&nbsp;";
+            }
+
+            echo "<label class='tips'>(Up to five tag.)</label>";
             ?>
             </td>
         </tr>
@@ -105,7 +130,6 @@ $(document).ready(function(){
         return false;       
     })
 
-    //字幕
     $('.tagBtn').click(function(){
         var v = $(this).attr('data-value');
         var d = dialog({

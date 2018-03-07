@@ -18,22 +18,12 @@ class Signup extends MY_Controller {
         }
 
 		$this->load->view('member/signup',$data);
-	}	
-	
-	public function logout(){
-		ci3_delcookie("identity");
-		$this->cResponse();
 	}
 
 	public function check(){
-		$identity = ci3_getcookie('identity');
-        if($identity){
-            $id = $this->aes->decrypt($identity);
-        } 
+		
 
-        if(!$id){
-			$this->cResponse(['code'=>'10000','message'=>'data error']);
-		}
+		$id = $this->getMemberId();    
 
 		if($_POST['username']){
 			$username = ci3_string_filter($_POST['username']);
@@ -56,9 +46,7 @@ class Signup extends MY_Controller {
 
 		$id = null;
 		$identity = ci3_getcookie('identity');
-        if($identity){
-            $params['id'] = $this->aes->decrypt($identity);
-        }    
+        $params['id'] = $this->getMemberId();    
 
 		if($_FILES['Filedata']['tmp_name']){
 			$uploadImg = $this->image->upload();
@@ -76,13 +64,27 @@ class Signup extends MY_Controller {
 		$params['biography'] = ci3_string_filter($_POST['biography']);
 		$params['ip'] = $_SERVER['REMOTE_ADDR'];
 		$id = $this->memberModel->save($params);
-
 		if($id){
 			$identity = $this->aes->encrypt($id);
 			$expire = 3600*24*30;
 			ci3_setcookie('identity',$identity,$expire);
 		}
 
-		redirect('index');
+		redirect('member/account/index');
+	}
+
+	private function getMemberId(){
+		$identity = ci3_getcookie('identity');
+        if($identity){
+            $id = $this->aes->decrypt($identity);
+            $row = $this->memberModel->getRow($id);
+        }
+
+        if(empty($row)){
+        	return 0;
+        }else{
+        	return $id;
+        }
+
 	}
 }

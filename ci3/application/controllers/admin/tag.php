@@ -100,7 +100,13 @@ class Tag extends Admin_Controller {
 						$this->tagModel->update(['data'=>['name'=>$name,'sort_id'=>$sort_id,'tag_type_id'=>$tag_type_id],'where'=>$value]);
 					}
 					break;
-				
+				case 'delete':
+					foreach ($_POST['ckbOption'] as $id) {
+						$res = $this->tagModel->delete(['where'=>$id]);
+						$where = "tag_id={$id}";
+						$this->ci3Model->dataDelete(['table'=>'article_tag_relation','where'=>$where]);
+					}
+					break;
 				default:
 					# code...
 					break;

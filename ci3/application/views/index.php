@@ -19,27 +19,29 @@ $this->load->view('header',$data);
 <?php 
 foreach ($dataModel as $key => $value) {
 	//$article_url = ci3_url('article/detail',['id'=>$value['id']]);
-	$article_url = ci3_article_url(['tag_id'=>$t,'article_id'=>$value['id']]);
+	$article_url = ci3_article_url(['category_id'=>$c,'tag_id'=>$t,'article_id'=>$value['id']]);
 	//'target'=>"_blank",
 	$body = "<h3>".html_a(['href'=>$article_url,'text'=>$value['title']])."</h3>";
 
+	$i = 0;
 	if($value['cover_image']){
-		$htmlimage = html_img(['src'=>$value['cover_image'],'height'=>'125px']);
+		$htmlimage = html_a(['href'=>$article_url,'text'=>html_img(['src'=>$value['cover_image'],'height'=>'125px'])]);
 		$body .= $htmlimage;
-	}else{
-		$images = ci3_content_images($value['content']);
-		if(!empty($images)){
-			$i = 0;
-			foreach ($images as $image_url) {
-				$htmlimage = html_img(['src'=>$image_url,'height'=>'125px']);
-				$body .= $htmlimage;
-				if(++$i>2){
-					break;
-				}
+		$i++;
+	}
+
+	$images = ci3_content_images($value['content']);
+	if(!empty($images)){
+		foreach ($images as $image_url) {
+			$htmlimage = html_a(['href'=>$article_url,'text'=>html_img(['src'=>$image_url,'height'=>'125px'])]);
+			$body .= $htmlimage;
+			if(++$i>2){
+				break;
 			}
-			
 		}
 	}
+
+	$body .=  "&nbsp;".$value['abstract'];
 	$member_id = $value['member_id'] ? $value['member_id'] : 1;
 	$memberModel = $this->memberModel->getInfo($member_id);
 	$username = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>$memberModel['username'],'style'=>'color:#999999']);

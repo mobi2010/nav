@@ -1,7 +1,7 @@
 RewriteEngine on
 
 RewriteCond %{REQUEST_FILENAME} !-f    
-RewriteRule ^(.*?)-([0-9]+)-([0-9]+)\.html$ index.php?d=$1&c=detail&m=index&tag_id=$2&id=$3 [L]
+RewriteRule ^(.*?)-([0-9]+)-([0-9]+)-([0-9]+)\.html$ index.php?d=$1&c=detail&m=index&category_id=$2&tag_id=$3&id=$4 [L]
 
 RewriteCond %{REQUEST_FILENAME} !-f    
 RewriteRule ^(.*)$ index.php/$1 [L]

@@ -18,13 +18,17 @@ $this->load->view('admin/header');
             <?php 
                 $tagModel = ["--ALL--"]+$tagModel;
                 echo html_select(['name'=>"tag_id",'selected'=>$tag_id,'options'=>$tagModel]);
-
-
             ?>
+        </td>
+        <td>
+            <label class="control-label">Member Id：</label>
+        </td> 
+        <td>
+            <input type="text" id="member_id" class="form-control" name="member_id" value="<?=$member_id?>">
         </td>
     </tr>
     <tr>
-        <th colspan="4" class="text-center">
+        <th colspan="10" class="text-center">
             <a href='<?=ci3_url('admin/article/edit')?>' type="button" id='addBtn' class="btn btn-success">Create</a>
             &nbsp;&nbsp;&nbsp;&nbsp;
             <button type="button" id='searchBtn'class="btn btn-default">Select</button>
@@ -36,6 +40,7 @@ $this->load->view('admin/header');
         <th>ID</th>
         <th>Title</th>
         <th>Cover Image</th>
+        <th>Member ID</th>
         <th>Operate</th>
     </tr>
     <?php 
@@ -49,6 +54,7 @@ $this->load->view('admin/header');
                 $td .= html_td(['body'=>html_a(['target'=>"_blank",'href'=>ci3_url('article/detail',['id'=>$value['id']]),'text'=>$value['title']])]);
 
                 $td .= html_td(['body'=>html_img(['src'=>$value['cover_image'],'height'=>'80px'])]);
+                $td .= html_td(['body'=>html_a(['href'=>ci3_url('admin/member',['member_id'=>$value['member_id']]),'text'=>$value['member_id']])]);
                 $td .= html_td(['body'=>$tdBody]);
                 echo html_tr(['body'=>$td]);
             }
@@ -90,7 +96,8 @@ $(document).ready(function() {
     $('#searchBtn').click(function(){
         var title = $('#title').val();
         var tag_id = $('#tag_id').val();
-        var url = "<?=ci3_url('admin/article/index')?>?title="+title+"&tag_id="+tag_id;
+        var member_id = $('#member_id').val();
+        var url = "<?=ci3_url('admin/article/index')?>?title="+title+"&tag_id="+tag_id+"&member_id="+member_id;
         $.common.location(url);
         return false;
     })

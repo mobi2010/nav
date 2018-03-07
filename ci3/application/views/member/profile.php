@@ -21,11 +21,6 @@ $commonParams = $initData['commonParams'];
 </style>
 
 <div class="signup">
-	
-	<!-- <div class="breadcrumbContainer">
-	    <ul class="breadcrumb"><li class="active">Sign up</li></ul>       
-	</div> -->
-	<form id="ci3Form" enctype="multipart/form-data" action="<?=ci3_url('member/signup/save')?>" method="post">
 	<table class="table" style="width: 100%;" id="tag_table">
 		<tr >
 	        <td><label>Avatar:</label></td>
@@ -63,7 +58,33 @@ $commonParams = $initData['commonParams'];
 	        </td>
 	    </tr>
 	</table>
-	</form> 
+	<table class="table table-striped">
+    <tr>
+        <th colspan="2">Posts</th>
+    </tr>
+    <?php 
+    	$articleModel = $articleData['dataModel'];
+        if(!empty($articleModel)){
+            foreach ($articleModel as $key => $value) {
+            
+                
+                $td = html_td(['body'=>html_a(['target'=>"_blank",'href'=>ci3_article_url(['article_id'=>$value['id']]),'text'=>$value['title']])]);
+
+                $td .= html_td(['body'=>ci3_time($value['update_time'])]);
+                echo html_tr(['body'=>$td]);
+            }
+        }
+    ?>
+</table>
+	<?php 
+
+$pageData['totalCount'] = $articleData['totalCount'];
+$pageData['pageSize'] = $pageSize;
+$this->load->view('page',$pageData);
+
+?>
+
+
 </div>
 
 <script type="text/javascript">

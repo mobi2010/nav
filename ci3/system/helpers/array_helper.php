@@ -156,3 +156,16 @@ if ( ! function_exists('ci3_array_kv'))
 		return $res;
 	}
 }
+
+if ( ! function_exists('ci3_array_values'))
+{
+	function ci3_array_values($data=array()){
+		$res = [];
+		if(!empty($data)){
+			foreach ($data as $key => $value) {
+				$res[] = $value;
+			}
+		}
+		return $res;
+	}
+}

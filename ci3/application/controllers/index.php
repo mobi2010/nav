@@ -8,7 +8,6 @@ class Index extends MY_Controller {
 	function __construct($params = array())
 	{
 		parent::__construct(array('auth'=>false));		
-		$this->load->model('article_model', 'articleModel');//服务
 	}
 	public function index()
 	{	
@@ -20,7 +19,8 @@ class Index extends MY_Controller {
 
 
 		$params['title'] = $data['keyWord'] = $title = $_GET['w'] ? $_GET['w'] : null;
-		$params['tag_id'] = $data['t'] = (int)$_GET['t'];
+		$params['tag_id'] = $data['t'] = (int)ci3_decrypt($_GET['t']);
+		$params['category_id'] = $data['c'] = (int)ci3_decrypt($_GET['i']);
 		$getList = $this->articleModel->getList($params);
 		
 		$data += $getList;

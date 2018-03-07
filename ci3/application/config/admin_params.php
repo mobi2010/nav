@@ -16,7 +16,7 @@ $adminParams['tagType'] =  [1=>'Identity'];
 $adminParams['status'] =  [0=>'Active',1=>'Inactive'];
 
 //性别
-$adminParams['gender'] =  [0=>'Female',1=>'Male'];
+$adminParams['gender'] =  [0=>'Female',1=>'Male',2=>'Secret'];
 //region
 $adminParams['region'] =  [0=>'Unknown',1=>'Japan',2=>'America',3=>'China'];
 
@@ -25,6 +25,11 @@ $adminParams['region'] =  [0=>'Unknown',1=>'Japan',2=>'America',3=>'China'];
 $adminParams['menuData'] = [
 		'content'=>['title'=>'Content Management','sub'=>
 			[	
+				['title'=>'Category','sub'=>
+					[
+						['title'=>'Category List','uri'=>'admin/category'],
+					]
+				],
 				['title'=>'Tag','sub'=>
 					[
 						['title'=>'Tag List','uri'=>'admin/tag'],
@@ -35,6 +40,21 @@ $adminParams['menuData'] = [
 					[
 						['title'=>'Article Add','uri'=>'admin/article/edit'],
 						['title'=>'Article List','uri'=>'admin/article'],
+					]
+				],
+				['title'=>'Comment','sub'=>
+					[
+						['title'=>'Comment List','uri'=>'admin/comment'],
+					]
+				],
+				['title'=>'Member','sub'=>
+					[
+						['title'=>'Member List','uri'=>'admin/member'],
+					]
+				],
+				['title'=>'Site','sub'=>
+					[
+						['title'=>'Feedback','uri'=>'admin/feedback'],
 					]
 				]
 			]

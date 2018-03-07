@@ -18,6 +18,12 @@ class Signin extends MY_Controller {
 		$password = ci3_string_filter($_POST['password']);
 		$row = $this->memberModel->getRow("username like '{$username}' and password like '{$password}'");
 		if($row['id']){
+
+			if($row['status'] == 1){
+				$this->cResponse(['code'=>'10000','message'=>'Account is frozen']);
+			}
+
+
 			$identity = $this->aes->encrypt($row['id']);
 			$expire = 3600*24*30;
 			ci3_setcookie('identity',$identity,$expire);

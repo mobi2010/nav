@@ -6,8 +6,7 @@ class Article extends Admin_Controller {
 	function __construct($params = array())
 	{
 		parent::__construct();
-		$this->load->model('Tag_model', 'tagModel');//服务
-		$this->load->model('article_model', 'articleModel');//服务
+		
 	}
 	/**
 	 * [index]
@@ -24,11 +23,13 @@ class Article extends Admin_Controller {
 
 		$data['title'] = $params['title'] = $_GET['title'] ? $_GET['title'] : null;
 		$data['tag_id'] = $params['tag_id'] = $_GET['tag_id'] ? $_GET['tag_id'] : null;
+		$data['member_id'] = $params['member_id'] = $_GET['member_id'] ? $_GET['member_id'] : null;
 		
 		$getList = $this->articleModel->getList($params);
 		$data += $getList;
 
 		$data['tagModel'] = $this->tagModel->getKv();
+		$data['categoryData'] = $this->categoryModel->getKv();
 		$this->load->view('admin/article/list',$data);
 	}
 	/**
@@ -37,6 +38,7 @@ class Article extends Admin_Controller {
 	 */
 	public function edit(){
 		$data['dataModel'] = $this->articleModel->getInfo($_GET['id']);
+		$data['categoryData'] = $this->categoryModel->getKv();
 		$this->load->view('admin/article/edit',$data);
 	}
 
@@ -53,20 +55,19 @@ class Article extends Admin_Controller {
 			$image_url = $_POST['cover_image'];
 		}
 		$data['id'] = (int)$_POST['id'];
+		$data['category_id'] = (int)$_POST['category_id'];
 		$data['title'] = ci3_string_filter($_POST['title']);
 		$data['abstract'] = ci3_string_filter($_POST['abstract']);
 		$data['cover_image'] = $image_url;
 		$data['content'] = trim($_POST['editorValue']);
 		$data['hits'] = rand(10,100);
-		$data['member_id'] = rand(1,50);
+		$data['member_id'] = (int)$_POST['member_id'];//rand(1,20);
 		$article_id = $this->articleModel->save($data);
 
 		//person_identity
-		foreach ($_POST['tag'] as $tag_id) {
-			$taData['tag_id'] = $tag_id;
-			$taData['article_id'] = $article_id;
-			$this->ci3Model->dataInsert(['table'=>'article_tag_relation','data'=>$taData]);
-		}
+		$params['tags'] = $_POST['tags'];
+		$params['article_id'] = $article_id;
+		$this->articleModel->addArticleTags($params);
 
 
 		redirect('admin/article');
@@ -77,14 +78,8 @@ class Article extends Admin_Controller {
 	 */
 	public function delete(){
 		$id = (int)$_POST['id'];
-		$res = $this->articleModel->delete(['where'=>$id]);
-		if($res){
-			$where = "article_id={$id}";
-			$this->ci3Model->dataDelete(['table'=>'article_tag_relation','where'=>$where]);
-			$this->cResponse();
-		}else{
-			$this->cResponse(['code'=>'10000','message'=>'data error']);
-		}
+		$this->articleModel->deleteOne($id);
+		$this->cResponse();
 	}
 
 	public function deltag(){
@@ -106,9 +101,7 @@ class Article extends Admin_Controller {
 			switch ($type) {
 				case 'delete':
 					foreach ($_POST['ckbOption'] as $article_id) {
-						$this->articleModel->delete(['where'=>$article_id]);
-						$where = "article_id={$article_id}";
-						$this->ci3Model->dataDelete(['table'=>'article_tag_relation','where'=>$where]);
+						$this->articleModel->deleteOne($article_id);
 					}
 					break;
 				

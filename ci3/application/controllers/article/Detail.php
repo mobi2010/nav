@@ -6,14 +6,13 @@ class Detail extends MY_Controller {
 	function __construct($params = array())
 	{
 		parent::__construct(array('auth'=>false));		
-		$this->load->model('article_model', 'articleModel');//服务
-		$this->load->model('comment_model', 'commentModel');//服务
 
 	}
 	public function index()
 	{	
 		$id = (int)$_GET['id'];
 		$tag_id = (int)$_GET['tag_id'];
+		$category_id = (int)$_GET['category_id'];
 		$dataModel = [];
 		if($id){
 			$dataModel = $this->articleModel->getInfo($id);
@@ -27,14 +26,15 @@ class Detail extends MY_Controller {
 
 			$data['dataModel'] = $dataModel;
 			$data['tag_id'] = $tag_id;
+			$data['category_id'] = $category_id;
 			$member_id = $dataModel['member_id'] ? $dataModel['member_id'] : 1;
 
 			$data['memberModel'] = $this->memberModel->getInfo($member_id);
 
-			$data['identity'] = ci3_getcookie('identity');
+			$data['is_logined'] = $this->getMemberId();
 
-			$data['previousModel'] = $this->articleModel->context(['article_id'=>$id,'tag_id'=>$tag_id]);
-			$data['nextModel'] = $this->articleModel->context(['article_id'=>$id,'tag_id'=>$tag_id,'type'=>1]);
+			$data['previousModel'] = $this->articleModel->context(['category_id'=>$category_id,'article_id'=>$id,'tag_id'=>$tag_id]);
+			$data['nextModel'] = $this->articleModel->context(['category_id'=>$category_id,'article_id'=>$id,'tag_id'=>$tag_id,'type'=>1]);
 
 
 
@@ -70,7 +70,7 @@ class Detail extends MY_Controller {
 		$page = $page > 0 ? $page : 1;
 		$params['pageSize'] = $data['pageSize'] = $pageSize = 10;
 		$params['offset'] = $offset = ($page-1)*$pageSize; 
-		
+		$params['order'] = "id asc"; 
 		$data['article_id'] = $params['article_id'] = (int)$_POST['article_id'];
 
 		$getList = $this->commentModel->getList($params);

@@ -12,18 +12,14 @@
 * 
 * @return [string]        [html]
 */
-
 $html = null;
-
 $totalCount = $totalCount ? $totalCount : 0;//记录总数
 if(!$totalCount){
 	return ;
 }
-
 $pageSize = $pageSize ? $pageSize : 15; //每页显示的记录数
 $totalPage = ceil($totalCount/$pageSize);//总页数
 $showPageSize = $showPageSize ? $showPageSize : 10; //显示的页数
-
 if($totalPage > 1){
 	//当前页
 	$page = $page ? $page : $_REQUEST['page']; 
@@ -34,7 +30,6 @@ if($totalPage > 1){
 	$unset = $unset ? $unset : ['page'];//需要upset掉的参数
 	$url = $url ? $url : "?"; //链接地址
 	$url .= ci3_query_string(['page']);
-
 	$showPageSize = $showPageSize > $totalPage ? $totalPage : $showPageSize; //显示的页数
 	$autoNumber = floor($showPageSize/2);//自动翻转的基数
 	if(($page + $showPageSize) > $totalPage){     
@@ -45,10 +40,7 @@ if($totalPage > 1){
 		$startPage = $page-$autoNumber;
 	} 
 	$startPage = $startPage >0 ? $startPage : 1; //起始页      
-
 	$html = '<ul class="pagination">';
-
-
 	//第一页
 	if($page <= 1){
 		$html .= '<li class="first disabled"><span>first</span></li>';
@@ -61,9 +53,7 @@ if($totalPage > 1){
 	}else{
 		$html .= '<li class="prev disabled"><span>&laquo;</span></li>';
 	}
-
 	//中间页
-
 	for($i=0;$i<$showPageSize;$i++){
 		$pi = $i+$startPage;
 		if($page == $pi){
@@ -72,7 +62,6 @@ if($totalPage > 1){
 			$html .= '<li><a href="javascript:;" data-page="'.$pi.'">'.$pi.'</a></li>';
 		}
 	}   
-
 	//后页
 	if($page < $totalPage){
 		$html .= '<li class="next"><a href="javascript:;" data-page="'.($page+1).'">&raquo;</a></li>';

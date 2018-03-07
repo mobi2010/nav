@@ -52,9 +52,12 @@ foreach ($dataModel as $key => $value) {
 
 	$body = html_div(["body"=>$memberBody,'class'=>'member-info']);
 	
-	$content = ci3_emoji($value['content']);
+	$content = ci3_emoji($value['content'])."&nbsp;&nbsp;(".ci3_time($value['insert_time']).")";
 	if($member_id == $value['member_id']){
 		$deleteBody = html_a(['data-value'=>ci3_encrypt($value['id']),'text'=>'Delete','style'=>'color: #999999;','class'=>'deleteBtn']);
+		$content .=html_div(["body"=>$deleteBody,"class"=>"comment-operate"]);
+	}else{
+		$deleteBody = html_a(['data-r'=>$value['id'],'data-m'=>$value['member_id'],'data-n'=>$memberModel['username'],'text'=>'Reply','style'=>'color: #999999;','class'=>'replyBtn']);
 		$content .=html_div(["body"=>$deleteBody,"class"=>"comment-operate"]);
 	}
 	$contentBody = html_div(["body"=>$content,'class'=>'comment-content']);
@@ -87,5 +90,6 @@ $(document).ready(function(){
             $ts.parents('.comment-line').remove();
         })
     })
+   
 })
 </script>	

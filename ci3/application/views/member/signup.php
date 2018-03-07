@@ -81,7 +81,7 @@ $commonParams = $initData['commonParams'];
 	        <td align="center" colspan="2" >
 	        	<?php 
 	        	if($dataModel['id']){
-	        		echo html_button(['id'=>'logout','value'=>'Sign out','class'=>'btn btn-default']);
+	        		echo html_button(['id'=>'backBtn','value'=>'Back','class'=>'btn btn-default']);
 	        		echo "&nbsp;&nbsp;&nbsp;&nbsp;";
 	        	}
 
@@ -95,12 +95,8 @@ $commonParams = $initData['commonParams'];
 
 <script type="text/javascript">
 $(document).ready(function(){
-	$('#logout').click(function(){
-		$.post("<?=base_url('member/signup/logout');?>",function(dt){
-        	$.common.location("<?=base_url('index');?>");
-        })
-        
-        return false; 
+	$('#backBtn').click(function(){
+		window.history.back();return false;
 	})
     $('#saveBtn').click(function(){
     	var id = $('#id').val()

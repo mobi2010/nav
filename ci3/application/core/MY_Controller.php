@@ -19,8 +19,13 @@ class MY_Controller extends CI_Controller
 	{
 		parent::__construct();
 
-		$this->load->model('Ci3_model', 'ci3Model');//服务
-		$this->load->model('member_model', 'memberModel');//服务
+		$this->load->model('Ci3_model', 'ci3Model');
+		$this->load->model('tag_model', 'tagModel');
+		$this->load->model('member_model', 'memberModel');
+		$this->load->model('article_model', 'articleModel');
+		$this->load->model('comment_model', 'commentModel');
+		$this->load->model('category_model', 'categoryModel');
+
 
 		$this->load->library('image');
 		$this->load->library('aes');
@@ -51,15 +56,16 @@ class MY_Controller extends CI_Controller
 				
 				break;			
 			default:
-				if((!$this->userId || $this->userEntity['status'] != 0) && 
-					$this->uriEntity['class'] != "login"){
-					redirect('login');		
-				}
-				if($this->userEntity['step'] < 9 && 
-					!($this->uriEntity['class'] == "account" && 
-						in_array($this->uriEntity['method'], array("info","infoSave")))){
-					redirect('member/account/info');
-				}
+				$identity = ci3_getcookie('identity');
+		        if($identity){
+		            $id = $this->aes->decrypt($identity);
+		            $row = $this->memberModel->getRow($id);
+		        }
+		        if(empty($row)){
+		        	redirect('member/signin');
+		        }else{
+		        	return $id;
+		        }
 				break;
 		}
 		return true;

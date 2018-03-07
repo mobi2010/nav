@@ -16,10 +16,11 @@ $this->load->view('header',$data);
 
 .detail-time{
 	color:#999999;
-	font-size:0.5em;
+	font-size:.8em;
 }
 .context{
-	font-size:2em;
+	font-size:1.3em;
+    margin: .5em;
 }
 .pre-context{
 	float: right;
@@ -29,8 +30,14 @@ $this->load->view('header',$data);
 	float: left;
 }
 
+.content{
+    margin: .5em;
+}
+
 .comment{
 	clear: both;
+    position: relative;
+    top:1em;  
 }
 .comment-button{
 	margin-top: 1em; 
@@ -48,13 +55,13 @@ $this->load->view('header',$data);
 $pnBody = null;
 
 if(!empty($previousModel)){
-	$article_url = ci3_article_url(['tag_id'=>$tag_id,'article_id'=>$previousModel['id']]);
+	$article_url = ci3_article_url(['category_id'=>$category_id,'tag_id'=>$tag_id,'article_id'=>$previousModel['id']]);
 	$prehtml = html_a(['href'=>$article_url,'text'=>$previousModel['title']."&gt;&gt;"]);
 	$pnBody .= html_span(['body'=>$prehtml,'class'=>'pre-context']); 
 }
 
 if(!empty($nextModel)){
-	$article_url = ci3_article_url(['tag_id'=>$tag_id,'article_id'=>$nextModel['id']]);
+	$article_url = ci3_article_url(['category_id'=>$category_id,'tag_id'=>$tag_id,'article_id'=>$nextModel['id']]);
 	$nexthtml = html_a(['href'=>$article_url,'text'=>"&lt;&lt;".$nextModel['title']]); 
 	$pnBody .= html_span(['body'=>$nexthtml,'class'=>'next-context']); 
 }
@@ -68,17 +75,17 @@ $detailTime = ci3_time($dataModel['insert_time'])." come from ";
 $detailTime .= html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>$memberModel['username']]);
 
 $detailTime .= "&nbsp;".$dataModel['hits'].' hits';
-$detailBody .= html_div(['body'=>$detailTime,'class'=>'detail-time']);;
+$detailBody .= html_div(['body'=>$detailTime,'class'=>'detail-time']);
 
 
 
-$detailBody .= ci3_content($dataModel['content']);
+$detailBody .= html_div(['body'=>ci3_content($dataModel['content']),'class'=>'content']);
 
 
 if(!empty($dataModel['tags'])){
 	$tagBody = null;
 	foreach ($dataModel['tags'] as $key => $value) {
-		$tagBody .=  html_a(['href'=>ci3_url('index',['t'=>$key]),'text'=>$value,'class'=>' btn btn-warning btn-xs'])."&nbsp;&nbsp;"; 
+		$tagBody .=  html_a(['href'=>ci3_url('index',['t'=>ci3_encrypt($key)]),'text'=>$value,'class'=>' btn btn-warning btn-xs'])."&nbsp;&nbsp;"; 
 
 	}
 	$detailBody .= html_div(['body'=>$tagBody]);
@@ -101,8 +108,9 @@ echo $detailBody;
 $commentHtml = html_textarea(['name'=>'comment']);
 $commentHtml .=  html_div(['body'=>html_button(['name'=>'commentBtn','class'=>'btn btn-success','value'=>'Submit']),'class'=>'comment-button']);;
 $commentHtml .= html_hidden(['name'=>'article_id','value'=>$dataModel['id']]);
+$commentHtml .= html_hidden(['name'=>'reply_id','value'=>'0']);
 $commentDiv = html_div(['body'=>$commentHtml,'class'=>'comment']);
-$commentDiv .= html_div(['style'=>'height:50px']);
+$commentDiv .= html_div(['style'=>'height:5em']);
 echo $commentDiv;
 ?>
 
@@ -123,7 +131,7 @@ $this->load->view('footer',$data);
 $(document).ready(function(){
 	
     $('#commentBtn').click(function(){
-        var logined = "<?=$identity?1:0;?>";
+        var logined = "<?=$is_logined;?>";
 
         if(logined == 0){
         	$.common.alert({'message':'Please log in first'});
@@ -162,6 +170,15 @@ $(document).ready(function(){
             $('.pagination a').off().on('click',function(){
                 var page = $(this).attr('data-page');
                 showCommentList(page);
+                return false;
+            })
+            $('.replyBtn').off().on('click',function(){
+                var r = $(this).attr('data-r');
+                var m = $(this).attr('data-m');
+                var n = $(this).attr('data-n');
+                $('#comment').val("Reply@"+n+": ").focus();
+                $('#reply_id').val(r);
+                return false;
             })
 
         })

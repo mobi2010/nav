@@ -11,13 +11,24 @@ $localParams['cryptoSecretKey'] =  [
 
 $localParams['gender'] =  [0=>'Female',1=>'Male',2=>'Secret'];
 
+$localParams['memberMenu'] =  [
+	['title'=>'Information','uri'=>'member/account/index'],
+	['title'=>'Post','uri'=>'member/account/post'],
+    ['title'=>'Sign Out','uri'=>'member/account/signout'],
+];
 
 
+$localParams['footer'] =  [
+    ['title'=>'feedback','uri'=>'site/feedback','image'=>'/assets/common/images/feedback.jpg'],
+    ['title'=>'weibo','url'=>'https://weibo.com/navbus','image'=>'/assets/common/images/weibo.jpg'],
+    ['title'=>'facebook','url'=>'https://facebook.com/','image'=>'/assets/common/images/facebook.jpg'],
+    ['title'=>'wechat','url'=>'https://wechat.com/','image'=>'/assets/common/images/wechat.jpg'],
+];
 //菜单
-$localParams['menuData'] = [
-		['title'=>'Home','uri'=>'index'],
-		//['title'=>'Tag','uri'=>'tag'],
-	];
+// $localParams['menuData'] = [
+// 		['title'=>'Home','uri'=>'index'],
+// 		//['title'=>'Tag','uri'=>'tag'],
+// 	];
 //导航索引
 $localParams['navIndex'] = 'index';
 return $localParams;
