@@ -65,5 +65,15 @@ var jiathis_config={
 <script type="text/javascript" src="http://v3.jiathis.com/code/jiathis_r.js?btn=r1.gif&move=0" charset="utf-8"></script>
 <!-- JiaThis Button END -->
 
+<!-- baidu tongji -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?f6e5de0d9d782044b6d8cee0931c0417";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </body>
 </html>
