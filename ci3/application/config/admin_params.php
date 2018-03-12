@@ -20,6 +20,9 @@ $adminParams['gender'] =  [0=>'Female',1=>'Male',2=>'Secret'];
 //region
 $adminParams['region'] =  [0=>'Unknown',1=>'Japan',2=>'America',3=>'China'];
 
+//source
+$adminParams['source'] =  [0=>'Foreign',1=>'Local'];
+
 
 //菜单
 $adminParams['menuData'] = [

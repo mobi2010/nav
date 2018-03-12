@@ -3,7 +3,6 @@ $this->load->view('header',$data);
 
 $commonParams = $initData['commonParams'];
 
-
 ?>  
 
 <style type="text/css">
@@ -23,6 +22,7 @@ $commonParams = $initData['commonParams'];
     float:left;
     margin:1em;
 }
+
 .content{
 
 }
@@ -32,7 +32,13 @@ $commonParams = $initData['commonParams'];
 	<ul class="menu">
 	<?php 
 	foreach ($commonParams['memberMenu'] as $key => $value) {
-		echo "<li>".html_a(['text'=>$value['title'],'href'=>ci3_url($value['uri'])])."</li>";
+		$profileParams['class'] = '';
+		$profileParams['text'] = $value['title'];
+		$profileParams['href'] = ci3_url($value['uri']);
+		if(strtolower($value['title']) == $uriEntity['method']){
+			$profileParams['class'] = 'current';
+		}
+		echo "<li>".html_a($profileParams)."</li>";
 	}
 	?>
 	

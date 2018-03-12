@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: 2018-03-07 18:02:35
+-- Generation Time: 2018-03-11 13:30:30
 -- 服务器版本： 10.1.30-MariaDB
 -- PHP Version: 5.6.33
 
@@ -16,6 +16,7 @@ SET time_zone = "+00:00";
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 --
 -- Database: `nav`
@@ -400,15 +401,166 @@ CREATE TABLE `feedback` (
 
 CREATE TABLE `member` (
   `id` int(10) UNSIGNED NOT NULL,
-  `avatar_url` varchar(100) NOT NULL,
   `username` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
   `password` varchar(50) NOT NULL,
   `gender` tinyint(1) NOT NULL COMMENT '0secret1male2female',
-  `biography` varchar(200) NOT NULL,
-  `ip` varchar(20) NOT NULL,
-  `status` int(11) NOT NULL COMMENT '0active1inactive',
+  `status` tinyint(4) NOT NULL COMMENT '0active1inactive',
   `update_time` int(11) NOT NULL,
+  `insert_time` int(11) NOT NULL,
+  `source` tinyint(4) NOT NULL COMMENT '0正常，1本站'
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_content_0`
+--
+
+CREATE TABLE `member_content_0` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `avatar_url` varchar(100) NOT NULL,
+  `biography` varchar(200) NOT NULL,
+  `ip` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_content_1`
+--
+
+CREATE TABLE `member_content_1` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `avatar_url` varchar(100) NOT NULL,
+  `biography` varchar(200) NOT NULL,
+  `ip` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_content_2`
+--
+
+CREATE TABLE `member_content_2` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `avatar_url` varchar(100) NOT NULL,
+  `biography` varchar(200) NOT NULL,
+  `ip` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_content_3`
+--
+
+CREATE TABLE `member_content_3` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `avatar_url` varchar(100) NOT NULL,
+  `biography` varchar(200) NOT NULL,
+  `ip` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_content_4`
+--
+
+CREATE TABLE `member_content_4` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `avatar_url` varchar(100) NOT NULL,
+  `biography` varchar(200) NOT NULL,
+  `ip` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_content_5`
+--
+
+CREATE TABLE `member_content_5` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `avatar_url` varchar(100) NOT NULL,
+  `biography` varchar(200) NOT NULL,
+  `ip` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_content_6`
+--
+
+CREATE TABLE `member_content_6` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `avatar_url` varchar(100) NOT NULL,
+  `biography` varchar(200) NOT NULL,
+  `ip` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_content_7`
+--
+
+CREATE TABLE `member_content_7` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `avatar_url` varchar(100) NOT NULL,
+  `biography` varchar(200) NOT NULL,
+  `ip` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_content_8`
+--
+
+CREATE TABLE `member_content_8` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `avatar_url` varchar(100) NOT NULL,
+  `biography` varchar(200) NOT NULL,
+  `ip` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_content_9`
+--
+
+CREATE TABLE `member_content_9` (
+  `id` int(11) NOT NULL,
+  `member_id` int(11) NOT NULL,
+  `avatar_url` varchar(100) NOT NULL,
+  `biography` varchar(200) NOT NULL,
+  `ip` varchar(20) NOT NULL
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- 表的结构 `member_relation`
+--
+
+CREATE TABLE `member_relation` (
+  `id` bigint(20) NOT NULL,
+  `own_id` int(11) NOT NULL,
+  `other_id` int(11) NOT NULL,
   `insert_time` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
 
@@ -651,6 +803,83 @@ ALTER TABLE `member`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `member_content_0`
+--
+ALTER TABLE `member_content_0`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `member_content_1`
+--
+ALTER TABLE `member_content_1`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `member_content_2`
+--
+ALTER TABLE `member_content_2`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `member_content_3`
+--
+ALTER TABLE `member_content_3`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `member_content_4`
+--
+ALTER TABLE `member_content_4`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `member_content_5`
+--
+ALTER TABLE `member_content_5`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `member_content_6`
+--
+ALTER TABLE `member_content_6`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `member_content_7`
+--
+ALTER TABLE `member_content_7`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `member_content_8`
+--
+ALTER TABLE `member_content_8`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `member_content_9`
+--
+ALTER TABLE `member_content_9`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `member_id` (`member_id`);
+
+--
+-- Indexes for table `member_relation`
+--
+ALTER TABLE `member_relation`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `own_id` (`own_id`,`other_id`);
+
+--
 -- Indexes for table `person`
 --
 ALTER TABLE `person`
@@ -840,6 +1069,72 @@ ALTER TABLE `feedback`
 --
 ALTER TABLE `member`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_content_0`
+--
+ALTER TABLE `member_content_0`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_content_1`
+--
+ALTER TABLE `member_content_1`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_content_2`
+--
+ALTER TABLE `member_content_2`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_content_3`
+--
+ALTER TABLE `member_content_3`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_content_4`
+--
+ALTER TABLE `member_content_4`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_content_5`
+--
+ALTER TABLE `member_content_5`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_content_6`
+--
+ALTER TABLE `member_content_6`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_content_7`
+--
+ALTER TABLE `member_content_7`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_content_8`
+--
+ALTER TABLE `member_content_8`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_content_9`
+--
+ALTER TABLE `member_content_9`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- 使用表AUTO_INCREMENT `member_relation`
+--
+ALTER TABLE `member_relation`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- 使用表AUTO_INCREMENT `person`

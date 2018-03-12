@@ -1,9 +1,8 @@
 <?php 
     $commonParams = $initData['commonParams'];
 
-    $htmlTitle = $htmlTitle ? $htmlTitle : "NAV-BUS"; 
-    $htmlKeywords = $htmlKeywords ? $htmlKeywords :  "NAV-BUS"; 
-
+    $htmlTitle = $htmlTitle ? $htmlTitle : "IAV-18"; 
+    $htmlKeywords = $htmlKeywords ? $htmlKeywords :  "IAV-18"; 
 ?>
 <!DOCTYPE html>
 <html>
@@ -25,7 +24,10 @@ body{
     background-color:#eee;
 }
 
-
+.current{
+    color:red;
+    font-weight:bold;
+}
 </style>
 
 <script type="text/javascript">
@@ -46,7 +48,7 @@ $(document).ready(function(){
 </script>    
 <div class="breadcrumbContainer" >
     <ul class="breadcrumb" style="line-height:3em;background: #fff;padding: 1em 3.5em;color:#999999">
-        <a style="text-indent:-9999px;width:12em;background: url(/assets/common/images/logo.png) center no-repeat;display: inline-block;" href="<?=ci3_url('index')?>">NAV-BUS</a>
+        <a style="text-indent:-9999px;width:12em;background: url(/assets/common/images/logo.png) center no-repeat;display: inline-block;" href="<?=ci3_url('index')?>">IAV-18</a>
 
         <span style="display: inline-block;float: right;">
             <?php 
@@ -74,23 +76,34 @@ $(document).ready(function(){
                 redirect('index');
             }
 
-            echo html_a(['href'=>ci3_url('member/account/index'),'text'=>html_img(['src'=>$memberRow['avatar_url'],'height'=>'30em'])]);
+            echo html_a(['href'=>ci3_url('member/account/profile'),'text'=>html_img(['src'=>$memberRow['avatar_url'],'height'=>'30em'])]);
         }
         
         echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
         ?>
         </span>
         <span style="display: inline-block;float: right;">
-         <?php 
-        $menuData[] = ['title'=>'Home','uri'=>'index'];
+        <?php 
+        foreach ($commonParams['menuData'] as $key => $value) {
+            $menuParams = ['href'=>ci3_url($value['uri']),'text'=>$value['title']];
+            $menuParams['class'] = '';
+            if(!$_GET['i']){
+                $menuParams['class'] = $uriEntity['uri_string'] == $value['uri'] ? 'current' : '';
+            }
+            $htmlNav[] = html_a($menuParams);
+        }
 
-        $menuParams = ['href'=>ci3_url('index'),'text'=>'Home'];
-        $menuParams['class'] = $uriEntity['uri_string'] == $value['uri'] ? 'current' : '';
-        $htmlNav[] = html_a($menuParams);
+        
 
         $categoryData = $this->categoryModel->getKv();
         foreach ($categoryData as $key => $value) {
-            $menuParams = ['href'=>ci3_url('index',['i'=>ci3_encrypt($key)]),'text'=>$value];
+            $i = ci3_encrypt($key);
+            $menuParams = ['href'=>ci3_url('index',['i'=>$i]),'text'=>$value];
+            $menuParams['class'] = '';
+            if($_GET['i']){
+                $menuParams['class'] = $_GET['i'] == $i ? 'current' : '';
+            }
+
             $htmlNav[] = html_a($menuParams);
         }
 

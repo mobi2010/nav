@@ -454,6 +454,29 @@ if ( ! function_exists('ci3_time')){
 		return $res;
 	}
 }
+
+if ( ! function_exists('ci3_content_index')){
+	function ci3_content_index($content){
+		$contenthtml = "";
+		$label = ['video','embed','iframe','images'];
+		foreach ($label as $key => $value) {
+			$fun = "ci3_content_{$value}";
+			$res = $fun($content);
+			if(is_array($res['html'])){
+				foreach ($res['html'] as $html) {
+					$contenthtml .= $html;
+				}
+			}else{
+				$contenthtml = $res['html'];
+			}
+			if($contenthtml){
+				break;
+			}
+
+		}
+		return $contenthtml;
+	}
+}	
 /**
  * [内容图片]
  * @param  [type] $key [description]
@@ -461,23 +484,99 @@ if ( ! function_exists('ci3_time')){
  */
 if ( ! function_exists('ci3_content_images')){
 	function ci3_content_images($content){
-		$images = [];
+		$res = [];
+		$urls = [];
+		$htmls = [];
 		if($content){
 			preg_match_all('/\<img src="(.*?)"/isu', $content, $matches);
 			if(!empty($matches[1])){
 				$host = "http://".$_SERVER['HTTP_HOST'];
-				foreach ($matches[1] as $url) {
+				foreach ($matches[1] as $key => $url) {
 					if(preg_match("/^(http|https)\:\/\/(.*?)/is", $url)){
-						$images[]=$url;
+						$url=$url;
 					}else{
-						$images[]=$host.$url;
+						$url=$host.$url;
+					}
+					$urls[] = $url;
+					$htmls[] = '<img src="'.$url.'" height="180px" />';
+					if($key==2){
+						break;
 					}
 				}
 			}
 		}
-		return $images;
+		$res['url'] = $urls;
+		$res['html'] = $htmls;
+		return $res;
 	}
 }
+
+/**
+ * [内容图片]
+ * @param  [type] $key [description]
+ * @return [type]      [description]
+ */
+if ( ! function_exists('ci3_content_iframe')){
+	function ci3_content_iframe($content){
+		$res = [];
+		if($content){
+			preg_match('/\<iframe src="(.*?)"/isu', $content, $matches);
+			if(!empty($matches[1])){
+				$res['url'] = $matches[1];
+				$res['html'] = '<iframe src="'.$matches[1].'" height="180px" width="320px" frameborder="0" align="left" allowfullscreen="true" allowtransparency="true"></iframe>';
+			}
+		}
+		return $res;
+	}
+}
+
+
+
+/**
+ * [内容图片]
+ * @param  [type] $key [description]
+ * @return [type]      [description]
+ */
+if ( ! function_exists('ci3_content_video')){
+	function ci3_content_video($content){
+		$res = [];
+		$host = "http://".$_SERVER['HTTP_HOST'];
+		if($content){
+			preg_match('/\<source src="(.*?)"/isu', $content, $matches);
+			if(!empty($matches[1])){
+					if(preg_match("/^(http|https)\:\/\/(.*?)/is", $matches[1])){
+						$url = $matches[1];
+					}else{
+						$url = $host.$matches[1];
+					}
+				$res['url'] = $url; 
+				$res['html'] = '<video class="edui-upload-video  vjs-default-skin video-js" controls="" preload="none" height="180px" width="320px" src="'.$url.'"><source src="'.$url.'" type="video/mp4"/></video>';
+			}
+		}
+		return $res;
+	}
+}
+/**
+ * [内容图片]
+ * @param  [type] $key [description]
+ * @return [type]      [description]
+ */
+if ( ! function_exists('ci3_content_embed')){
+	function ci3_content_embed($content){
+		$res = [];
+		if($content){
+			preg_match('/\<embed (.*?) src="(.*?)"/isu', $content, $matches);
+			if(!empty($matches[2])){
+				$res['url'] = $matches[2];
+				$res['html'] = '<embed type="application/x-shockwave-flash" class="edui-faked-video" pluginspage="http://www.macromedia.com/go/getflashplayer" src="'.$matches[2].'"  height="180px" width="320px" wmode="transparent" play="true" loop="false" menu="false" allowscriptaccess="never" allowfullscreen="true"/>';
+			}
+		}
+		return $res;
+	}
+}
+
+
+
 
 /**
  * [中文转英文]

@@ -27,4 +27,18 @@ class Index extends MY_Controller {
 		$this->load->view('index',$data);
 	}	
 	
+	public function follow()
+	{	
+		//分页
+		$page = (int)$_GET['page'];
+		$page = $page > 0 ? $page : 1;
+		$params['pageSize'] = $data['pageSize'] = $pageSize = 8;
+		$params['offset'] = $offset = ($page-1)*$pageSize; 
+		$params['follow_member_id'] = $this->userId; 
+		$getList = $this->articleModel->getList($params);
+		
+		$data += $getList;
+		$this->load->view('index',$data);
+	}	
+
 }

@@ -3,9 +3,10 @@ $this->load->view('header',$data);
 ?>  
 
 <style type="text/css">
-.title{
-	clear: both;
-
+.article-title{
+    clear: both;
+    font-size:3em;
+    font-weight:bold;
 }
 
 .detail{
@@ -19,6 +20,7 @@ $this->load->view('header',$data);
 	font-size:.8em;
 }
 .context{
+    clear: both;
 	font-size:1.3em;
     margin: .5em;
 }
@@ -31,7 +33,7 @@ $this->load->view('header',$data);
 }
 
 .content{
-    margin: .5em;
+    margin: 1.5em 0;
 }
 
 .comment{
@@ -42,6 +44,11 @@ $this->load->view('header',$data);
 .comment-button{
 	margin-top: 1em; 
 	float: right;
+}
+
+.member-panel{
+    padding-top:1em; 
+    clear: both;
 }
 </style>
 
@@ -68,13 +75,33 @@ if(!empty($nextModel)){
 
 $detailBody .= html_div(['body'=>$pnBody,'class'=>'context']);
 
-$detailBody .= "<h1 class='title'>{$dataModel['title']}</h1>";
 
-$detailTime = ci3_time($dataModel['insert_time'])." come from ";
+//member
+$username = $memberData['username'];
+$memberBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberData['id'])]),'text'=>html_img(['src'=>$memberData['avatar_url'],'width'=>'25']),'title'=>$username]);
+//$memberBody .= html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberData['id'])]),'text'=>$username,'style'=>'color:#999999']);
 
-$detailTime .= html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>$memberModel['username']]);
+$memberBody .= "&nbsp;";  
+if($followStatus == 'follow'){
+    $memberBody .= html_a(['text'=>'Unfollow','data-value'=>$m,'class'=>'unfollowBtn btn btn-danger btn-xs']);
+}elseif(in_array($followStatus,['guest','none','followed'])){
+    $memberBody .= html_a(['text'=>'Follow','data-value'=>$m,'class'=>'followBtn btn btn-primary btn-xs']);
+}
 
-$detailTime .= "&nbsp;".$dataModel['hits'].' hits';
+
+
+
+$detailBody .= html_div(['body'=>$dataModel['title'],'class'=>'article-title']);
+
+
+
+
+$detailTime = ci3_time($dataModel['insert_time']);
+
+// $detailTime .= html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberData['id'])]),'text'=>$memberData['username']]);
+
+$detailTime .= "&nbsp;".$dataModel['hits'].' hits come from &nbsp;';
+$detailTime .= $memberBody;
 $detailBody .= html_div(['body'=>$detailTime,'class'=>'detail-time']);
 
 
@@ -91,6 +118,8 @@ if(!empty($dataModel['tags'])){
 	$detailBody .= html_div(['body'=>$tagBody]);
 
 }
+
+
 
 $detailBody .= html_div(['body'=>$pnBody,'class'=>'context']);
 
@@ -131,7 +160,7 @@ $this->load->view('footer',$data);
 $(document).ready(function(){
 	
     $('#commentBtn').click(function(){
-        var logined = "<?=$is_logined;?>";
+        var logined = "<?=$current_user_id;?>";
 
         if(logined == 0){
         	$.common.alert({'message':'Please log in first'});
@@ -186,6 +215,29 @@ $(document).ready(function(){
     showCommentList(1);
 
 
+    $('.followBtn').click(function(){
+        var m = $(this).attr('data-value');
+        $.post("<?=ci3_url('member/profile/follow')?>",{'m':m},function(dt){
+            if(dt['code'] !=0){
+                $.common.alert(dt);
+            }else{
+                $.common.refresh();
+            }
+            
+        })
+    })
+    $('.unfollowBtn').click(function(){
+        var m = $(this).attr('data-value');
+        if(!confirm('Unfollow?')){return false;}
+        $.post("<?=ci3_url('member/profile/unfollow')?>",{'m':m},function(dt){
+            if(dt['code'] !=0){
+                $.common.alert(dt);
+            }else{
+                $.common.refresh();
+            }
+            
+        })
+    })
 
 }) 
 </script>  

@@ -94,4 +94,14 @@ class Admin_Controller extends CI_Controller
     	}
     	$exit && exit; 
     }
+
+    /**
+   	 * [ci3SetCookie description]
+   	 * @return [type] [description]
+   	 */
+    protected function ci3SetCookie($member_id){
+    	$identity = $this->aes->encrypt($member_id);
+		$expire = 3600*24*30;
+		ci3_setcookie('identity',$identity,$expire);
+    }
 }	

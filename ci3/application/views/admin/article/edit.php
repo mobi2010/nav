@@ -9,12 +9,16 @@
 </script>    
 <?php 
 $this->load->view('admin/header');
+
 ?>
 <script type="text/javascript" charset="utf-8" src="/assets/plugins/ueditor/ueditor.config.js"></script>
 <script type="text/javascript" charset="utf-8" src="/assets/plugins/ueditor/ueditor.all.min.js"></script>
 
 <form id="ci3Form" enctype="multipart/form-data" action="<?=ci3_url('admin/article/save')?>" method="post">
     <table class="table " style="width: 100%;" id="tag_table">
+        <?php 
+            echo html_hidden(['name'=>'id','value'=>$dataModel['id']]);   
+        ?>
         <tr >
             <td><label>Member Id:</label></td>
             <td>
@@ -34,19 +38,18 @@ $this->load->view('admin/header');
             </td>
         </tr>
 
-        <tr >
+        <!-- <tr >
             <td><label>Cover Image:</label></td>
             <td>
             <?php
-            if($dataModel['cover_image']) {
-                echo html_img(['src'=>$dataModel['cover_image']]);
-            }
-            echo html_hidden(['name'=>'id','value'=>$dataModel['id']]);   
-            echo html_hidden(['name'=>'cover_image','value'=>$dataModel['cover_image']]);    
-            echo html_file(['name'=>'Filedata']);
+            // if($dataModel['cover_image']) {
+            //     echo html_img(['src'=>$dataModel['cover_image']]);
+            // }
+            // echo html_hidden(['name'=>'cover_image','value'=>$dataModel['cover_image']]);    
+            // echo html_file(['name'=>'Filedata']);
             ?>
             </td>
-        </tr>
+        </tr> -->
         <tr >
             <td><label>Abstract:</label></td>
             <td>

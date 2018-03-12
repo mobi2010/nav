@@ -45,7 +45,7 @@
 foreach ($dataModel as $key => $value) {
 
 	$memberModel = $this->memberModel->getInfo($value['member_id']);
-	$avatarBody = html_img(['src'=>$memberModel['avatar_url'],'height'=>'60px']);
+	$avatarBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>html_img(['src'=>$memberModel['avatar_url'],'height'=>'60px'])]);
 	$memberBody = html_div(['body'=>$avatarBody,'class'=>'member-avatar']);
 	$usernameBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>$memberModel['username']]);
 	$memberBody .= html_div(['body'=>$usernameBody,'class'=>'member-name']);

@@ -2,20 +2,18 @@
 
 
 class Account extends MY_Controller {		
-	public $memberId;
-	public $memberEntity;//user 实体
+	
 	function __construct($params = array())
 	{
-		parent::__construct(array('auth'=>false));		
+		parent::__construct(array('auth'=>true));		
 		$this->load->model('Tag_model', 'tagModel');//服务
 		$this->load->model('article_model', 'articleModel');//服务
-		$this->getMemberInfo();
 	}
 
-	public function index()
+	public function profile()
 	{	
 	
-		$memberModel = $this->memberEntity;
+		$memberModel = $this->userEntity;
 		$data['dataModel'] = $memberModel;
 		$this->load->view('account/profile',$data);
 	}	
@@ -33,7 +31,7 @@ class Account extends MY_Controller {
 		$params['offset'] = $offset = ($page-1)*$pageSize; 
 
 		$data['title'] = $params['title'] = $_GET['title'] ? $_GET['title'] : null;
-		$params['member_id'] = $this->memberId;
+		$params['member_id'] = $this->userId;
 		
 		$getList = $this->articleModel->getList($params);
 		$data += $getList;
@@ -46,7 +44,7 @@ class Account extends MY_Controller {
 		if($_GET['a']){
 			$article_id = (int)ci3_decrypt($_GET['a']);
 			$dataModel = $this->articleModel->getInfo($article_id);
-			if($dataModel['member_id'] == $this->memberId){
+			if($dataModel['member_id'] == $this->userId){
 				$data['dataModel'] = $dataModel;
 			}else{
 				redirect('index');
@@ -60,7 +58,7 @@ class Account extends MY_Controller {
 		if($_POST['a']){
 			$article_id = (int)ci3_decrypt($_POST['a']);
 			$dataModel = $this->articleModel->getInfo($article_id);
-			if($dataModel['member_id'] == $this->memberId){
+			if($dataModel['member_id'] == $this->userId){
 				$this->articleModel->delete(['where'=>$article_id]);
 			}else{
 				redirect('index');
@@ -83,7 +81,7 @@ class Account extends MY_Controller {
 		$data['cover_image'] = $image_url;
 		$data['content'] = trim($_POST['editorValue']);
 		$data['hits'] = 0;
-		$data['member_id'] = $this->memberId;
+		$data['member_id'] = $this->userId;
 		$data['category_id'] = (int)$_POST['category_id'];
 		$article_id = $this->articleModel->save($data);
 
@@ -95,19 +93,28 @@ class Account extends MY_Controller {
 		redirect('member/account/post');
 	}
 
-	public function getMemberInfo(){
-		$identity = ci3_getcookie('identity');
-        if($identity){
-            $id = $this->aes->decrypt($identity);
-            $memberModel = $this->memberModel->getInfo($id);
-        }
-        if(empty($memberModel)){
-        	redirect('member/signin');
-        }else{
-        	$this->memberId = $id;
-        	$this->memberEntity = $memberModel;
-        	return $memberModel;
-        }
+
+	public function follow(){
+		//分页
+		$page = (int)$_GET['page'];
+		$page = $page > 0 ? $page : 1;
+		$params['pageSize'] = $pageSize = 15;
+		$params['offset'] = $offset = ($page-1)*$pageSize; 
+		$params['where'] = "own_id=".$this->userId;
+		$data = $this->memberModel->followList($params);
+		$data['pageSize'] = $pageSize;
+		$this->load->view('account/follow',$data);
 	}
 
+	public function fans(){
+		//分页
+		$page = (int)$_GET['page'];
+		$page = $page > 0 ? $page : 1;
+		$params['pageSize'] = $pageSize = 15;
+		$params['offset'] = $offset = ($page-1)*$pageSize; 
+		$params['where'] = "other_id=".$this->userId;
+		$data = $this->memberModel->followList($params,1);
+		$data['pageSize'] = $pageSize;
+		$this->load->view('account/fans',$data);
+	}
 }	

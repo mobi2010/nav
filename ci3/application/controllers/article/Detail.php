@@ -21,7 +21,7 @@ class Detail extends MY_Controller {
 		if(empty($dataModel['id'])){
 			redirect('index');
 		}else{
-			$dataModel['hits'] += +1;
+			$dataModel['hits'] += 1;
 			$this->articleModel->save(['id'=>$dataModel['id'],'hits'=>$dataModel['hits']]);
 
 			$data['dataModel'] = $dataModel;
@@ -29,9 +29,12 @@ class Detail extends MY_Controller {
 			$data['category_id'] = $category_id;
 			$member_id = $dataModel['member_id'] ? $dataModel['member_id'] : 1;
 
-			$data['memberModel'] = $this->memberModel->getInfo($member_id);
+			$data['memberData'] = $this->memberModel->getInfo($member_id);
+			$data['m'] = ci3_encrypt($member_id);
+			$data['current_user_id'] = $this->userId;
 
-			$data['is_logined'] = $this->getMemberId();
+			$data['followStatus'] = $this->memberModel->followStatus($this->userId,$member_id);
+
 
 			$data['previousModel'] = $this->articleModel->context(['category_id'=>$category_id,'article_id'=>$id,'tag_id'=>$tag_id]);
 			$data['nextModel'] = $this->articleModel->context(['category_id'=>$category_id,'article_id'=>$id,'tag_id'=>$tag_id,'type'=>1]);
@@ -39,13 +42,13 @@ class Detail extends MY_Controller {
 
 
 			$data['htmlTitle'] = $dataModel['title']; 
-    		$data['htmlKeywords'] = $dataModel['tags'] ? implode(',',$dataModel['tags']) :  "NAV-BUS"; 
+    		$data['htmlKeywords'] = $dataModel['tags'] ? implode(',',$dataModel['tags']) :  "IAV-18"; 
 			$this->load->view('article/detail',$data);
 		}
 	}
 
 	public function comment(){
-		$member_id = $this->getMemberId();
+		$member_id = $this->userId;
 		if(!$member_id || !$_POST['article_id'] || !$_POST['comment']){
 			$this->cResponse(['code'=>'10000','message'=>'Data error']);
 		}
@@ -75,7 +78,7 @@ class Detail extends MY_Controller {
 
 		$getList = $this->commentModel->getList($params);
 		$data += $getList;
-		$data['member_id'] = $this->getMemberId();
+		$data['member_id'] = $this->userId;
 		$this->load->view('article/comment-list',$data);
 	}	
 
@@ -88,11 +91,4 @@ class Detail extends MY_Controller {
 		$this->cResponse();
 	}	
 	
-	private function getMemberId(){
-		$identity = ci3_getcookie('identity');
-        if($identity){
-            $member_id = $this->aes->decrypt($identity);
-        }
-        return (int)$member_id;
-	}	
 }

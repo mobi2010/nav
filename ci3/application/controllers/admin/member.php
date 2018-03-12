@@ -44,11 +44,9 @@ class Member extends Admin_Controller {
 	public function login(){
 		$member_id = (int)$_GET['member_id'];
 		if($member_id){
-			$identity = $this->aes->encrypt($member_id);
-			$expire = 3600*24*30;
-			ci3_setcookie('identity',$identity,$expire);
+			$this->ci3SetCookie($member_id);
 		}
-		redirect('member/account/index');
+		redirect('member/account/profile');
 	}
 
 	/**
@@ -70,7 +68,7 @@ class Member extends Admin_Controller {
 			switch ($type) {
 				case 'delete':
 					foreach ($_POST['ckbOption'] as  $id) {
-						 $this->memberModel->delete(['where'=>$id]);
+						 $this->memberModel->deleteOne(['where'=>$id]);
 					}
 					break;
 				case 'update':
@@ -82,6 +80,7 @@ class Member extends Admin_Controller {
 						$params['email'] = ci3_string_filter($_POST['email'][$value]);
 						$params['gender'] = intval($_POST['gender'][$value]);
 						$params['biography'] = ci3_string_filter($_POST['biography'][$value]);
+						$params['source'] = intval($_POST['source'][$value]);
 						$this->memberModel->save($params);
 					}
 					break;

@@ -32,6 +32,8 @@ class MY_Controller extends CI_Controller
 
 		$this->uriEntity();//uri实体数据		
 
+		$this->userEntity();//用户实体
+
 		$this->init();//初始数据
 
 		$params['auth'] !== false && $this->auth();//验证
@@ -56,15 +58,8 @@ class MY_Controller extends CI_Controller
 				
 				break;			
 			default:
-				$identity = ci3_getcookie('identity');
-		        if($identity){
-		            $id = $this->aes->decrypt($identity);
-		            $row = $this->memberModel->getRow($id);
-		        }
-		        if(empty($row)){
+		        if(empty($this->userEntity)){
 		        	redirect('member/signin');
-		        }else{
-		        	return $id;
 		        }
 				break;
 		}
@@ -113,10 +108,29 @@ class MY_Controller extends CI_Controller
      * [会员信息]
      * @return [type] [description]
      */
-    protected function memberInfo($userid,$source=0){
-    	if($source == 0 && $userid == $this->userId){
-    		return $this->userEntity;
-    	}
-    	return $this->member->info($userid,$source);
+    protected function userEntity(){
+    	$identity = ci3_getcookie('identity');
+        if($identity){
+            $id = $this->aes->decrypt($identity);
+            $memberModel = $this->memberModel->getInfo($id);
+        }
+        if(empty($memberModel)){
+        	$this->userEntity = [];
+        }else{
+        	$this->userId = $id;
+        	$this->userEntity = $memberModel;
+        }
+        $this->load->vars('userEntity',$this->userEntity);//映射到模板
+        return $this->userEntity;
+    }
+
+   	/**
+   	 * [ci3SetCookie description]
+   	 * @return [type] [description]
+   	 */
+    protected function ci3SetCookie($member_id){
+    	$identity = $this->aes->encrypt($member_id);
+		$expire = 3600*24*30;
+		ci3_setcookie('identity',$identity,$expire);
     }
 }

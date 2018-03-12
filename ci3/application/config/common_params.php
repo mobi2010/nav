@@ -12,8 +12,10 @@ $localParams['cryptoSecretKey'] =  [
 $localParams['gender'] =  [0=>'Female',1=>'Male',2=>'Secret'];
 
 $localParams['memberMenu'] =  [
-	['title'=>'Information','uri'=>'member/account/index'],
+	['title'=>'Profile','uri'=>'member/account/profile'],
 	['title'=>'Post','uri'=>'member/account/post'],
+    ['title'=>'Follow','uri'=>'member/account/follow'],
+    ['title'=>'Fans','uri'=>'member/account/fans'],
     ['title'=>'Sign Out','uri'=>'member/account/signout'],
 ];
 
@@ -25,10 +27,10 @@ $localParams['footer'] =  [
     ['title'=>'wechat','url'=>'https://wechat.com/','image'=>'/assets/common/images/wechat.jpg'],
 ];
 //菜单
-// $localParams['menuData'] = [
-// 		['title'=>'Home','uri'=>'index'],
-// 		//['title'=>'Tag','uri'=>'tag'],
-// 	];
+$localParams['menuData'] = [
+		['title'=>'Home','uri'=>'index'],
+		['title'=>'Follow','uri'=>'index/follow'],
+	];
 //导航索引
 $localParams['navIndex'] = 'index';
 return $localParams;

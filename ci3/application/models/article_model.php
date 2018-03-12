@@ -59,6 +59,7 @@ class Article_model extends MY_Model {
 
 		if($params['tag_id']){
 			$join = "left join article_tag_relation atr on a.id=atr.article_id ";
+			$whereArr[] = "atr.tag_id={$params['tag_id']}";
 		}
 
 		$where = " where ".implode(" and ",$whereArr);
@@ -104,6 +105,17 @@ class Article_model extends MY_Model {
 			$whereArr[] = "atr.tag_id={$params['tag_id']}";
 		}
 		
+		if($params['follow_member_id']){
+			$followMemberIds = $this->memberModel->followMemberIds($params['follow_member_id']);
+			if(!empty($followMemberIds)){
+				$followMemberIdString = implode(',',$followMemberIds);
+				$whereArr[] = "a.member_id in({$followMemberIdString})";
+			}else{
+				$res['totalCount'] = 0;
+				$res['dataModel'] = [];
+				return $res;
+			}
+		}	
 
 
 		$where = empty($whereArr) ? "" : " where ".implode($whereArr,' and ');
@@ -202,7 +214,7 @@ class Article_model extends MY_Model {
 					$tag_id = $tagRow['id'];
 				}
 				
-				$tagIds[] = $tag_id;
+				$tagIds[$tag_id] = $tag_id;
 			}
 		}
 

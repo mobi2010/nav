@@ -22,11 +22,7 @@ class Signin extends MY_Controller {
 			if($row['status'] == 1){
 				$this->cResponse(['code'=>'10000','message'=>'Account is frozen']);
 			}
-
-
-			$identity = $this->aes->encrypt($row['id']);
-			$expire = 3600*24*30;
-			ci3_setcookie('identity',$identity,$expire);
+			$this->ci3SetCookie($row['id']);
 			$this->cResponse();
 			
 		}else{

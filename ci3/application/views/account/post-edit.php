@@ -17,27 +17,29 @@ $commonParams = $initData['commonParams'];
 
 <form id="ci3Form" enctype="multipart/form-data" action="<?=ci3_url('member/account/postsave')?>" method="post">
     <table class="table" style="width: 100%;" id="tag_table">
-        
+        <?php 
+        echo html_hidden(['name'=>'id','value'=>$dataModel['id']]);   
+        ?>
         <tr >
             <td align="right"><label>Title<font color="#FF0000">*</font></label></td>
             <td>
             <?=html_text(['name'=>'title','value'=>$dataModel['title']]);?>
             </td>
         </tr>
-
+<!-- 
         <tr >
             <td align="right"><label>Cover Image</label></td>
             <td>
             <?php
-            if($dataModel['cover_image']) {
-                echo html_img(['src'=>$dataModel['cover_image']]);
-            }
-            echo html_hidden(['name'=>'id','value'=>$dataModel['id']]);   
-            echo html_hidden(['name'=>'cover_image','value'=>$dataModel['cover_image']]);    
-            echo html_file(['name'=>'Filedata']);
+            // if($dataModel['cover_image']) {
+            //     echo html_img(['src'=>$dataModel['cover_image']]);
+            // }
+            
+            // echo html_hidden(['name'=>'cover_image','value'=>$dataModel['cover_image']]);    
+            // echo html_file(['name'=>'Filedata']);
             ?>
             </td>
-        </tr>
+        </tr> -->
         <tr >
             <td align="right"><label>Abstract</label></td>
             <td>
@@ -54,7 +56,7 @@ $commonParams = $initData['commonParams'];
                 $tags = ci3_array_values($dataModel['tags']);
             }
              
-
+            
             for($i=0;$i<5;$i++){
                 echo html_text(['name'=>'tags[]','value'=>$tags[$i],'style'=>'width:8em;display: inline-block;'])."&nbsp;&nbsp;";
             }

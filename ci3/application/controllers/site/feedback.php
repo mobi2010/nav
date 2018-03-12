@@ -7,8 +7,6 @@ class Feedback extends MY_Controller {
 	{
 		parent::__construct(array('auth'=>false));		
 		$this->load->model('feedback_model', 'feedbackModel');
-
-
 	}
 	public function index()
 	{	
@@ -21,7 +19,7 @@ class Feedback extends MY_Controller {
 		$getList = $this->feedbackModel->getList($params);
 		$data += $getList;
 		$data['member_id'] = $this->getMemberId();
-		$this->load->view('site/index',$data);
+		$this->load->view('site/feedback',$data);
 	}
 
 	public function save(){

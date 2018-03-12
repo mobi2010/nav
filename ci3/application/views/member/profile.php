@@ -3,8 +3,6 @@ $this->load->view('header',$data);
 
 $commonParams = $initData['commonParams'];
 
-
-
 ?>  
 
 <style type="text/css">
@@ -36,7 +34,12 @@ $commonParams = $initData['commonParams'];
 	        <td><label>Username:</label></td>
 	        <td>
 	        <?php 
-	            echo $dataModel['username'];   
+	            echo $dataModel['username']."&nbsp;&nbsp;";  
+	            if($followStatus == 'follow'){
+	            	echo html_a(['text'=>'Unfollow','data-value'=>$m,'class'=>'unfollowBtn btn btn-danger btn-xs']);
+	            }elseif(in_array($followStatus,['guest','none','followed'])){
+	            	echo html_a(['text'=>'Follow','data-value'=>$m,'class'=>'followBtn btn btn-primary btn-xs']);
+	            }
 	        ?>
 	        </td>
 	    </tr>
@@ -76,7 +79,7 @@ $commonParams = $initData['commonParams'];
         }
     ?>
 </table>
-	<?php 
+<?php 
 
 $pageData['totalCount'] = $articleData['totalCount'];
 $pageData['pageSize'] = $pageSize;
@@ -89,8 +92,29 @@ $this->load->view('page',$pageData);
 
 <script type="text/javascript">
 $(document).ready(function(){
-
-
+	$('.followBtn').click(function(){
+		var m = $(this).attr('data-value');
+		$.post("<?=ci3_url('member/profile/follow')?>",{'m':m},function(dt){
+			if(dt['code'] !=0){
+				$.common.alert(dt);
+			}else{
+				$.common.refresh();
+			}
+            
+        })
+	})
+	$('.unfollowBtn').click(function(){
+		var m = $(this).attr('data-value');
+		if(!confirm('Unfollow?')){return false;}
+		$.post("<?=ci3_url('member/profile/unfollow')?>",{'m':m},function(dt){
+			if(dt['code'] !=0){
+				$.common.alert(dt);
+			}else{
+				$.common.refresh();
+			}
+            
+        })
+	})
 
 }) 
 </script>    
