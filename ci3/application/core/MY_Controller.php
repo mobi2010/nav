@@ -29,6 +29,8 @@ class MY_Controller extends CI_Controller
 
 		$this->load->library('image');
 		$this->load->library('aes');
+		$this->load->library('curl','','curlUtils');
+		$this->load->library('video','','videoUtils');
 
 		$this->uriEntity();//uri实体数据		
 

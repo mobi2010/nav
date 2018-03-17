@@ -142,7 +142,7 @@ class Article_model extends MY_Model {
 	function save($params=[]){
 		$contentParams = [];
 		foreach ($params as $key => $value) {
-			if(in_array($key,['cover_image','abstract','content'])){
+			if(in_array($key,['cover_image','abstract','content','video_url'])){
 				$contentParams[$key] = $value;
 				unset($params[$key]);
 			}

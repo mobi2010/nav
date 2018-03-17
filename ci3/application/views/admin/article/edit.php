@@ -57,6 +57,12 @@ $this->load->view('admin/header');
             </td>
         </tr>
         <tr >
+            <td><label>VideoUrl:</label></td>
+            <td>
+            <?=html_text(['name'=>'video_url','value'=>$dataModel['video_url']]);?>
+            </td>
+        </tr>
+        <tr >
             <td><label>Tag:</label></td>
             <td>
             <?php 
@@ -125,10 +131,10 @@ $(document).ready(function(){
         
         var content = UE.getEditor('editor').getContent();
 
-        if(!content){
-            $.common.alert({'message':'内容不能为空'});
-            return false;
-        }
+        // if(!content){
+        //     $.common.alert({'message':'内容不能为空'});
+        //     return false;
+        // }
         $('#ci3Form').submit();
         return false;       
     })

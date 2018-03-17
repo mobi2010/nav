@@ -31,6 +31,7 @@ class Admin_Controller extends CI_Controller
 
 		$this->load->library('image');
 		$this->load->library('aes');
+		$this->load->library('video','','videoUtils');
 	}
 	/**
 	 * [验证]

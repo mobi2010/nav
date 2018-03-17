@@ -70,10 +70,11 @@ var jiathis_config={
 var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
-  hm.src = "https://hm.baidu.com/hm.js?f6e5de0d9d782044b6d8cee0931c0417";
+  hm.src = "https://hm.baidu.com/hm.js?0960d26520b08a718a7cbeae6c8d2d70";
   var s = document.getElementsByTagName("script")[0]; 
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
+
 </body>
 </html>

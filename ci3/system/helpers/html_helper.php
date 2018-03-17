@@ -915,3 +915,41 @@ if ( ! function_exists('html_email')){
 		return html_a(array('href'=>"mailto:".$email,'target'=>'_blank','class'=>'online-qq','text'=>html_span(array('class'=>'third-icons email','body'=>"&nbsp;")).$text,'title'=>'邮箱:'.$email));
 	}
 }
+
+/**
+* [html_dd description]
+* @param  [type] $params [description]
+* @return [type]         [description]
+*/
+if ( ! function_exists('html_iframe')){
+	function html_iframe($params=array()){	   
+		$default = ['frameborder'=>"0",'align'=>"left",'allowfullscreen'=>"true",'allowtransparency'=>"true"];
+		$params = array_merge($default,$params);
+	    $html ='<iframe ';
+	    $html .= html_join($params,array('body'));
+	    $html .= '>';
+	    $html .= $params['body'];
+	    $html .= '</iframe>';
+	    return $html;
+	}
+}
+/**
+* [html_dd description]
+* @param  [type] $params [description]
+* @return [type]         [description]
+*/
+if ( ! function_exists('html_video')){
+	function html_video($params=array()){	   
+		$default = ['preload'=>"meta",'controls'=>"controls"];
+
+
+		$params = array_merge($default,$params);
+		$src = $params['src'];unset($params['src']);
+	    $html ='<video ';
+	    $html .= html_join($params,array('body'));
+	    $html .= '>';
+	    $html .= '<source src="'.$src.'" type="video/mp4"/>';
+	    $html .= '</video>';
+	    return $html;
+	}
+}

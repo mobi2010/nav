@@ -75,7 +75,6 @@ if(!empty($nextModel)){
 
 $detailBody .= html_div(['body'=>$pnBody,'class'=>'context']);
 
-
 //member
 $username = $memberData['username'];
 $memberBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberData['id'])]),'text'=>html_img(['src'=>$memberData['avatar_url'],'width'=>'25']),'title'=>$username]);
@@ -104,9 +103,15 @@ $detailTime .= "&nbsp;".$dataModel['hits'].' hits come from &nbsp;';
 $detailTime .= $memberBody;
 $detailBody .= html_div(['body'=>$detailTime,'class'=>'detail-time']);
 
+$contentHtml = null;
+if($dataModel['video_url']){
+    $res = $this->videoUtils->parse($dataModel['video_url']);
+    if($res['url']){
+        $contentHtml = html_div(['body'=>html_video(['src'=>$res['url'],"preload"=>"auto","autoplay"=>"autoplay",'width'=>'640px','height'=>'360px']),'class'=>'content']);
+    }
+}
 
-
-$detailBody .= html_div(['body'=>ci3_content($dataModel['content']),'class'=>'content']);
+$detailBody .= $contentHtml ? $contentHtml : html_div(['body'=>ci3_content($dataModel['content']),'class'=>'content']);
 
 
 if(!empty($dataModel['tags'])){

@@ -68,6 +68,7 @@ class Article extends Admin_Controller {
 		$data['abstract'] = ci3_string_filter($_POST['abstract']);
 		$data['cover_image'] = $image_url;
 		$data['content'] = trim($_POST['editorValue']);
+		$data['video_url'] = trim($_POST['video_url']);
 		$data['hits'] = rand(10,100);
 		$data['member_id'] = $member_id;//rand(1,20);
 		$article_id = $this->articleModel->save($data);
