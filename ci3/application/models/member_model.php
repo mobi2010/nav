@@ -30,6 +30,11 @@ class Member_model extends MY_Model {
 	}
 
 	function getList($params=[]){
+		$pageSize = $params['pageSize'];
+		$offset = $params['offset'];  
+		$params['order'] = $params['order'] ? $params['order'] : "id desc";  
+		$params['limit'] = "{$offset},{$pageSize}";  
+
 		$this->params = $this->params + $params;
 		$res['totalCount'] = $this->dataFetchCount($this->params);
 		$dataModel = $this->dataFetchArray($this->params);

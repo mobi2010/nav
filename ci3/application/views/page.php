@@ -26,7 +26,7 @@ $showPageSize = $showPageSize ? $showPageSize : 10; //显示的页数
 
 if($totalPage > 1){
 	//当前页
-	$page = $page ? $page : $_REQUEST['page']; 
+	$page = $page ? $page : $_GET['page']; 
 	$page = $page>1 ? $page : 1;
 	$page = $page > $totalPage ? $totalPage : $page;
 	

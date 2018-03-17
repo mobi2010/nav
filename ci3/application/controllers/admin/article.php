@@ -54,6 +54,14 @@ class Article extends Admin_Controller {
 		}else{
 			$image_url = $_POST['cover_image'];
 		}
+
+		$member_id = (int)$_POST['member_id'];
+		if(!$member_id){
+			$memberIds = $this->ci3Model->dataFetchArray(['table'=>'member','where'=>'source=1','sval'=>'id']);
+			$arKey = array_rand($memberIds,1);
+
+			$member_id = $memberIds[$arKey];
+		}
 		$data['id'] = (int)$_POST['id'];
 		$data['category_id'] = (int)$_POST['category_id'];
 		$data['title'] = ci3_string_filter($_POST['title']);
@@ -61,7 +69,7 @@ class Article extends Admin_Controller {
 		$data['cover_image'] = $image_url;
 		$data['content'] = trim($_POST['editorValue']);
 		$data['hits'] = rand(10,100);
-		$data['member_id'] = (int)$_POST['member_id'];//rand(1,20);
+		$data['member_id'] = $member_id;//rand(1,20);
 		$article_id = $this->articleModel->save($data);
 
 		//person_identity

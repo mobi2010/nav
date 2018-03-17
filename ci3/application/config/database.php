@@ -48,13 +48,16 @@
 $active_group = 'default';
 $active_record = TRUE;
 
-// $db['default']['hostname'] = '2010mobi.gotoftp3.com';
-// $db['default']['username'] = '2010mobi';
-// $db['default']['password'] = 'zx2010!@#';
 $db['default']['hostname'] = 'localhost';
 $db['default']['username'] = 'root';
 $db['default']['password'] = '123456';
 $db['default']['database'] = 'nav';
+
+// $db['default']['hostname'] = 'localhost';
+// $db['default']['username'] = 'iav18';
+// $db['default']['password'] = 'Iav18@Godaddy';
+// $db['default']['database'] = 'iav18';
+
 $db['default']['dbdriver'] = 'mysql';
 $db['default']['dbprefix'] = '';
 $db['default']['pconnect'] = TRUE;
