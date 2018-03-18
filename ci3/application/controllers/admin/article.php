@@ -23,6 +23,7 @@ class Article extends Admin_Controller {
 
 		$data['title'] = $params['title'] = $_GET['title'] ? $_GET['title'] : null;
 		$data['tag_id'] = $params['tag_id'] = $_GET['tag_id'] ? $_GET['tag_id'] : null;
+		$data['category_id'] = $params['category_id'] = $_GET['category_id'] ? $_GET['category_id'] : null;
 		$data['member_id'] = $params['member_id'] = $_GET['member_id'] ? $_GET['member_id'] : null;
 		
 		$getList = $this->articleModel->getList($params);
@@ -39,6 +40,7 @@ class Article extends Admin_Controller {
 	public function edit(){
 		$data['dataModel'] = $this->articleModel->getInfo($_GET['id']);
 		$data['categoryData'] = $this->categoryModel->getKv();
+		$data['action'] = $_GET['action'];
 		$this->load->view('admin/article/edit',$data);
 	}
 

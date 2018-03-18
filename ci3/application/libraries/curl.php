@@ -128,17 +128,21 @@ class Curl
 	        CURLOPT_RETURNTRANSFER => 1,
 	        CURLOPT_FORBID_REUSE => 1,
 	        CURLOPT_TIMEOUT => 0,
-	        CURLOPT_SSL_VERIFYPEER => false,
-	        CURLOPT_POSTFIELDS => $body
+	        CURLOPT_SSL_VERIFYPEER => true,
+	        CURLOPT_POSTFIELDS => $body,
+	        CURLOPT_HTTPHEADER =>$this->get_curlopt_httpheader(),
+	        CURLOPT_HTTP_VERSION => '1.0'
 	    );
 
 	    $ch = curl_init();
-	    curl_setopt_array($ch, ($option + $defaults));
+	    $option = $option + $defaults;
+	    curl_setopt_array($ch, $option);
 	    if( ! $result = curl_exec($ch))
 	    {
 	        trigger_error(curl_error($ch));
 	    }
 	    curl_close($ch);
+	    var_dump($option);
 	    return $result;
 	}
 
@@ -187,9 +191,11 @@ class Curl
     private function  get_curlopt_httpheader($params=[]){
     
 
-    	$defaults[] = "Accept:text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8";
-    	$defaults[] = "Accept-Encoding:gzip, deflate, br";
-    	$defaults[] = "Accept-Language:zh-CN,zh;q=0.9";
+    	// $defaults[] = "application/json, text/javascript, */*; q=0.01";
+    	// $defaults[] = "Accept-Encoding:gzip, deflate";
+    	// $defaults[] = "Accept-Language:zh-CN,zh;q=0.9";
+    	// $defaults[] = "Content-Type:application/x-www-form-urlencoded; charset=UTF-8";
+
     	$defaults[] = "Connection:keep-alive";    	
     	$defaults[] = "Upgrade-Insecure-Requests:1";
     	$defaults[] = "User-Agent:Mozilla/5.0 (Windows NT 6.1; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/64.0.3282.167 Safari/537.36";

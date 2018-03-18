@@ -17,7 +17,9 @@ $this->load->view('admin/header');
 <form id="ci3Form" enctype="multipart/form-data" action="<?=ci3_url('admin/article/save')?>" method="post">
     <table class="table " style="width: 100%;" id="tag_table">
         <?php 
-            echo html_hidden(['name'=>'id','value'=>$dataModel['id']]);   
+            if($action != 'copy'){
+                echo html_hidden(['name'=>'id','value'=>$dataModel['id']]);   
+            }
         ?>
         <tr >
             <td><label>Member Id:</label></td>

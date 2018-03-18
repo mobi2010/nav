@@ -39,7 +39,7 @@ $this->load->view('admin/header');
     <tr>
         <th>ID</th>
         <th>Title</th>
-        <th>Cover Image</th>
+        <th>Category</th>
         <th>Member ID</th>
         <th>Operate</th>
     </tr>
@@ -48,12 +48,14 @@ $this->load->view('admin/header');
             foreach ($dataModel as $key => $value) {
                 $tdBody = html_a(['href'=>ci3_url('admin/article/edit',['id'=>$value['id']]),'text'=>'修改','class'=>'edit btn btn-primary btn-xs']);
                 $tdBody .= str_repeat('&nbsp;',4);
+                $tdBody .= html_a(['href'=>ci3_url('admin/article/edit',['id'=>$value['id'],'action'=>'copy']),'text'=>'复制','class'=>'edit btn btn-warning btn-xs']);
+                $tdBody .= str_repeat('&nbsp;',4);
                 $tdBody .= html_a(['text'=>'删除','data-value'=>$value['id'],'class'=>'deleteBtn btn btn-danger btn-xs']);
                 
                 $td = html_td(['body'=>html_checkbox(['class'=>'ckbOne','data-name'=>$value['name'],'name'=>'ckbOption[]','value'=>$value['id'],'text'=>$value['id']])]);;
                 $td .= html_td(['body'=>html_a(['target'=>"_blank",'href'=>ci3_url('article/detail',['id'=>$value['id']]),'text'=>$value['title']])]);
 
-                $td .= html_td(['body'=>html_img(['src'=>$value['cover_image'],'height'=>'80px'])]);
+                $td .= html_td(['body'=>html_a(['href'=>ci3_url('admin/article/index',['category_id'=>$value['category_id']]),'text'=>$value['category_id']])]);
                 $td .= html_td(['body'=>html_a(['href'=>ci3_url('admin/member',['member_id'=>$value['member_id']]),'text'=>$value['member_id']])]);
                 $td .= html_td(['body'=>$tdBody]);
                 echo html_tr(['body'=>$td]);

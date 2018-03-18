@@ -21,7 +21,7 @@ class Video {
 		
 	}
 	
-	public function weibo($url){
+	public function weibo_web($url){
 		$res = [];
 		$params['url'] = $url;
 		$params['header'] = $this->get_weibo_header();
@@ -33,6 +33,24 @@ class Video {
 
 		preg_match('/video_src=(.*?)&cover_img/is',$info,$matche);
 		$res['url'] = "http:".urldecode($matche[1]);
+		return $res;
+	}
+
+	public function weibo($url){
+		$url = "https://m.weibo.cn/status".strrchr($url,'/');
+
+		$res = [];
+		$params['url'] = $url;
+		$info = $this->get($params);
+		if(empty($info)){
+			return $res;
+		}
+
+		preg_match('/"stream_url_hd": "(.*?)"/is',$info,$matche);
+		if(!$matche[1]){
+			preg_match('/"stream_url": "(.*?)"/is',$info,$matche);
+		}
+		$res['url'] = urldecode($matche[1]);
 		return $res;
 	}
 
@@ -78,7 +96,8 @@ class Video {
 	        CURLOPT_HTTP_VERSION => '1.0'
 	    );   
 	    $ch = curl_init();
-	    curl_setopt_array($ch, ($option + $defaults));
+	    $option = $option + $defaults;
+	    curl_setopt_array($ch, $option);
 	    $result = curl_exec($ch);
 	    if( ! $result) {
 	        var_dump(curl_error($ch));

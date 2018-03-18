@@ -50,10 +50,11 @@ if(empty($dataModel)){
 		if($value['video_url']){
 		    $res = $this->videoUtils->parse($value['video_url']);
 		    if($res['url']){
-		        $contentHtml = html_div(['body'=>html_video(['src'=>$res['url'],'width'=>'320px','height'=>'180px']),'class'=>'content']);
+		        $contentHtml = html_video(['src'=>$res['url'],'width'=>'320px','height'=>'180px']);
 		    }
 		}
-		$body .=  $contentHtml ? $contentHtml : html_div(['body'=>ci3_content_index($value['content']),"data-url"=>$article_url,'class'=>'home-line-content','onclick'=>"window.location.href = '{$article_url}'"]);
+		$contentHtml =  $contentHtml ? $contentHtml : ci3_content_index($value['content']);
+		$body .=  html_div(['body'=>$contentHtml,"data-url"=>$article_url,'class'=>'home-line-content','onclick'=>"window.location.href = '{$article_url}'"]);
 
 		//title
 		$body .= "<h3>".html_a(['href'=>$article_url,'text'=>$value['title'],'target'=>"_blank"])."</h3>";

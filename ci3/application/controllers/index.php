@@ -14,7 +14,7 @@ class Index extends MY_Controller {
 		//分页
 		$page = (int)$_GET['page'];
 		$page = $page > 0 ? $page : 1;
-		$params['pageSize'] = $data['pageSize'] = $pageSize = 8;
+		$params['pageSize'] = $data['pageSize'] = $pageSize = 5;
 		$params['offset'] = $offset = ($page-1)*$pageSize;  
 
 
