@@ -84,7 +84,7 @@ $(document).ready(function(){
         </span>
         <span style="display: inline-block;float: right;">
         <?php 
-        foreach ($commonParams['menuData'] as $key => $value) {
+        foreach ($commonParams['menuDataFront'] as $key => $value) {
             $menuParams = ['href'=>ci3_url($value['uri']),'text'=>$value['title']];
             $menuParams['class'] = '';
             if(!$_GET['i']){
@@ -104,6 +104,15 @@ $(document).ready(function(){
                 $menuParams['class'] = $_GET['i'] == $i ? 'current' : '';
             }
 
+            $htmlNav[] = html_a($menuParams);
+        }
+
+        foreach ($commonParams['menuDataEnd'] as $key => $value) {
+            $menuParams = ['href'=>ci3_url($value['uri']),'text'=>$value['title']];
+            $menuParams['class'] = '';
+            if(!$_GET['i']){
+                $menuParams['class'] = $uriEntity['uri_string'] == $value['uri'] ? 'current' : '';
+            }
             $htmlNav[] = html_a($menuParams);
         }
 

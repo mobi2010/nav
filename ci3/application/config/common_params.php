@@ -27,10 +27,13 @@ $localParams['footer'] =  [
     ['title'=>'wechat','url'=>'https://wechat.com/','image'=>'/assets/common/images/wechat.jpg'],
 ];
 //菜单
-$localParams['menuData'] = [
+$localParams['menuDataFront'] = [
 		['title'=>'Home','uri'=>'index'],
-		['title'=>'Follow','uri'=>'index/follow'],
-	];
+];
+$localParams['menuDataEnd'] = [
+        ['title'=>'Follow','uri'=>'index/follow'],
+        ['title'=>'Navigation','uri'=>'site/navigation'],
+    ];    
 //导航索引
 $localParams['navIndex'] = 'index';
 return $localParams;

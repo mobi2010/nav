@@ -1,46 +1,27 @@
-<?php if (!defined('BASEPATH')) exit('No direct script access allowed'); 
+<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 /**
- * 视频解析
+ * 首页
+ *
+ * @author by zsc
  */
-class Video {	
-
-	public $source = ['weibo','miaopai','facebook'];
-
-	public function __construct()
-    {
-    }
-
-	public function parse($url) {   
-		foreach ($this->source as $key => $value) {
-			if(strpos($url,$value) !== false){
-				$res = $this->{$value}($url);
-				return $res;
-				break;
-			}
-		}
-		
-	}
-	public function facebook($url){
-		$res = [];
-		$params['url'] = $url;
-		$info = $this->get($params);
-		if(empty($info)){
-			return $res;
-		}
-		preg_match('/hd_src_no_ratelimit:"(.*?)"/is',$info,$matche);
-		if(!$matche[1]){
-			preg_match('/sd_src_no_ratelimit:"(.*?)"/is',$info,$matche);
-		}
-		$res['url'] = urldecode($matche[1]);
-		return $res;
+class Test extends MY_Controller {		
+	function __construct($params = array())
+	{
+		parent::__construct(array('auth'=>false));		
 	}
 	
+	public function index(){
+		$url = $_GET['url'];
+		$res = $this->weibo($url);
+		var_dump($res);
+	}
 
 	public function weibo($url){
 		$url = "https://m.weibo.cn/status".strrchr($url,'/');
 
 		$res = [];
 		$params['url'] = $url;
+		$params['header'] = $this->get_weibo_header();
 		$info = $this->get($params);
 		if(empty($info)){
 			return $res;
@@ -50,22 +31,8 @@ class Video {
 		if(!$matche[1]){
 			preg_match('/"stream_url": "(.*?)"/is',$info,$matche);
 		}
+
 		$res['url'] = urldecode($matche[1]);
-		return $res;
-	}
-
-	public function miaopai($url){
-		$res = [];
-		$params['url'] = $url;
-		$info = $this->get($params);
-
-		if(empty($info)){
-			return $res;
-		}
-
-		preg_match('/"videoSrc":"(.*?)"/is',$info,$matche);
-
-		$res['url'] = $matche[1];
 		return $res;
 	}
 
@@ -102,6 +69,7 @@ class Video {
 	    if( ! $result) {
 	        var_dump(curl_error($ch));
 	    }
+	    var_dump($option,$result);
 	    curl_close($ch);
 	    return $result;
 	} 
@@ -129,30 +97,10 @@ class Video {
     	$time = microtime(true);
     	$md5 = md5($time);
     	$key = base64_encode($md5);
-    	$defaults[] = "Accept-Encoding:gzip, deflate, br";
-    	$defaults[] = "Cookie:SUB={$key};";
-    	$defaults[] = "Host:weibo.com";
-    	$defaults[] = "Referer:https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=https%3A%2F%2Fweibo.com%2Ftv%2Fv%2F{$md5}%3Ffid%3D1034%3A{$md5}&domain=.weibo.com&ua=php-sso_sdk_client-0.6.23&_rand={$time}";
+    	//$defaults[] = "Accept-Encoding:gzip, deflate, br";
+    	//$defaults[] = "Cookie:SUB={$key};";
+    	//$defaults[] = "Host:weibo.com";
+    	//$defaults[] = "Referer:https://passport.weibo.com/visitor/visitor?entry=miniblog&a=enter&url=https%3A%2F%2Fweibo.com%2Ftv%2Fv%2F{$md5}%3Ffid%3D1034%3A{$md5}&domain=.weibo.com&ua=php-sso_sdk_client-0.6.23&_rand={$time}";
     	return $defaults;    
     }
-
-    /**
-     * [weibo_web description]
-     * @param  [type] $url [description]
-     * @return [type]      [description]
-     */
-    public function weibo_web($url){
-		$res = [];
-		$params['url'] = $url;
-		$params['header'] = $this->get_weibo_header();
-		$info = $this->get($params);
-
-		if(empty($info)){
-			return $res;
-		}
-
-		preg_match('/video_src=(.*?)&cover_img/is',$info,$matche);
-		$res['url'] = "http:".urldecode($matche[1]);
-		return $res;
-	}
-}	
+}		
