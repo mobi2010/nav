@@ -6,20 +6,28 @@ $navData = $initData['navData'];
 <style type="text/css">
 
 .nav{
-    padding: 0px 1em 1em 1em;
-    background-color:#fff;
+    /*padding: 0px 1em 1em 1em;
+    background-color:#fff;*/
 }
 
 .title{
     margin-top:1em; 
     font-size:large; 
     font-weight:bold; 
-    color:#333;
+    color:#FFFFFF;
+    background-color:#337ab7;
+    padding: .5em 1em;
+    width: 10em;
+    overflow: hidden;
 }
 .navurl{
     font-weight:bold; 
     display:inline-block;
-    padding: 1em 2em 0px 0px;
+    margin: 1em 2em 0px 0px;
+    background-color:#FFFFFF;
+    padding: 1em 1em;
+    width: 12em;
+    overflow: hidden;
 }
 .navurl:hover{
     color: red;

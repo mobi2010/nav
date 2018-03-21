@@ -36,7 +36,7 @@ $navData = $initData['navData'];
 <div class="nav">
 	<table class="table" >
 		<tr >
-	        <td colspan="2" align="center"><label>Video Download</label></td>
+	        <td colspan="2" align="center"><label>Video Parse</label></td>
 	    </tr>
 		<tr >
 	        <td ><label>e.g.</label></td>
@@ -60,7 +60,7 @@ $navData = $initData['navData'];
 	    	<td width="10%"><label>Operate:</label></td>
 	    	<td >
 	    		<?php 
-	    		foreach ($navData['VideoDownload']['sub'] as $key => $value) {
+	    		foreach ($navData['VideoParse']['sub'] as $key => $value) {
 					echo html_button(['value'=>$value['title'],'data-type'=>$value['type'],'class'=>'btn btn-success parseBtns']);
 				}
 	    		?>
@@ -69,7 +69,7 @@ $navData = $initData['navData'];
 	    </tr>
 
 	    <tr >
-	        <td><label>DownLoad:</label></td>
+	        <td><label>Result:</label></td>
 	        <td>
 	        	<?php 
 	        	echo html_a(['id'=>'result',"target"=>"_blank"]);
