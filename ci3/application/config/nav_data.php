@@ -26,6 +26,7 @@ $navData['VideoParse'] = ['title'=>"Video Parse",'sub'=>[
 		['title'=>'微博视频解析','uri'=>'site/tools/video',"type"=>'weibo'],
 		['title'=>'秒拍视频解析','uri'=>'site/tools/video',"type"=>'miaopai'],
 		['title'=>'Facebook视频解析','uri'=>'site/tools/video',"type"=>'facebook'],
+		['title'=>'Youtube视频解析','uri'=>'site/tools/video',"type"=>'youtube'],
 	]
 ];
 

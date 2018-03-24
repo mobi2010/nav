@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>CMS</title>
+    <title></title>
     <link href="/assets/common/css/bootstrap.css" rel="stylesheet">
     <link href="/assets/common/css/site.css" rel="stylesheet">
     <script src="/assets/common/js/jquery.js"></script>
@@ -11,7 +11,7 @@
 <body>
 
 <div class="admin-login"  style="width:340px; height:auto;margin: 120px auto 0;">
-    <h1>NAV-CMS</h1>
+    <h1></h1>
         <div class="form-group field-adminloginform-username required">
             <label class="control-label" for="adminloginform-username">Username:</label>
             <input type="text" id="uname" value="" class="form-control" name="Login[username]">
@@ -24,6 +24,12 @@
 
             <div class="help-block"></div>
         </div>  
+        <div class="form-group field-adminloginform-password required">
+            <label class="control-label" for="adminloginform-password">PIN:</label>
+            <input type="password" id="pin" class="form-control" name="Login[pin]">
+
+            <div class="help-block"></div>
+        </div>
         <div class="form-group">
             <button id="loginBtn" type="submit" class="btn btn-primary">Login</button>        
         </div>
@@ -36,10 +42,12 @@
         var verify = function(){
             var uname = $('#uname').val();
             var upwd = $('#upwd').val();
+            var pin = $('#pin').val();
             if(!uname){alert('Account not null');return;}
             if(!upwd){alert('Password not null');return;}
+            if(!pin){alert('PIN not null');return;}
 
-            $.post('<?=base_url("admin/login/checked");?>',{'uname':uname,'upwd':upwd},function(dt){
+            $.post('<?=base_url("admin/login/checked");?>',{'uname':uname,'upwd':upwd,'pin':pin},function(dt){
                 if(dt['code'] == 0){
                     $.common.location('<?=base_url("admin/index");?>');
                 }else{

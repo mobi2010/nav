@@ -12,21 +12,25 @@ class Tools extends MY_Controller {
 	}
 	public function index()
 	{	
-		$data['btnData'] = $this->btnData;
-		$this->load->view('tools/index',$data);
-	}
-
-	public function parse(){
-		//header('content-type:application/json;charset=utf8');    
+		
 
 		$content = trim($_POST['content']);
 		$type = trim($_POST['type']);
 
-		if(empty($content)){
-			$code = 10000;
-			$message = "Data error";
-			$this->cResponse($res);
+		if(!empty($content)){
+			$parseData = $this->parse($type,$content);
+			$content = $content;
 		}
+
+		$data['parseData'] = $parseData ? $parseData : "";
+		$data['content'] = $content ? $content : "";
+		$this->load->view('tools/index',$data);
+	}
+
+	private function parse($type,$content){
+		//header('content-type:application/json;charset=utf8');    
+
+		
 
 		switch ($type) {
 			case 'jf'://json format
@@ -98,10 +102,8 @@ class Tools extends MY_Controller {
 				# code...
 				break;
 		}
-		$res['code'] = $code;
-		$res['message'] = $message;
-		$res['data'] = $data;
-		$this->cResponse($res);
+
+		return $data;
 	}
 	/**
 	 * [unicode_encode description]
@@ -148,6 +150,13 @@ class Tools extends MY_Controller {
 	 */
 	public function video(){
 		$data['btnData'] = $this->btnData;
+
+		$content = trim($_POST['content']);
+		if($content){
+			$data['videoParseData'] = $this->videoUtils->parse($content);
+			$data['content'] = $content;
+		}
+
 		$this->load->view('tools/video',$data);
 	}
 

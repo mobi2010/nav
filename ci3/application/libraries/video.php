@@ -4,21 +4,55 @@
  */
 class Video {	
 
-	public $source = ['weibo','miaopai','facebook'];
+	public $source = ['weibo','miaopai','facebook','youtube'];
 
 	public function __construct()
     {
     }
 
-	public function parse($url) {   
+	public function parse($url,$dataType="") {   
+		$res = [];
 		foreach ($this->source as $key => $value) {
 			if(strpos($url,$value) !== false){
 				$res = $this->{$value}($url);
-				return $res;
 				break;
 			}
 		}
-		
+		if(!empty($res) && $dataType=="first"){
+			foreach ($res as $key => $value) {
+				return $value;
+			}
+		}
+		return $res;
+	}
+	public function youtube($url){
+		$res = [];
+		$params['url'] = $url;
+		$info = $this->get($params);
+		if(empty($info)){
+			return $res;
+		}
+
+		preg_match('/adaptive_fmts":"(.*?)"/is',$info,$matche);
+
+		if(empty($matche[1])){
+			return $res;
+		}
+
+		$data = explode(',', $matche[1]);
+		if(empty($data)){
+			return $res;
+		}
+		foreach ($data as $key => $value) {
+			preg_match('/url=(.*?)\\\u0026/is',$value,$urls);
+			preg_match('/size=(.*?)\\\u0026/is',$value,$size);
+			if($urls[1] && $size[1]){
+				$url = urldecode($urls[1]);
+				$res[$size[1]] = ['url'=>$url,'name'=>$size[1]];
+			}
+
+		}
+		return $res;
 	}
 	public function facebook($url){
 		$res = [];
@@ -28,10 +62,16 @@ class Video {
 			return $res;
 		}
 		preg_match('/hd_src_no_ratelimit:"(.*?)"/is',$info,$matche);
-		if(!$matche[1]){
-			preg_match('/sd_src_no_ratelimit:"(.*?)"/is',$info,$matche);
+		if(!empty($matche[1])){
+			$url = urldecode($matche[1]);
+			$res[] = ['url'=>$url,'name'=>'HD'];
 		}
-		$res['url'] = urldecode($matche[1]);
+
+		preg_match('/sd_src_no_ratelimit:"(.*?)"/is',$info,$matche);
+		if(!empty($matche[1])){
+			$url = urldecode($matche[1]);
+			$res[] = ['url'=>$url,'name'=>'SD'];
+		}
 		return $res;
 	}
 	
@@ -47,10 +87,17 @@ class Video {
 		}
 
 		preg_match('/"stream_url_hd": "(.*?)"/is',$info,$matche);
-		if(!$matche[1]){
-			preg_match('/"stream_url": "(.*?)"/is',$info,$matche);
+
+		if(!empty($matche[1])){
+			$url = $matche[1];
+			$res[] = ['url'=>$url,'name'=>'HD'];
 		}
-		$res['url'] = urldecode($matche[1]);
+
+		preg_match('/"stream_url": "(.*?)"/is',$info,$matche);
+		if(!empty($matche[1])){
+			$url = $matche[1];
+			$res[] = ['url'=>$url,'name'=>'SD'];
+		}
 		return $res;
 	}
 
@@ -64,8 +111,11 @@ class Video {
 		}
 
 		preg_match('/"videoSrc":"(.*?)"/is',$info,$matche);
+		if($matche[1]){
+			$url = $matche[1];
+			$res[] = ['url'=>$url,'name'=>'SD'];
+		}
 
-		$res['url'] = $matche[1];
 		return $res;
 	}
 

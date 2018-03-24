@@ -12,7 +12,7 @@ class Test extends MY_Controller {
 	
 	public function index(){
 		$url = $_GET['url'];
-		$res = $this->weibo($url);
+		$res = $this->videoUtils->parse($url);
 		var_dump($res);
 	}
 

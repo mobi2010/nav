@@ -50,6 +50,10 @@ $this->load->view('header',$data);
     padding-top:1em; 
     clear: both;
 }
+
+.abstract{
+    padding-bottom: 1em; 
+}
 </style>
 
 
@@ -105,7 +109,7 @@ $detailBody .= html_div(['body'=>$detailTime,'class'=>'detail-time']);
 
 $contentHtml = null;
 if($dataModel['video_url']){
-    $res = $this->videoUtils->parse($dataModel['video_url']);
+    $res = $this->videoUtils->parse($dataModel['video_url'],'first');
     if($res['url']){
         $contentHtml = html_div(['body'=>html_video(['src'=>$res['url'],"preload"=>"auto","autoplay"=>"autoplay",'width'=>'640px','height'=>'360px']),'class'=>'content']);
     }
@@ -113,7 +117,7 @@ if($dataModel['video_url']){
 
 $detailBody .= $contentHtml ? $contentHtml : html_div(['body'=>ci3_content($dataModel['content']),'class'=>'content']);
 
-
+$detailBody .= $dataModel['abstract'] ? html_div(['body'=>ci3_content($dataModel['abstract']),'class'=>'abstract']) : null;
 if(!empty($dataModel['tags'])){
 	$tagBody = null;
 	foreach ($dataModel['tags'] as $key => $value) {
