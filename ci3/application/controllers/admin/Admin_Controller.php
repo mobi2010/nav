@@ -25,13 +25,14 @@ class Admin_Controller extends CI_Controller
 		$this->load->model('tagType_model', 'tagtypeModel');
 		$this->load->model('feedback_model', 'feedbackModel');
 		$this->load->model('category_model', 'categoryModel');
-
+		$this->load->model('nav_model', 'navModel');
 
 
 
 		$this->load->library('image');
 		$this->load->library('aes');
 		$this->load->library('video','','videoUtils');
+		$this->load->library('curl','','curlUtils');
 	}
 	/**
 	 * [验证]

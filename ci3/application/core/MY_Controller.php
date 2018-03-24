@@ -25,6 +25,7 @@ class MY_Controller extends CI_Controller
 		$this->load->model('article_model', 'articleModel');
 		$this->load->model('comment_model', 'commentModel');
 		$this->load->model('category_model', 'categoryModel');
+		$this->load->model('nav_model', 'navModel');
 
 
 		$this->load->library('image');

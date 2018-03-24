@@ -1,6 +1,5 @@
 <?php 
 $this->load->view('header',$data);
-$navData = $initData['navData'];
 
 ?>  
 <style type="text/css">
@@ -37,13 +36,13 @@ $navData = $initData['navData'];
 <div class="nav">
 <?php 
 foreach ($navData as $k => $v) {
-    echo html_div(['body'=>$v['title'],'class'=>'title']);
+    echo html_div(['body'=>$v['name'],'class'=>'title']);
     $sub = $v['sub'];
     if(!empty($sub)){
         $subHtml = null;
         foreach ($sub as $key => $value) {
-            $url = strstr($value['uri'],'http') ? $value['uri'] : ci3_url($value['uri']);
-            $subHtml .= html_a(['text'=>$value['title'],'href'=>$url,'target'=>"_blank",'class'=>'navurl']);
+            $url = ci3_url('site/navigation/dis',['u'=>ci3_encrypt($value['id'])]);
+            $subHtml .= html_a(['text'=>$value['name'],'href'=>$url,'target'=>"_blank",'class'=>'navurl']);
         }
         echo html_div(['body'=>$subHtml]);
     }

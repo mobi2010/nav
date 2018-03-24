@@ -26,7 +26,7 @@ $adminParams['source'] =  [0=>'Foreign',1=>'Local'];
 
 //菜单
 $adminParams['menuData'] = [
-		'content'=>['title'=>'Content Management','sub'=>
+		'content'=>['title'=>'Content','sub'=>
 			[	
 				['title'=>'Category','sub'=>
 					[
@@ -45,23 +45,39 @@ $adminParams['menuData'] = [
 						['title'=>'Article List','uri'=>'admin/article'],
 					]
 				],
-				['title'=>'Comment','sub'=>
-					[
-						['title'=>'Comment List','uri'=>'admin/comment'],
-					]
-				],
+			]
+		],
+		'member' => ['title'=>'Member','sub'=>
+			[
 				['title'=>'Member','sub'=>
 					[
 						['title'=>'Member List','uri'=>'admin/member'],
 					]
-				],
+				],	
+				['title'=>'Comment','sub'=>
+					[
+						['title'=>'Comment List','uri'=>'admin/comment'],
+					]
+				]
+			]
+		],
+		'site' => ['title'=>'Site','sub'=>
+			[
 				['title'=>'Site','sub'=>
 					[
 						['title'=>'Feedback','uri'=>'admin/feedback'],
 					]
+				],
+				['title'=>'Nav','sub'=>
+					[
+						['title'=>'Nav category','uri'=>'admin/nav/category'],
+						['title'=>'Nav list','uri'=>'admin/nav/index'],
+						['title'=>'Nav data','uri'=>'admin/nav/data'],
+					]
 				]
 			]
 		]
+		
 	];
 
 return $adminParams;
