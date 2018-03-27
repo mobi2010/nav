@@ -12,9 +12,9 @@ $commonParams = $initData['commonParams'];
                 //$tdBody = html_a(['data-value'=>$m,'text'=>'Follow-','class'=>'unfollowBtn btn btn-danger btn-xs']);
                 
 
-                $username = $value['username'];
+                $nickname = $value['nickname'];
                 $memberBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>$m]),'text'=>html_img(['src'=>$value['avatar_url'],'width'=>'30'])])."&nbsp;";
-                $memberBody .= html_a(['href'=>ci3_url('member/profile/index',['m'=>$m]),'text'=>$username,'style'=>'color:#999999']);
+                $memberBody .= html_a(['href'=>ci3_url('member/profile/index',['m'=>$m]),'text'=>$nickname,'style'=>'color:#999999']);
 
                 $td = html_td(['body'=>$memberBody]);
 

@@ -30,14 +30,15 @@ $adminParams = $initData['adminParams'];
     <tr>
         <th>ID</th>
         <th>Avatar</th>
+        <th>Nickname</th>
         <th>Username</th>
+        <th>Pwd</th>
         <th>Email</th>
         <th>Gender</th>
-        <th>Pwd</th>
         <th>Biography</th>
-        <th>Ip</th>
-        <!-- <th>Update_time</th> -->
-        <th>Insert_time</th>
+        <!-- <th>Ip</th>
+        <th>Update_time</th>
+        <th>Insert_time</th> -->
         <th>Status</th>
         <th>Source</th>
         <th>Operate</th>
@@ -50,17 +51,24 @@ $adminParams = $initData['adminParams'];
                 //$tdBody .= html_a(['text'=>'view','target'=>"_blank",'href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($value['id'])]),'class'=>'btn btn-primary btn-xs']);
                 
                 $td = html_td(['body'=>html_checkbox(['class'=>'ckbOne','data-name'=>$value['name'],'name'=>'ckbOption[]','value'=>$value['id'],'text'=>$value['id']])]);
-                $avatar = html_a(['text'=>html_img(['src'=>$value['avatar_url'],'height'=>'60']),'target'=>"_blank",'href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($value['id'])]),'class'=>'btn btn-primary btn-xs']);
+
+                $title = "IP&nbsp;:&nbsp;{$value['ip']}\n";
+                $title .= "InsertTime&nbsp;:&nbsp;".date("Y-m-d H:i:s",$value['insert_time'])."\n";
+                $title .= "UpdateTime&nbsp;:&nbsp;".date("Y-m-d H:i:s",$value['update_time'])."\n";
+                $avatar = html_a(['text'=>html_img(['src'=>$value['avatar_url'],'height'=>'60']),'target'=>"_blank",'href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($value['id'])]),'title'=>$title]);
                 
                 $td .= html_td(['body'=>$avatar]);
+                $td .= html_td(['body'=>html_text(['name'=>"nickname[{$value['id']}]",'value'=>$value['nickname'],'size'=>'10'])]);
+
                 $td .= html_td(['body'=>html_text(['name'=>"username[{$value['id']}]",'value'=>$value['username'],'size'=>'10'])]);
+                $td .= html_td(['body'=>html_text(['name'=>"password[{$value['id']}]",'value'=>$value['password'],'size'=>'10'])]);
+
                 $td .= html_td(['body'=>html_text(['name'=>"email[{$value['id']}]",'value'=>$value['email'],'size'=>'10'])]);
                 $td .= html_td(['body'=>html_select(['name'=>"gender[{$value['id']}]",'selected'=>$value['gender'],'options'=>$adminParams['gender']])]);
-                $td .= html_td(['body'=>html_text(['name'=>"password[{$value['id']}]",'value'=>$value['password'],'size'=>'10'])]);
-                $td .= html_td(['body'=>html_text(['name'=>"biography[{$value['id']}]",'value'=>$value['biography']])]);
-                $td .= html_td(['body'=>$value['ip']]);
-                //$td .= html_td(['body'=>date("Y-m-d H:i:s",$value['update_time'])]);
-                $td .= html_td(['body'=>date("Y-m-d H:i:s",$value['insert_time'])]);
+                $td .= html_td(['body'=>html_textarea(['name'=>"biography[{$value['id']}]",'value'=>$value['biography']])]);
+                // $td .= html_td(['body'=>$value['ip']]);
+                // $td .= html_td(['body'=>date("Y-m-d H:i:s",$value['update_time'])]);
+                // $td .= html_td(['body'=>date("Y-m-d H:i:s",$value['insert_time'])]);
                 $td .= html_td(['body'=>html_select(['name'=>"status[{$value['id']}]",'selected'=>$value['status'],'options'=>$adminParams['status']])]);
                 $td .= html_td(['body'=>html_select(['name'=>"source[{$value['id']}]",'selected'=>$value['source'],'options'=>$adminParams['source']])]);
                 $td .= html_td(['body'=>$tdBody]);

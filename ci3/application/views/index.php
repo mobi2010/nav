@@ -37,9 +37,9 @@ if(empty($dataModel)){
 	foreach ($dataModel as $key => $value) {
 		//member
 		$memberModel = $this->memberModel->getInfo($value['member_id']);
-		$username = $memberModel['username'];
+		$nickname = $memberModel['nickname'];
 		$memberBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>html_img(['src'=>$memberModel['avatar_url'],'width'=>'30'])])."&nbsp;";
-		$memberBody .= html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>$username,'style'=>'color:#999999']);
+		$memberBody .= html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>$nickname,'style'=>'color:#999999']);
 
 		$body =  html_div(['body'=>$memberBody]);
 
@@ -66,7 +66,7 @@ if(empty($dataModel)){
 		
 		//time
 		
-		$detailTime = ci3_time($value['insert_time'])." come from ".$username;
+		$detailTime = ci3_time($value['insert_time'])." come from ".$nickname;
 		$body .= html_div(['body'=>$detailTime,'class'=>'home-line-time']);
 
 

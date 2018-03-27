@@ -31,10 +31,10 @@ $commonParams = $initData['commonParams'];
 	        </td>
 	    </tr>
 	    <tr >
-	        <td><label>Username:</label></td>
+	        <td><label>Nickname:</label></td>
 	        <td>
 	        <?php 
-	            echo $dataModel['username']."&nbsp;&nbsp;";  
+	            echo $dataModel['nickname']."&nbsp;&nbsp;";  
 	            if($followStatus == 'follow'){
 	            	echo html_a(['text'=>'Unfollow','data-value'=>$m,'class'=>'unfollowBtn btn btn-danger btn-xs']);
 	            }elseif(in_array($followStatus,['guest','none','followed'])){

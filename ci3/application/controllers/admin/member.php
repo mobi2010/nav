@@ -77,6 +77,7 @@ class Member extends Admin_Controller {
 						$params['password'] = ci3_string_filter($_POST['password'][$value]);
 						$params['status'] = intval($_POST['status'][$value]);
 						$params['username'] = ci3_string_filter($_POST['username'][$value]);
+						$params['nickname'] = ci3_string_filter($_POST['nickname'][$value]);
 						$params['email'] = ci3_string_filter($_POST['email'][$value]);
 						$params['gender'] = intval($_POST['gender'][$value]);
 						$params['biography'] = ci3_string_filter($_POST['biography'][$value]);

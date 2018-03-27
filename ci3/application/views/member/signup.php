@@ -48,12 +48,6 @@ $commonParams = $initData['commonParams'];
 	        </td>
 	    </tr>
 	    <tr >
-	        <td><label>Email:</label></td>
-	        <td>
-	        <?=html_text(['value'=>$dataModel['email'],'name'=>'email']);?>
-	        </td>
-	    </tr>
-	    <tr >
 	        <td><label>Password:</label></td>
 	        <td>
 	        <?php 
@@ -61,6 +55,22 @@ $commonParams = $initData['commonParams'];
 	        ?>
 	        </td>
 	    </tr>
+	    <tr >
+	        <td><label>Email:</label></td>
+	        <td>
+	        <?=html_text(['value'=>$dataModel['email'],'name'=>'email']);?>
+	        </td>
+	    </tr>
+	    <tr >
+	        <td><label>Nickname:</label></td>
+	        <td>
+	        <?php 
+	            echo html_text(['name'=>'nickname','value'=>$dataModel['nickname']]);   
+	        ?>
+	        </td>
+	    </tr>
+	    
+	    
 	     <tr >
 	        <td><label>Gender:</label></td>
 	        <td>
@@ -106,6 +116,12 @@ $(document).ready(function(){
             return false;
         }
 
+        var password = $('#password').val();
+        if(!password){
+            $.common.alert({'message':'Please enter the Password'});
+            return false;
+        }
+
         var email = $('#email').val();
         if(!email){
             $.common.alert({'message':'Please enter the Email'});
@@ -117,12 +133,13 @@ $(document).ready(function(){
             return false;
         }
 
-
-        var password = $('#password').val();
-        if(!password){
-            $.common.alert({'message':'Please enter the Password'});
+        var nickname = $('#nickname').val();
+        if(!nickname){
+            $.common.alert({'message':'Please enter the Nickname'});
             return false;
         }
+
+        
 
         $.post("<?=base_url('member/signup/check');?>",$('#ci3Form').serialize(),function(dt){
         	if(dt.code != 0){

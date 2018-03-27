@@ -39,6 +39,7 @@ class Comment_model extends MY_Model {
 			$table  = "comment";
 		}else{
 			$table = $this->getTableName($params['article_id']);
+			$this->params['where'] = "article_id=".$params['article_id'];
 		}
 		
 		$this->params['table'] = $table;

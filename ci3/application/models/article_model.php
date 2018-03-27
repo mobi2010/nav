@@ -123,8 +123,19 @@ class Article_model extends MY_Model {
 		$sql = "select count(*) as total from article a {$join} {$where} limit 1";
 		$res['totalCount'] = $this->dataFetchCount(['sql'=>$sql]);
 
-		$sql = "select *,a.id as id from article a {$join} {$where} {$orderBy} limit {$offset},{$pageSize}";
-		$dataModel = $this->dataFetchArray(['sql'=>$sql]);
+		if($params['random'] == true){
+			$sql = "select *,a.id as id from article a {$join} {$where} {$orderBy} limit 50";
+			$dataModelTemp = $this->dataFetchArray(['sql'=>$sql]);
+			$randData = array_rand($dataModelTemp,$pageSize);
+			foreach ($randData as $key => $value) {
+				$dataModel[] = $dataModelTemp[$value];
+			}
+		}else{
+			$sql = "select *,a.id as id from article a {$join} {$where} {$orderBy} limit {$offset},{$pageSize}";
+			$dataModel = $this->dataFetchArray(['sql'=>$sql]);
+		}
+
+		
 		if(!empty($dataModel)){
 			foreach ($dataModel as $key => $value) {
 				$id = $value['id'];

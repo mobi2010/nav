@@ -80,9 +80,9 @@ if(!empty($nextModel)){
 $detailBody .= html_div(['body'=>$pnBody,'class'=>'context']);
 
 //member
-$username = $memberData['username'];
-$memberBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberData['id'])]),'text'=>html_img(['src'=>$memberData['avatar_url'],'width'=>'25']),'title'=>$username]);
-//$memberBody .= html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberData['id'])]),'text'=>$username,'style'=>'color:#999999']);
+$nickname = $memberData['nickname'];
+$memberBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberData['id'])]),'text'=>html_img(['src'=>$memberData['avatar_url'],'width'=>'25']),'title'=>$nickname]);
+//$memberBody .= html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberData['id'])]),'text'=>$nickname,'style'=>'color:#999999']);
 
 $memberBody .= "&nbsp;";  
 if($followStatus == 'follow'){
@@ -101,7 +101,7 @@ $detailBody .= html_div(['body'=>$dataModel['title'],'class'=>'article-title']);
 
 $detailTime = ci3_time($dataModel['insert_time']);
 
-// $detailTime .= html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberData['id'])]),'text'=>$memberData['username']]);
+// $detailTime .= html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberData['id'])]),'text'=>$memberData['nickname']]);
 
 $detailTime .= "&nbsp;".$dataModel['hits'].' hits come from &nbsp;';
 $detailTime .= $memberBody;

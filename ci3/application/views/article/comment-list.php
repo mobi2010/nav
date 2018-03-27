@@ -47,8 +47,8 @@ foreach ($dataModel as $key => $value) {
 	$memberModel = $this->memberModel->getInfo($value['member_id']);
 	$avatarBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>html_img(['src'=>$memberModel['avatar_url'],'height'=>'60px'])]);
 	$memberBody = html_div(['body'=>$avatarBody,'class'=>'member-avatar']);
-	$usernameBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>$memberModel['username']]);
-	$memberBody .= html_div(['body'=>$usernameBody,'class'=>'member-name']);
+	$nicknameBody = html_a(['href'=>ci3_url('member/profile/index',['m'=>ci3_encrypt($memberModel['id'])]),'text'=>$memberModel['nickname']]);
+	$memberBody .= html_div(['body'=>$nicknameBody,'class'=>'member-name']);
 
 	$body = html_div(["body"=>$memberBody,'class'=>'member-info']);
 	
@@ -57,7 +57,7 @@ foreach ($dataModel as $key => $value) {
 		$deleteBody = html_a(['data-value'=>ci3_encrypt($value['id']),'text'=>'Delete','style'=>'color: #999999;','class'=>'deleteBtn']);
 		$content .=html_div(["body"=>$deleteBody,"class"=>"comment-operate"]);
 	}else{
-		$deleteBody = html_a(['data-r'=>$value['id'],'data-m'=>$value['member_id'],'data-n'=>$memberModel['username'],'text'=>'Reply','style'=>'color: #999999;','class'=>'replyBtn']);
+		$deleteBody = html_a(['data-r'=>$value['id'],'data-m'=>$value['member_id'],'data-n'=>$memberModel['nickname'],'text'=>'Reply','style'=>'color: #999999;','class'=>'replyBtn']);
 		$content .=html_div(["body"=>$deleteBody,"class"=>"comment-operate"]);
 	}
 	$contentBody = html_div(["body"=>$content,'class'=>'comment-content']);

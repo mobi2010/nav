@@ -31,7 +31,14 @@ $commonParams = $initData['commonParams'];
     ?>
     </td>
 </tr>
-
+<tr >
+    <td><label>Nickname:</label></td>
+    <td>
+    <?php 
+        echo $dataModel['nickname'];   
+    ?>
+    </td>
+</tr>
  <tr >
     <td><label>Gender:</label></td>
     <td>

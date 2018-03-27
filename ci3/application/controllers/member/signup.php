@@ -57,6 +57,7 @@ class Signup extends MY_Controller {
 		}
 
 		$params['username'] = ci3_string_filter($_POST['username']);
+		$params['nickname'] = ci3_string_filter($_POST['nickname']);
 		$params['password'] = ci3_string_filter($_POST['password']);
 		$params['email'] = ci3_string_filter($_POST['email']);
 		$params['avatar_url'] = $avatar_url;
