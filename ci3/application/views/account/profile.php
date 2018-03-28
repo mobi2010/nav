@@ -51,7 +51,7 @@ $commonParams = $initData['commonParams'];
     <td><label>Biography:</label></td>
     <td>
     <?php 
-        echo $dataModel['biography'];
+        echo str_replace(["\r\n", "\r", "\n"], "<br/>", $dataModel['biography']);
     ?>
     </td>
 </tr>

@@ -40,22 +40,22 @@ $this->load->view('admin/header');
             </td>
         </tr>
 
-        <!-- <tr >
+        <tr >
             <td><label>Cover Image:</label></td>
             <td>
             <?php
-            // if($dataModel['cover_image']) {
-            //     echo html_img(['src'=>$dataModel['cover_image']]);
-            // }
-            // echo html_hidden(['name'=>'cover_image','value'=>$dataModel['cover_image']]);    
-            // echo html_file(['name'=>'Filedata']);
+            if($dataModel['cover_image']) {
+                echo html_img(['src'=>$dataModel['cover_image']]);
+            }
+            echo html_hidden(['name'=>'cover_image','value'=>$dataModel['cover_image']]);    
+            echo html_file(['name'=>'Filedata']);
             ?>
             </td>
-        </tr> -->
+        </tr>
         <tr >
             <td><label>Abstract:</label></td>
             <td>
-            <?=html_text(['name'=>'abstract','value'=>$dataModel['abstract']]);?>
+            <?=html_textarea(['name'=>'abstract','value'=>$dataModel['abstract'],'rows'=>5]);?>
             </td>
         </tr>
         <tr >

@@ -21,7 +21,7 @@ $adminParams['gender'] =  [0=>'Female',1=>'Male',2=>'Secret'];
 $adminParams['region'] =  [0=>'Unknown',1=>'Japan',2=>'America',3=>'China'];
 
 //source
-$adminParams['source'] =  [0=>'Foreign',1=>'Local'];
+$adminParams['source'] =  [0=>'Foreign',1=>'Local',2=>'javbus'];
 
 
 //菜单
@@ -76,8 +76,21 @@ $adminParams['menuData'] = [
 					]
 				]
 			]
-		]
-		
+		],
+		'data' => ['title'=>'Data','sub'=>
+			[
+				['title'=>'member','sub'=>
+					[
+						['title'=>'javbus','uri'=>'admin/data/javbusmember'],
+					]
+				],
+				['title'=>'article','sub'=>
+					[
+						['title'=>'javbus','uri'=>'admin/data/javbusarticle'],
+					]
+				]
+			]
+		],
 	];
 
 return $adminParams;

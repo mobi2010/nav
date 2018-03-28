@@ -1,5 +1,7 @@
 <?php 
 $this->load->view('admin/header');
+$adminParams = $initData['adminParams'];
+
 ?>
 <form id="ci3Form" method="post" action="<?=base_url('admin/article/batch');?>">
 
@@ -41,6 +43,7 @@ $this->load->view('admin/header');
         <th>Title</th>
         <th>Category</th>
         <th>Member ID</th>
+        <th>Status</th>
         <th>Operate</th>
     </tr>
     <?php 
@@ -57,10 +60,13 @@ $this->load->view('admin/header');
 
                 $td .= html_td(['body'=>html_a(['href'=>ci3_url('admin/article/index',['category_id'=>$value['category_id']]),'text'=>$value['category_id']])]);
                 $td .= html_td(['body'=>html_a(['href'=>ci3_url('admin/member',['member_id'=>$value['member_id']]),'text'=>$value['member_id']])]);
+                $td .= html_td(['body'=>html_select(['name'=>"status[{$value['id']}]",'selected'=>$value['status'],'options'=>$adminParams['status']])]);
                 $td .= html_td(['body'=>$tdBody]);
                 echo html_tr(['body'=>$td]);
             }
             $tdBody = html_checkbox(['name'=>'ckbAll','text'=>'All']);
+            $tdBody .= str_repeat('&nbsp;',4);
+            $tdBody .= html_a(['date-type'=>'update','text'=>'Update','class'=>'batchBtn btn btn-primary btn-xs']);
             $tdBody .= str_repeat('&nbsp;',4);
             $tdBody .= html_a(['date-type'=>'delete','text'=>'Delete','class'=>'batchBtn btn btn-danger btn-xs']);
             $td = html_td(['body'=>$tdBody,'colspan'=>6]);
@@ -85,7 +91,7 @@ $(document).ready(function() {
         if($("input[name='ckbOption[]']:checked").length == 0){
             $.common.alert({"message":"请选择"});
         }else{
-            if(!confirm('确定删除?')){return false;}
+            if(type == 'delete' && !confirm('确定删除?')){return false;}
             $.post("<?=base_url('admin/article/batch');?>?type="+type,$('#ci3Form').serialize(),function(dt){
                 $.common.alert(dt);
                 $.common.refresh();

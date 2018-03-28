@@ -47,7 +47,9 @@ if(empty($dataModel)){
 
 		//content
 		$contentHtml = null;
-		if($value['video_url']){
+		if($value['cover_image']){
+			$contentHtml = html_img(['src'=>$value['cover_image'],'height'=>'180px']);
+		}elseif($value['video_url']){
 		    $res = $this->videoUtils->parse($value['video_url'],'first');
 		    if($res['url']){
 		        $contentHtml = html_video(['src'=>$res['url'],'width'=>'320px','height'=>'180px']);

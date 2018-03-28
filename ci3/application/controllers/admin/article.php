@@ -25,7 +25,7 @@ class Article extends Admin_Controller {
 		$data['tag_id'] = $params['tag_id'] = $_GET['tag_id'] ? $_GET['tag_id'] : null;
 		$data['category_id'] = $params['category_id'] = $_GET['category_id'] ? $_GET['category_id'] : null;
 		$data['member_id'] = $params['member_id'] = $_GET['member_id'] ? $_GET['member_id'] : null;
-		
+		$params['source'] = "backend"; 
 		$getList = $this->articleModel->getList($params);
 		$data += $getList;
 
@@ -51,8 +51,8 @@ class Article extends Admin_Controller {
 	public function save(){
 		if($_FILES['Filedata']['tmp_name']){
 			$uploadImg = $this->image->upload();
-			$thumbImg = $this->image->thumb(array('file'=>$uploadImg['filePath'],'width'=>160,'height'=>120,'bgcolor'=>'white'));
-			$image_url = $thumbImg['filePath'];
+			// $thumbImg = $this->image->thumb(array('file'=>$uploadImg['filePath'],'width'=>160,'height'=>120,'bgcolor'=>'white'));
+			$image_url = $uploadImg['filePath'];
 		}else{
 			$image_url = $_POST['cover_image'];
 		}
@@ -115,7 +115,13 @@ class Article extends Admin_Controller {
 						$this->articleModel->deleteOne($article_id);
 					}
 					break;
-				
+				case 'update':
+					foreach ($_POST['ckbOption'] as $key => $value) {
+						$params['id'] = $value;
+						$params['status'] = intval($_POST['status'][$value]);
+						$this->articleModel->save($params);
+					}
+					break;
 				default:
 					# code...
 					break;

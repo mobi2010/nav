@@ -105,6 +105,10 @@ class Article_model extends MY_Model {
 			$whereArr[] = "atr.tag_id={$params['tag_id']}";
 		}
 		
+		if($params['source'] != "backend"){
+			$whereArr[] = " a.status=0";
+		}
+
 		if($params['follow_member_id']){
 			$followMemberIds = $this->memberModel->followMemberIds($params['follow_member_id']);
 			if(!empty($followMemberIds)){

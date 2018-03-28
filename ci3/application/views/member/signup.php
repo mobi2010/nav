@@ -83,7 +83,7 @@ $commonParams = $initData['commonParams'];
 	        <td><label>Biography:</label></td>
 	        <td>
 	        <?php 
-	            echo html_textarea(['value'=>$dataModel['biography'],'name'=>'biography']);
+	            echo html_textarea(['value'=>$dataModel['biography'],'name'=>'biography','rows'=>5]);
 	        ?>
 	        </td>
 	    </tr>

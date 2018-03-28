@@ -74,8 +74,8 @@ class Member_model extends MY_Model {
 			}
 		}else{
 			$this->params['data']['insert_time'] = time(); 
-			$this->params['data']['status'] = 0; 
-			$this->params['data']['source'] = 0; 
+			$this->params['data']['status'] = isset($params['status']) ? $params['status'] : 0; 
+			$this->params['data']['source'] = isset($params['source']) ? $params['source'] : 0; 
 			$id = $this->dataInsert($this->params);
 
 			$contentParams['member_id'] = $id;

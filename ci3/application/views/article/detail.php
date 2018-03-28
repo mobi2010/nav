@@ -54,6 +54,9 @@ $this->load->view('header',$data);
 .abstract{
     padding-bottom: 1em; 
 }
+.cover_image{
+    display: block;
+}
 </style>
 
 
@@ -108,14 +111,22 @@ $detailTime .= $memberBody;
 $detailBody .= html_div(['body'=>$detailTime,'class'=>'detail-time']);
 
 $contentHtml = null;
+
 if($dataModel['video_url']){
     $res = $this->videoUtils->parse($dataModel['video_url'],'first');
     if($res['url']){
-        $contentHtml = html_div(['body'=>html_video(['src'=>$res['url'],"preload"=>"auto","autoplay"=>"autoplay",'width'=>'640px','height'=>'360px']),'class'=>'content']);
+        $contentHtml .= html_video(['src'=>$res['url'],"preload"=>"auto","autoplay"=>"autoplay",'width'=>'640px','height'=>'360px']);
     }
 }
 
-$detailBody .= $contentHtml ? $contentHtml : html_div(['body'=>ci3_content($dataModel['content']),'class'=>'content']);
+if($dataModel['cover_image']){
+    $contentHtml .= html_img(['src'=>$dataModel['cover_image'],'class'=>'cover_image']);
+}
+
+
+$contentHtml .= ci3_content($dataModel['content']);
+
+$detailBody .= html_div(['body'=>$contentHtml,'class'=>'content']);
 
 $detailBody .= $dataModel['abstract'] ? html_div(['body'=>ci3_content($dataModel['abstract']),'class'=>'abstract']) : null;
 if(!empty($dataModel['tags'])){

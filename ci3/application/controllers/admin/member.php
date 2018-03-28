@@ -68,7 +68,7 @@ class Member extends Admin_Controller {
 			switch ($type) {
 				case 'delete':
 					foreach ($_POST['ckbOption'] as  $id) {
-						 $this->memberModel->deleteOne(['where'=>$id]);
+						 $this->memberModel->deleteOne($id);
 					}
 					break;
 				case 'update':
