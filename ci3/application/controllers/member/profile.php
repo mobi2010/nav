@@ -18,12 +18,15 @@ class Profile extends MY_Controller {
 			$params['pageSize'] = $data['pageSize'] = $pageSize = 8;
 			$params['offset'] = $offset = ($page-1)*$pageSize; 
 			$params['member_id'] = $id;
-            $data['dataModel'] = $this->memberModel->getInfo($id);
+            $data['dataModel'] = $dataModel = $this->memberModel->getInfo($id);
 
             $data['articleData'] = $this->articleModel->getList($params);
             $data['m'] = $_GET['m'];
 
             $data['followStatus'] = $this->memberModel->followStatus($this->userId,$id);
+
+            $data['htmlTitle'] = 'iav18-'.$dataModel['nickname']; 
+            $data['htmlKeywords'] = $dataModel['biography'] ? $dataModel['biography'] :  "iav18"; 
         }
 		$this->load->view('member/profile',$data);
 	}

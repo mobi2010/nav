@@ -1,8 +1,8 @@
 <?php 
     $commonParams = $initData['commonParams'];
 
-    $htmlTitle = $htmlTitle ? $htmlTitle : "IAV-18"; 
-    $htmlKeywords = $htmlKeywords ? $htmlKeywords :  "IAV-18"; 
+    $htmlTitle = $htmlTitle ? $htmlTitle : "iav18"; 
+    $htmlKeywords = $htmlKeywords ? $htmlKeywords :  "iav18"; 
 ?>
 <!DOCTYPE html>
 <html>
@@ -48,7 +48,7 @@ $(document).ready(function(){
 </script>    
 <div class="breadcrumbContainer" >
     <ul class="breadcrumb" style="line-height:3em;background: #fff;padding: 1em 3.5em;color:#999999">
-        <a style="text-indent:-9999px;width:12em;background: url(/assets/common/images/logo.png) center no-repeat;display: inline-block;" href="<?=ci3_url('index')?>">IAV-18</a>
+        <a style="text-indent:-9999px;width:12em;background: url(/assets/common/images/logo.png) center no-repeat;display: inline-block;" href="<?=ci3_url('index')?>">iav18</a>
 
         <span style="display: inline-block;float: right;">
             <?php 

@@ -41,8 +41,8 @@ class Detail extends MY_Controller {
 
 
 
-			$data['htmlTitle'] = $dataModel['title']; 
-    		$data['htmlKeywords'] = $dataModel['tags'] ? implode(',',$dataModel['tags']) :  "IAV-18"; 
+			$data['htmlTitle'] = 'iav18-'.$dataModel['title']; 
+    		$data['htmlKeywords'] = $dataModel['tags'] ? implode(',',$dataModel['tags']) :  "iav18"; 
 			$this->load->view('article/detail',$data);
 		}
 	}
