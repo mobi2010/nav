@@ -50,7 +50,7 @@ foreach ($dataModel as $key => $value) {
 
     $avatarBody = html_a(['href'=>$url,'text'=>html_img(['src'=>$value['avatar_url'],'height'=>'100px'])]);
     $memberBody = html_div(['body'=>$avatarBody,'class'=>'member-avatar']);
-    $nicknameBody = html_a(['href'=>$url,'text'=>$value['nickname'].'波多野結衣','class'=>'nickname']);
+    $nicknameBody = html_a(['href'=>$url,'text'=>$value['nickname'],'class'=>'nickname']);
     $memberBody .= html_div(['body'=>$nicknameBody,'class'=>'member-name']);
 
     $subHtml .= html_div(["body"=>$memberBody,'class'=>'member-info']);
