@@ -31,6 +31,7 @@ $localParams['menuDataFront'] = [
 		['title'=>'Home','uri'=>'index'],
 ];
 $localParams['menuDataEnd'] = [
+        ['title'=>'Star','uri'=>'index/star'],
         ['title'=>'Follow','uri'=>'index/follow'],
         ['title'=>'Navigation','uri'=>'site/navigation'],
     ];    
